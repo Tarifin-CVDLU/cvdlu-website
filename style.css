@@ -463,8 +463,43 @@ footer {
     transform: scale(1.1);
 }
 
-/* Responsive */
+/* Responsive - Mobile Menu & Carousels */
+.menu-toggle {
+    display: none;
+    font-size: 1.8rem;
+    cursor: pointer;
+    color: var(--text-main);
+}
+
 @media (max-width: 768px) {
+    .menu-toggle {
+        display: block;
+    }
+
+    nav ul {
+        position: fixed;
+        top: 80px;
+        left: -100%;
+        width: 100%;
+        height: calc(100vh - 80px);
+        background: var(--secondary-color);
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        padding-top: 40px;
+        transition: 0.4s ease-in-out;
+        gap: 30px;
+        box-shadow: 0 10px 15px rgba(0,0,0,0.1);
+    }
+
+    nav ul.active {
+        left: 0;
+    }
+
+    nav ul li a {
+        font-size: 1.3rem;
+    }
+
     .hero {
         flex-direction: column;
         text-align: center;
@@ -472,9 +507,40 @@ footer {
         height: auto;
         padding-bottom: 40px;
     }
+    
     .hero-content h1 { font-size: 2.5rem; }
     .hero-image img { max-width: 300px; margin-top: 30px; }
-    nav ul { display: none; }
+    
     .mision-vision-grid { grid-template-columns: 1fr; }
     .iniciativa-box { padding: 30px; }
+
+    /* Horizontal Swipe Carousels for Mobile */
+    .grid-container, .puntos-grid, .gallery-grid {
+        display: flex;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        padding-bottom: 20px; /* Space for scrollbar */
+        gap: 15px;
+        -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+    }
+
+    /* Scrollbar Styling */
+    .grid-container::-webkit-scrollbar, 
+    .puntos-grid::-webkit-scrollbar, 
+    .gallery-grid::-webkit-scrollbar {
+        height: 6px;
+    }
+    
+    .grid-container::-webkit-scrollbar-thumb, 
+    .puntos-grid::-webkit-scrollbar-thumb, 
+    .gallery-grid::-webkit-scrollbar-thumb {
+        background: var(--primary-color);
+        border-radius: 10px;
+    }
+
+    .card, .punto-card, .gallery-item {
+        flex: 0 0 85%; /* Cards take up 85% of screen width */
+        scroll-snap-align: center;
+    }
 }
