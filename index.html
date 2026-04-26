@@ -17,8 +17,11 @@
             <img src="logo.png" alt="Logo CVDLU">
             <div class="logo-text">Voz de los Usuarios</div>
         </div>
+        <div class="menu-toggle" id="mobile-menu">
+            <i class="fas fa-bars"></i>
+        </div>
         <nav>
-            <ul>
+            <ul id="nav-menu">
                 <li><a href="#inicio">Inicio</a></li>
                 <li><a href="#nosotros">Nosotros</a></li>
                 <li><a href="#iniciativa">Iniciativa</a></li>
@@ -207,9 +210,9 @@
     <section id="galeria">
         <h2 class="section-title">Galería de Acción</h2>
         <div class="gallery-grid">
-            <div class="gallery-item"><img src="assets/abeja_no_bg.png" alt="Acción 1"></div>
-            <div class="gallery-item"><img src="assets/logo.png" alt="Acción 2"></div>
-            <div class="gallery-item"><img src="assets/abeja_no_bg.png" alt="Acción 3"></div>
+            <div class="gallery-item"><img src="abeja_no_bg.png" alt="Acción 1"></div>
+            <div class="gallery-item"><img src="logo.png" alt="Acción 2"></div>
+            <div class="gallery-item"><img src="abeja_no_bg.png" alt="Acción 3"></div>
             <!-- Más imágenes se pueden agregar aquí -->
         </div>
     </section>
@@ -280,5 +283,32 @@
     </footer>
 
     <script src="script.js"></script>
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenu = document.getElementById('mobile-menu');
+        const navMenu = document.getElementById('nav-menu');
+        const navLinks = document.querySelectorAll('#nav-menu li a');
+
+        mobileMenu.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            const icon = mobileMenu.querySelector('i');
+            if (navMenu.classList.contains('active')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            } else {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+        });
+
+        // Close menu when clicking a link
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+                mobileMenu.querySelector('i').classList.remove('fa-times');
+                mobileMenu.querySelector('i').classList.add('fa-bars');
+            });
+        });
+    </script>
 </body>
 </html>
