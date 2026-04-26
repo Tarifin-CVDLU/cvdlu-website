@@ -472,6 +472,29 @@ footer {
 }
 
 @media (max-width: 768px) {
+    html, body {
+        overflow-x: hidden;
+        width: 100%;
+        max-width: 100vw;
+    }
+
+    section {
+        padding: 50px 5%;
+        max-width: 100vw;
+    }
+
+    .logo-text {
+        font-size: 0.9rem;
+    }
+
+    .section-title {
+        font-size: 1.8rem;
+    }
+
+    .hashtags span {
+        font-size: 0.75rem;
+    }
+
     .menu-toggle {
         display: block;
     }
@@ -512,7 +535,8 @@ footer {
     .hero-image img { max-width: 300px; margin-top: 30px; }
     
     .mision-vision-grid { grid-template-columns: 1fr; }
-    .iniciativa-box { padding: 30px; }
+    .iniciativa-box { padding: 20px; }
+    .iniciativa-box h2 { font-size: 1.8rem; }
 
     /* Horizontal Swipe Carousels for Mobile */
     .grid-container, .puntos-grid, .gallery-grid {
