@@ -12,9 +12,13 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
+    <!-- Facebook SDK -->
+    <div id="fb-root"></div>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v19.0" nonce="cvdlu_test"></script>
+
     <header>
         <div class="logo-container">
-            <img src="logo.png" alt="Logo CVDLU">
+            <img src="assets/logo.png" alt="Logo CVDLU">
             <div class="logo-text">Voz de los Usuarios</div>
         </div>
         <div class="menu-toggle" id="mobile-menu">
@@ -40,7 +44,7 @@
             <a href="#reportes" class="btn-submit" style="text-decoration: none; display: inline-block; width: auto; padding: 15px 40px;">Realizar Reporte</a>
         </div>
         <div class="hero-image">
-            <img src="abeja_lucha.png" alt="Mascota CVDLU - La lucha no termina">
+            <img src="assets/abeja_lucha.png" alt="Mascota CVDLU - La lucha no termina">
         </div>
     </section>
 
@@ -120,6 +124,25 @@
     <!-- Noticias Section -->
     <section id="noticias">
         <h2 class="section-title">Últimas Noticias</h2>
+        
+        <!-- Facebook Feed (Prueba) -->
+        <div class="fb-feed-container">
+            <h3 style="margin-bottom: 15px; color: #1877F2;"><i class="fab fa-facebook"></i> Muro en Vivo</h3>
+            <div class="fb-page" 
+                data-href="https://www.facebook.com/vozdelosusuarios" 
+                data-tabs="timeline" 
+                data-width="500" 
+                data-height="500" 
+                data-small-header="false" 
+                data-adapt-container-width="true" 
+                data-hide-cover="false" 
+                data-show-facepile="true">
+                <blockquote cite="https://www.facebook.com/vozdelosusuarios" class="fb-xfbml-parse-ignore">
+                    <a href="https://www.facebook.com/vozdelosusuarios">Voz de los Usuarios</a>
+                </blockquote>
+            </div>
+        </div>
+
         <div class="grid-container">
             <!-- Noticia 1: Pronunciamiento Nacional -->
             <div class="card">
@@ -153,7 +176,7 @@
             <div class="card">
                 <a href="https://www.facebook.com/share/v/18LcQTrg4Y/" target="_blank" style="text-decoration: none; color: inherit;">
                     <div class="card-img">
-                        <img src="noticia_congreso.png" alt="Iniciativa Congreso">
+                        <img src="assets/noticia_congreso.png" alt="Iniciativa Congreso">
                         <i class="fas fa-play play-icon"></i>
                     </div>
                     <div class="card-content">
@@ -210,9 +233,9 @@
     <section id="galeria">
         <h2 class="section-title">Galería de Acción</h2>
         <div class="gallery-grid">
-            <div class="gallery-item"><img src="abeja_no_bg.png" alt="Acción 1"></div>
-            <div class="gallery-item"><img src="logo.png" alt="Acción 2"></div>
-            <div class="gallery-item"><img src="abeja_no_bg.png" alt="Acción 3"></div>
+            <div class="gallery-item"><img src="assets/abeja_no_bg.png" alt="Acción 1"></div>
+            <div class="gallery-item"><img src="assets/logo.png" alt="Acción 2"></div>
+            <div class="gallery-item"><img src="assets/abeja_no_bg.png" alt="Acción 3"></div>
             <!-- Más imágenes se pueden agregar aquí -->
         </div>
     </section>
