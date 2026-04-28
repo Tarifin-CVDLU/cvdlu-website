@@ -257,6 +257,19 @@ section {
     background: #FFF;
 }
 
+.fb-feed-container {
+    margin-bottom: 40px;
+    background: #f0f2f5;
+    padding: 20px;
+    border-radius: var(--border-radius);
+    text-align: center;
+    border: 1px solid #ddd;
+}
+
+.fb-feed-container .fb-page {
+    max-width: 100%;
+}
+
 /* News & Convocatorias */
 .grid-container {
     display: grid;
@@ -461,6 +474,29 @@ footer {
     color: var(--primary-color);
     background: #000;
     transform: scale(1.1);
+}
+
+.creative-signature {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px dashed #DDD;
+    display: inline-block;
+}
+
+.creative-signature p {
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 5px;
+}
+
+.signature-name {
+    font-size: 1.5rem;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: 800;
+    color: var(--primary-color);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-shadow: 1px 1px 0px #000;
 }
 
 /* Responsive - Mobile Menu & Carousels */
