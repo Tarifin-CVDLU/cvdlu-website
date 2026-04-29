@@ -317,12 +317,22 @@
             </div>
             <div class="form-group">
                 <label>Descripción del Reporte</label>
-                <textarea name="reporte" rows="5" required placeholder="Describe qué sucedió, ruta de transporte, hora, etc."></textarea>
+                <textarea name="reporte" rows="5" required placeholder="Describe qué sucedió, ruta de transporte, hora, etc. Recuerda subir una imagen o video abajo para publicar el reporte como evidencia."></textarea>
             </div>
             <div class="form-group">
                 <label>Adjuntar Imagen o Video</label>
                 <input type="file" name="archivo" accept="image/*,video/*">
             </div>
+            
+            <!-- Indicador de Progreso Creativo -->
+            <div id="progress-container" class="progress-container" style="display: none;">
+                <div class="progress-track">
+                    <div id="progress-bus" class="progress-bus">🚌</div>
+                    <div class="progress-goal">🚩</div>
+                </div>
+                <div class="progress-text">Enviando evidencia a la base... <span id="progress-percent">0%</span></div>
+            </div>
+
             <button type="submit" class="btn-submit" id="btn-reporte">Enviar Reporte</button>
             <div id="status-reporte" class="form-status"></div>
         </form>
