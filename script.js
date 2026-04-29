@@ -114,11 +114,14 @@ async function handleFormSubmit(e, isReporte) {
             });
 
             xhr.onload = function() {
-                // Google Apps Script suele retornar un 200 con el resultado
-                resolve(xhr.responseText);
+                if (xhr.status >= 200 && xhr.status < 300) {
+                    resolve(xhr.responseText);
+                } else {
+                    reject(new Error("El servidor rechazó la conexión (Status " + xhr.status + "). Es posible que el archivo sea demasiado pesado o falten permisos."));
+                }
             };
             xhr.onerror = function() {
-                reject(new Error("Error de conexión"));
+                reject(new Error("Error de conexión. Si estás probando desde un archivo local, Google bloquea el envío. Súbelo a GitHub y pruébalo en la web, o revisa que el video no pese más de 40MB."));
             };
 
             xhr.send(JSON.stringify(payload));
@@ -132,8 +135,8 @@ async function handleFormSubmit(e, isReporte) {
         console.error(error);
         statusDiv.className = "form-status error";
         statusDiv.innerText = error.message.includes("Falta configurar") 
-            ? "Error: Falta configurar el sistema de correos internamente."
-            : "Hubo un error al enviar. Inténtalo más tarde.";
+            ? "Error: Falta configurar la URL en el script."
+            : "Error: " + error.message;
     } finally {
         btn.innerText = originalBtnText;
         btn.disabled = false;
@@ -143,7 +146,7 @@ async function handleFormSubmit(e, isReporte) {
         
         setTimeout(() => {
             if(statusDiv.className.includes("success")) statusDiv.style.display = 'none';
-        }, 5000);
+        }, 8000);
     }
 }
 
