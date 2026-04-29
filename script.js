@@ -1,11 +1,29 @@
 // CVDLU - Lógica de Reportes y Estadísticas
 document.addEventListener('DOMContentLoaded', () => {
-    // Menu Móvil
+    // Menu Móvil (Corregido)
     const mobileMenu = document.getElementById('mobile-menu');
     const navMenu = document.getElementById('nav-menu');
-    if (mobileMenu) {
+    const navLinks = document.querySelectorAll('#nav-menu a');
+
+    if (mobileMenu && navMenu) {
         mobileMenu.addEventListener('click', () => {
             navMenu.classList.toggle('active');
+            // Cambiar icono
+            const icon = mobileMenu.querySelector('i');
+            if (navMenu.classList.contains('active')) {
+                icon.classList.replace('fa-bars', 'fa-times');
+            } else {
+                icon.classList.replace('fa-times', 'fa-bars');
+            }
+        });
+
+        // Cerrar menú al hacer clic en un enlace
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+                const icon = mobileMenu.querySelector('i');
+                icon.classList.replace('fa-times', 'fa-bars');
+            });
         });
     }
 
