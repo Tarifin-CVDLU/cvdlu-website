@@ -690,8 +690,19 @@ footer {
         border-radius: 10px;
     }
 
-    .card, .punto-card, .gallery-item {
-        flex: 0 0 85%; /* Cards take up 85% of screen width */
+    .card, .gallery-item {
+        flex: 0 0 85%;
         scroll-snap-align: center;
+    }
+
+    .punto-card {
+        flex: 0 0 90%;
+        scroll-snap-align: center;
+        padding: 15px; /* Reducir acolchado para ganar espacio horizontal */
+    }
+
+    .punto-card p {
+        font-size: 0.85rem; /* Fuente ligeramente más pequeña para que quepa la dirección */
+        line-height: 1.2;
     }
 }
