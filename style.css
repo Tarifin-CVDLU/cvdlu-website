@@ -456,6 +456,41 @@ input:focus, textarea:focus {
     border: 1px solid #d6d8db;
 }
 
+/* Progress Bar Creativo */
+.progress-container {
+    margin-bottom: 20px;
+    width: 100%;
+}
+.progress-track {
+    position: relative;
+    width: 100%;
+    height: 40px;
+    border-bottom: 3px dashed var(--primary-color);
+    margin-bottom: 10px;
+}
+.progress-bus {
+    position: absolute;
+    left: 0%;
+    bottom: -8px;
+    font-size: 2rem;
+    transition: left 0.3s ease-out;
+    transform: translateX(-50%);
+    z-index: 2;
+}
+.progress-goal {
+    position: absolute;
+    right: -10px;
+    bottom: -5px;
+    font-size: 1.8rem;
+    z-index: 1;
+}
+.progress-text {
+    text-align: center;
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: #FFF;
+}
+
 /* Counter */
 .counter-box {
     text-align: center;
