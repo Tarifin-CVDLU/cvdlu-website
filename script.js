@@ -108,9 +108,9 @@ async function cargarEstadisticas() {
             const porc = data.total > 0 ? (cant / data.total) * 100 : 0;
             container.innerHTML += `
                 <div style="margin-bottom: 15px;">
-                    <div style="display: flex; justify-content: space-between; margin-bottom: 5px; font-size: 0.9rem;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 5px; font-size: 0.95rem; color: var(--primary-color); font-weight: 600;">
                         <span>${cat}</span>
-                        <span style="color: var(--primary-color); font-weight: bold;">${cant}</span>
+                        <span style="font-weight: 800;">${cant}</span>
                     </div>
                     <div style="background: #333; height: 12px; border-radius: 6px; overflow: hidden;">
                         <div style="background: var(--primary-color); width: ${porc}%; height: 100%; transition: width 1s ease-out;"></div>

@@ -227,6 +227,14 @@ section {
     padding: 20px;
     border-radius: 10px;
     border-bottom: 4px solid var(--primary-color);
+    transition: all 0.3s ease;
+}
+
+.punto-card:hover, .punto-card:active {
+    background: rgba(255, 215, 0, 0.15);
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.2);
+    transform: translateY(-5px);
+    border-color: #FFF;
 }
 
 .punto-card h4 {
