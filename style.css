@@ -695,14 +695,29 @@ footer {
         scroll-snap-align: center;
     }
 
-    .punto-card {
-        flex: 0 0 90%;
+    .puntos-grid a {
+        flex: 0 0 85%; /* Las tarjetas ocupan el 85% del ancho para ser horizontales */
         scroll-snap-align: center;
-        padding: 15px; /* Reducir acolchado para ganar espacio horizontal */
+        text-decoration: none;
+    }
+
+    .punto-card {
+        padding: 15px;
+        width: 100%; /* Ocupar todo el ancho del enlace */
+        min-height: 100px; /* Asegurar formato rectangular horizontal */
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .punto-card h4 {
+        font-size: 1.1rem;
+        margin-bottom: 5px;
+        white-space: nowrap; /* Evitar que el título se rompa en varias líneas si es corto */
     }
 
     .punto-card p {
-        font-size: 0.85rem; /* Fuente ligeramente más pequeña para que quepa la dirección */
+        font-size: 0.8rem;
         line-height: 1.2;
     }
 }
