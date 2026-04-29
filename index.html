@@ -310,7 +310,7 @@
     <section id="reportes" style="background: #080808;">
         <h2 class="section-title" style="color: #FFF;">Reporte Ciudadano</h2>
         <p style="margin-bottom: 20px;">Envía tu queja o reporte. Se enviará directamente a cvdlu.buzon@gmail.com</p>
-        <form action="https://formspree.io/cvdlu.buzon@gmail.com" method="POST" enctype="multipart/form-data">
+        <form id="form-reporte" enctype="multipart/form-data">
             <div class="form-group">
                 <label>Nombre (Opcional)</label>
                 <input type="text" name="nombre">
@@ -323,14 +323,15 @@
                 <label>Adjuntar Imagen o Video</label>
                 <input type="file" name="archivo" accept="image/*,video/*">
             </div>
-            <button type="submit" class="btn-submit">Enviar Reporte</button>
+            <button type="submit" class="btn-submit" id="btn-reporte">Enviar Reporte</button>
+            <div id="status-reporte" class="form-status"></div>
         </form>
     </section>
 
     <!-- Volunteer Section -->
     <section id="voluntarios">
         <h2 class="section-title">Únete como Voluntario</h2>
-        <form action="https://formspree.io/cvdlu.buzon@gmail.com" method="POST">
+        <form id="form-voluntario">
             <div class="form-group">
                 <label>Nombre Completo</label>
                 <input type="text" name="nombre" required>
@@ -343,7 +344,8 @@
                 <label>¿Cómo te gustaría ayudar?</label>
                 <textarea name="mensaje" rows="3"></textarea>
             </div>
-            <button type="submit" class="btn-submit">Quiero ser Voluntario</button>
+            <button type="submit" class="btn-submit" id="btn-voluntario">Quiero ser Voluntario</button>
+            <div id="status-voluntario" class="form-status"></div>
         </form>
     </section>
 
