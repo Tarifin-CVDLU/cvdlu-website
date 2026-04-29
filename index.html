@@ -32,6 +32,7 @@
                 <li><a href="#noticias">Noticias</a></li>
                 <li><a href="#galeria">Galería</a></li>
                 <li><a href="#reportes">Reportes</a></li>
+                <li><a href="#voluntarios">Voluntarios</a></li>
                 <li><a href="#contacto">Contacto</a></li>
             </ul>
         </nav>
@@ -210,31 +211,9 @@
     <!-- Convocatorias Section -->
     <section id="convocatorias">
         <h2 class="section-title">Convocatorias</h2>
-        <div class="grid-container">
-            <!-- Evento 1: Asamblea -->
-            <div class="card">
-                <a href="https://www.facebook.com/events/1442592476791848" target="_blank" style="text-decoration: none; color: inherit;">
-                    <div class="card-content">
-                        <div class="card-date">PRÓXIMO: 26 DE ABRIL, 6:30 PM</div>
-                        <h3 style="color: var(--primary-color);">1er Asamblea Ciudadana por la Movilidad</h3>
-                        <p>Únete a la primera gran asamblea de usuarios reales. Ven a compartir tus experiencias y ayúdanos a planear las acciones para defender nuestro derecho al transporte digno.</p>
-                        <p style="margin-top: 10px; font-weight: bold;"><i class="fas fa-map-marker-alt"></i> Plaza Hidalgo, Centro MTY</p>
-                    </div>
-                </a>
-            </div>
-            <!-- Evento 2: Colmenita -->
-            <div class="card">
-                <a href="https://www.facebook.com/events/1280268663474575" target="_blank" style="text-decoration: none; color: inherit;">
-                    <div class="card-content">
-                        <div class="card-date">DOMINGO 26 DE ABRIL, 4:00 PM</div>
-                        <h3 style="color: var(--primary-color);">COLMENITA - Voz de las infancias 🐝</h3>
-                        <p>Un espacio recreativo para que niñas y niños celebren su día a través del arte y el juego. Fomentamos la participación infantil para construir una mejor ciudad.</p>
-                        <p style="margin-top: 10px; font-weight: bold;"><i class="fas fa-map-marker-alt"></i> Plaza Hidalgo (Frente al Museo)</p>
-                    </div>
-                </a>
-            </div>
+        <div class="grid-container" style="justify-content: center;">
             <!-- Evento 3: Boicot FIFA -->
-            <div class="card" style="border: 2px solid #000;">
+            <div class="card" style="border: 2px solid #000; flex: 0 0 100%; max-width: 400px;">
                 <div class="card-content">
                     <div class="card-date" style="color: #000; font-weight: 900;">PRÓXIMAMENTE</div>
                     <h3 style="color: #d32f2f;">Marcha #BoicotFIFAWorldcup</h3>
@@ -324,15 +303,6 @@
         </div>
     </section>
 
-    <!-- Statistics Thermometer Section -->
-    <section id="termometro" style="background: #111; padding-top: 60px; padding-bottom: 40px;">
-        <h2 class="section-title" style="color: #FFF;">Termómetro Ciudadano</h2>
-        <p style="text-align: center; color: #999; margin-bottom: 30px;">Total de reportes recibidos: <span id="total-reportes" style="color: var(--primary-color); font-weight: bold; font-size: 1.2rem;">0</span></p>
-        <div id="thermometer-container" style="max-width: 800px; margin: 0 auto; padding: 0 20px;">
-            <p style="text-align: center; color: #666; font-style: italic;">Cargando estadísticas en tiempo real...</p>
-        </div>
-    </section>
-
     <!-- Citizen Report Section -->
     <section id="reportes" style="background: #080808;">
         <h2 class="section-title" style="color: #FFF;">Reporte Ciudadano</h2>
@@ -377,6 +347,15 @@
             <button type="submit" class="btn-submit" id="btn-reporte">Enviar Reporte</button>
             <div id="status-reporte" class="form-status"></div>
         </form>
+    </section>
+
+    <!-- Statistics Thermometer Section -->
+    <section id="termometro" style="background: #111; padding-top: 60px; padding-bottom: 40px;">
+        <h2 class="section-title" style="color: #FFF;">Termómetro Ciudadano</h2>
+        <p style="text-align: center; color: #999; margin-bottom: 30px;">Total de reportes recibidos: <span id="total-reportes" style="color: var(--primary-color); font-weight: bold; font-size: 1.2rem;">0</span></p>
+        <div id="thermometer-container" style="max-width: 800px; margin: 0 auto; padding: 0 20px;">
+            <p style="text-align: center; color: #666; font-style: italic;">Cargando estadísticas en tiempo real...</p>
+        </div>
     </section>
 
     <!-- Volunteer Section -->
