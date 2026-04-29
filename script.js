@@ -36,10 +36,20 @@ function setupForm(formId, statusId, btnId, isReporte) {
         btn.innerText = "Enviando...";
 
         try {
+            // Obtener IP por seguridad
+            let userIP = "Desconocida";
+            try {
+                const ipRes = await fetch("https://api.ipify.org?format=json");
+                const ipData = await ipRes.json();
+                userIP = ipData.ip;
+            } catch(e) { console.log("No se pudo obtener la IP"); }
+
             const formData = new FormData(form);
             const payload = {
                 tipo: isReporte ? "Reporte Ciudadano" : "Voluntario",
-                nombre: formData.get("nombre") || "Anónimo"
+                nombre: formData.get("nombre") || "Anónimo",
+                userIP: userIP,
+                userAgent: navigator.userAgent // Información del dispositivo y navegador
             };
 
             if (isReporte) {
