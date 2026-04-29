@@ -98,45 +98,48 @@ async function handleFormSubmit(e, isReporte) {
             throw new Error("Falta configurar la URL de Google Script");
         }
 
-        // Enviamos la petición POST usando XMLHttpRequest para tener progreso
-        await new Promise((resolve, reject) => {
-            const xhr = new XMLHttpRequest();
-            xhr.open('POST', GOOGLE_SCRIPT_URL, true);
-            
-            xhr.upload.addEventListener("progress", function(e) {
-                if (e.lengthComputable && isReporte) {
-                    const percentComplete = Math.round((e.loaded / e.total) * 100);
-                    const bus = document.getElementById('progress-bus');
-                    const text = document.getElementById('progress-percent');
-                    if (bus) bus.style.left = percentComplete + '%';
-                    if (text) text.innerText = percentComplete + '%';
-                }
-            });
+        // Animación simulada del camioncito mientras enviamos
+        const bus = document.getElementById('progress-bus');
+        const text = document.getElementById('progress-percent');
+        let progress = 0;
+        let progressInterval;
+        
+        if (isReporte && bus && text) {
+            progressInterval = setInterval(() => {
+                progress += Math.floor(Math.random() * 15) + 5;
+                if (progress > 90) progress = 90;
+                bus.style.left = progress + '%';
+                text.innerText = progress + '%';
+            }, 600);
+        }
 
-            xhr.onload = function() {
-                if (xhr.status >= 200 && xhr.status < 300) {
-                    resolve(xhr.responseText);
-                } else {
-                    reject(new Error("El servidor rechazó la conexión (Status " + xhr.status + "). Es posible que el archivo sea demasiado pesado o falten permisos."));
-                }
-            };
-            xhr.onerror = function() {
-                reject(new Error("Error de conexión. Si estás probando desde un archivo local, Google bloquea el envío. Súbelo a GitHub y pruébalo en la web, o revisa que el video no pese más de 40MB."));
-            };
-
-            xhr.send(JSON.stringify(payload));
+        // Usamos fetch en modo no-cors para evitar los bloqueos estrictos de seguridad del navegador
+        await fetch(GOOGLE_SCRIPT_URL, {
+            method: "POST",
+            mode: "no-cors",
+            headers: {
+                "Content-Type": "text/plain"
+            },
+            body: JSON.stringify(payload)
         });
+
+        if (progressInterval) clearInterval(progressInterval);
+        if (isReporte && bus && text) {
+            bus.style.left = '100%';
+            text.innerText = '100%';
+        }
 
         statusDiv.className = "form-status success";
         statusDiv.innerText = "¡Enviado con éxito! Gracias por tu participación.";
         form.reset();
 
     } catch (error) {
+        if (typeof progressInterval !== 'undefined') clearInterval(progressInterval);
         console.error(error);
         statusDiv.className = "form-status error";
         statusDiv.innerText = error.message.includes("Falta configurar") 
             ? "Error: Falta configurar la URL en el script."
-            : "Error: " + error.message;
+            : "Error de conexión. Verifica tu internet e inténtalo de nuevo.";
     } finally {
         btn.innerText = originalBtnText;
         btn.disabled = false;
