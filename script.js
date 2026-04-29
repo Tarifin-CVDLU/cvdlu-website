@@ -141,3 +141,14 @@ function toBase64(file) {
         reader.onerror = error => reject(error);
     });
 }
+
+// PROTECCIÓN BÁSICA DEL SITIO
+document.addEventListener('contextmenu', event => event.preventDefault()); // Bloquea clic derecho
+document.addEventListener('keydown', e => {
+    // Bloquea Ctrl+U (Ver código), Ctrl+S (Guardar), Ctrl+Shift+I (Inspeccionar)
+    if (e.ctrlKey && (e.key === 'u' || e.key === 's' || e.key === 'i' || e.key === 'J')) {
+        e.preventDefault();
+    }
+    if (e.key === 'F12') e.preventDefault();
+});
+document.addEventListener('dragstart', e => e.preventDefault()); // Bloquea arrastrar imágenes
