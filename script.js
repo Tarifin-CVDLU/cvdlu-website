@@ -41,7 +41,7 @@ window.addEventListener("load", () => {
 });
 
 // Google Apps Script URL (El usuario debe reemplazar esto)
-const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzDGG2N3SWUu3mgHNXHf3e8Pvd2GEBVIQwER6QrLeN0R8GNkuQVMndq8cgm6y1neX7IFQ/exec";
+const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzDCEt2niMCihet6-O5kPhwF2Lfq0Ru_MTR-GjCznFzbt6tb5EU8ArBmMlEBWRHfl_aBA/exec";
 
 function getBase64(file) {
     return new Promise((resolve, reject) => {
