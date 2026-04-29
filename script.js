@@ -71,6 +71,7 @@ async function handleFormSubmit(e, isReporte) {
         };
 
         if (isReporte) {
+            payload.categoria = form.querySelector('select[name="categoria"]').value;
             payload.reporte = form.querySelector('textarea[name="reporte"]').value;
             const fileInput = form.querySelector('input[name="archivo"]');
             if (fileInput.files.length > 0) {
@@ -162,3 +163,63 @@ const formVoluntario = document.getElementById('form-voluntario');
 if (formVoluntario) {
     formVoluntario.addEventListener('submit', (e) => handleFormSubmit(e, false));
 }
+
+// Cargar Estadísticas (Termómetro)
+async function cargarEstadisticas() {
+    if (GOOGLE_SCRIPT_URL === "URL_DE_TU_SCRIPT_AQUI") return;
+    
+    try {
+        const response = await fetch(GOOGLE_SCRIPT_URL + "?action=stats");
+        const data = await response.json();
+        
+        document.getElementById('total-reportes').innerText = data.total;
+        
+        const container = document.getElementById('thermometer-container');
+        if (data.total === 0) {
+            container.innerHTML = '<p style="text-align: center; color: #666; font-style: italic;">Aún no hay reportes registrados.</p>';
+            return;
+        }
+        
+        container.innerHTML = '';
+        
+        // Ordenar por cantidad de mayor a menor
+        const categoriasOrdenadas = Object.keys(data.categorias).sort((a, b) => data.categorias[b] - data.categorias[a]);
+        
+        // Encontrar el máximo para escalar las barras
+        const maxCount = data.categorias[categoriasOrdenadas[0]];
+        
+        categoriasOrdenadas.forEach(cat => {
+            const count = data.categorias[cat];
+            if (count > 0) {
+                const percent = (count / maxCount) * 100;
+                
+                const item = document.createElement('div');
+                item.className = 'thermometer-item';
+                item.innerHTML = `
+                    <div class="thermometer-label">
+                        <span>${cat}</span>
+                        <span style="font-weight: bold; color: var(--primary-color);">${count}</span>
+                    </div>
+                    <div class="thermometer-bar-container">
+                        <div class="thermometer-bar-fill" style="width: 0%;"></div>
+                    </div>
+                `;
+                container.appendChild(item);
+                
+                // Animar barra
+                setTimeout(() => {
+                    item.querySelector('.thermometer-bar-fill').style.width = percent + '%';
+                }, 100);
+            }
+        });
+        
+    } catch (e) {
+        console.log("No se pudieron cargar las estadísticas:", e);
+        const container = document.getElementById('thermometer-container');
+        if(container) container.innerHTML = '<p style="text-align: center; color: #666; font-style: italic;">Estadísticas no disponibles en este momento.</p>';
+    }
+}
+
+// Inicializar estadísticas
+document.addEventListener('DOMContentLoaded', cargarEstadisticas);
+
