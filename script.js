@@ -77,7 +77,16 @@ async function handleFormSubmit(e, isReporte) {
                 const file = fileInput.files[0];
                 payload.fileName = file.name;
                 payload.mimeType = file.type;
-                statusDiv.innerText = "Subiendo archivo... esto puede tardar unos minutos dependiendo del tamaño del video.";
+                statusDiv.innerText = "Procesando archivo... por favor no cierres la ventana.";
+                
+                // Mostrar contenedor de progreso
+                const progressContainer = document.getElementById('progress-container');
+                if (progressContainer) {
+                    progressContainer.style.display = 'block';
+                    document.getElementById('progress-bus').style.left = '0%';
+                    document.getElementById('progress-percent').innerText = '0%';
+                }
+                
                 payload.fileData = await getBase64(file);
             }
         } else {
@@ -89,10 +98,30 @@ async function handleFormSubmit(e, isReporte) {
             throw new Error("Falta configurar la URL de Google Script");
         }
 
-        // Enviamos la petición POST
-        await fetch(GOOGLE_SCRIPT_URL, {
-            method: "POST",
-            body: JSON.stringify(payload)
+        // Enviamos la petición POST usando XMLHttpRequest para tener progreso
+        await new Promise((resolve, reject) => {
+            const xhr = new XMLHttpRequest();
+            xhr.open('POST', GOOGLE_SCRIPT_URL, true);
+            
+            xhr.upload.addEventListener("progress", function(e) {
+                if (e.lengthComputable && isReporte) {
+                    const percentComplete = Math.round((e.loaded / e.total) * 100);
+                    const bus = document.getElementById('progress-bus');
+                    const text = document.getElementById('progress-percent');
+                    if (bus) bus.style.left = percentComplete + '%';
+                    if (text) text.innerText = percentComplete + '%';
+                }
+            });
+
+            xhr.onload = function() {
+                // Google Apps Script suele retornar un 200 con el resultado
+                resolve(xhr.responseText);
+            };
+            xhr.onerror = function() {
+                reject(new Error("Error de conexión"));
+            };
+
+            xhr.send(JSON.stringify(payload));
         });
 
         statusDiv.className = "form-status success";
@@ -108,6 +137,9 @@ async function handleFormSubmit(e, isReporte) {
     } finally {
         btn.innerText = originalBtnText;
         btn.disabled = false;
+        
+        const progressContainer = document.getElementById('progress-container');
+        if (progressContainer) progressContainer.style.display = 'none';
         
         setTimeout(() => {
             if(statusDiv.className.includes("success")) statusDiv.style.display = 'none';
