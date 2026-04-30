@@ -30,25 +30,28 @@ document.addEventListener('DOMContentLoaded', () => {
     // Inicializar funciones
     cargarEstadisticas();
     
-    // Lógica del contador de visitas simulado
+    // Lógica de contador REAL de visitas
     const visitorCountEl = document.getElementById('visitor-count');
     if (visitorCountEl) {
-        // Recuperar el valor guardado o iniciar en 1420
-        let count = parseInt(localStorage.getItem('cvdlu_visitor_count')) || 1420;
-        
-        const updateCounter = () => {
-            visitorCountEl.innerText = count.toLocaleString();
-        };
-        
-        updateCounter(); // Mostrar valor inicial
+        const baseURL = "https://api.counterapi.dev/v1/vozdelosusuarios/homepage";
+        const hasVisited = sessionStorage.getItem('cvdlu_visited');
+        // Si ya visitó en esta sesión, solo lee el valor. Si es nuevo, súmale 1 al servidor.
+        const url = hasVisited ? (baseURL + "/") : (baseURL + "/up");
 
-        // Simular nuevas visitas aleatorias cada 5-15 segundos
-        setInterval(() => {
-            const increment = Math.floor(Math.random() * 2) + 1; // Aumentar 1 o 2
-            count += increment;
-            localStorage.setItem('cvdlu_visitor_count', count);
-            updateCounter();
-        }, Math.floor(Math.random() * 10000) + 5000);
+        fetch(url)
+            .then(res => res.json())
+            .then(data => {
+                const realCount = data.count || 0;
+                const displayCount = 1420 + realCount; // Inicia en 1420 + las visitas reales nuevas
+                visitorCountEl.innerText = displayCount.toLocaleString();
+                
+                if (!hasVisited) {
+                    sessionStorage.setItem('cvdlu_visited', 'true');
+                }
+            })
+            .catch(e => {
+                visitorCountEl.innerText = "1,420"; // Fallback en caso de error
+            });
     }
     
     // Configurar formularios
