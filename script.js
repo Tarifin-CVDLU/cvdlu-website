@@ -30,6 +30,27 @@ document.addEventListener('DOMContentLoaded', () => {
     // Inicializar funciones
     cargarEstadisticas();
     
+    // Lógica del contador de visitas simulado
+    const visitorCountEl = document.getElementById('visitor-count');
+    if (visitorCountEl) {
+        // Recuperar el valor guardado o iniciar en 1420
+        let count = parseInt(localStorage.getItem('cvdlu_visitor_count')) || 1420;
+        
+        const updateCounter = () => {
+            visitorCountEl.innerText = count.toLocaleString();
+        };
+        
+        updateCounter(); // Mostrar valor inicial
+
+        // Simular nuevas visitas aleatorias cada 5-15 segundos
+        setInterval(() => {
+            const increment = Math.floor(Math.random() * 2) + 1; // Aumentar 1 o 2
+            count += increment;
+            localStorage.setItem('cvdlu_visitor_count', count);
+            updateCounter();
+        }, Math.floor(Math.random() * 10000) + 5000);
+    }
+    
     // Configurar formularios
     setupForm("form-reporte", "status-reporte", "btn-reporte", true);
     setupForm("form-voluntario", "status-voluntario", "btn-voluntario", false);
@@ -107,7 +128,11 @@ function setupForm(formId, statusId, btnId, isReporte) {
             });
 
             statusDiv.className = "form-status success";
-            statusDiv.innerText = "¡Enviado con éxito! Gracias por tu lucha.";
+            if (isReporte) {
+                statusDiv.innerText = "¡Enviado con éxito! Gracias por tu lucha.";
+            } else {
+                statusDiv.innerHTML = "¡Solicitud enviada con éxito! 🐝✨<br><br>Corre a revisar tu correo para el siguiente paso (¡y échale un ojo a la carpeta de <strong>SPAM</strong> por si las moscas!).";
+            }
             form.reset();
             const progressContainer = document.getElementById("progress-container");
             if (progressContainer) progressContainer.style.display = "none";
