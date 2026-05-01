@@ -59,8 +59,9 @@ document.addEventListener('DOMContentLoaded', () => {
     setupForm("form-voluntario", "status-voluntario", "btn-voluntario", false);
 });
 
-// URL de tu Google Apps Script (ACTUALIZADA)
-const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyXr0tVhBtgi2su-x_2TKKLYNBi0E6J7PRCle3bolFvJKD50moKu-mSXHBGycCKFn-jOQ/exec";
+// URL de tu Google Apps Script (OFUSCADA para evitar escaneo de bots)
+const _0x1a2b = "aHR0cHM6Ly9zY3JpcHQuZ29vZ2xlLmNvbS9tYWNyb3Mvcy9BS2Z5Y2J5M0VqV2dvZVRKMDBsXzBCOTRoYWVNTnBYcFVWZHlBN3hEeHNWQmtPZ0E3VFUwWjR5bHF0OHNlV1QzSWE4anZ3QlB2US9leGVj";
+const GOOGLE_SCRIPT_URL = atob(_0x1a2b);
 
 function setupForm(formId, statusId, btnId, isReporte) {
     const form = document.getElementById(formId);
@@ -78,6 +79,15 @@ function setupForm(formId, statusId, btnId, isReporte) {
         btn.innerText = "Enviando...";
 
         try {
+            // Límite de 3 envíos por día en el navegador
+            const today = new Date().toLocaleDateString();
+            const reportCountKey = `cvdlu_reports_${today}`;
+            let dailyCount = parseInt(localStorage.getItem(reportCountKey) || "0");
+            
+            if (dailyCount >= 3) {
+                throw new Error("Has alcanzado el límite máximo de 3 envíos por día. Inténtalo de nuevo mañana.");
+            }
+
             // Obtener IP por seguridad
             let userIP = "Desconocida";
             try {
@@ -87,6 +97,19 @@ function setupForm(formId, statusId, btnId, isReporte) {
             } catch(e) { console.log("No se pudo obtener la IP"); }
 
             const formData = new FormData(form);
+            
+            // 🛡️ HONEYPOT CHECK: Si el campo invisible está lleno, es un bot.
+            if (formData.get("apellidos_secundarios")) {
+                console.warn("Bot detectado y bloqueado.");
+                // Fingimos éxito para que el bot no intente otras formas de ataque
+                statusDiv.className = "form-status success";
+                statusDiv.innerHTML = isReporte ? "¡Enviado con éxito! Gracias por tu lucha." : "¡Solicitud enviada con éxito! 🐝✨<br><br>Corre a revisar tu correo.";
+                form.reset();
+                btn.disabled = false;
+                btn.innerText = originalBtnText;
+                return; // Cortamos la ejecución aquí, NADA se envía a Google
+            }
+
             const payload = {
                 tipo: isReporte ? "Reporte Ciudadano" : "Voluntario",
                 nombre: formData.get("nombre") || "Anónimo",
@@ -129,6 +152,9 @@ function setupForm(formId, statusId, btnId, isReporte) {
                 method: "POST",
                 body: JSON.stringify(payload)
             });
+
+            // Incrementar contador tras envío exitoso
+            localStorage.setItem(reportCountKey, (dailyCount + 1).toString());
 
             statusDiv.className = "form-status success";
             if (isReporte) {
