@@ -339,6 +339,11 @@
         <h2 class="section-title" style="color: #FFF;">Reporte Ciudadano</h2>
         <p style="margin-bottom: 20px; color: var(--primary-color);">Envía tu queja o reporte. Se enviará directamente a cvdlu.buzon@gmail.com</p>
         <form id="form-reporte" enctype="multipart/form-data">
+            <!-- Honeypot -->
+            <div class="form-group" style="display:none;" aria-hidden="true">
+                <label>No llenes este campo si eres humano</label>
+                <input type="text" name="apellidos_secundarios" tabindex="-1" autocomplete="off">
+            </div>
             <div class="form-group">
                 <label>Nombre (Opcional)</label>
                 <input type="text" name="nombre">
@@ -409,6 +414,11 @@
     <section id="voluntarios">
         <h2 class="section-title">Únete como Voluntario</h2>
         <form id="form-voluntario">
+            <!-- Honeypot -->
+            <div class="form-group" style="display:none;" aria-hidden="true">
+                <label>No llenes este campo si eres humano</label>
+                <input type="text" name="apellidos_secundarios" tabindex="-1" autocomplete="off">
+            </div>
             <div class="form-group">
                 <label>Nombre Completo</label>
                 <input type="text" name="nombre" required>
