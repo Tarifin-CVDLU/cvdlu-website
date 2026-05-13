@@ -30,38 +30,13 @@ document.addEventListener('DOMContentLoaded', () => {
     // Inicializar funciones
     cargarEstadisticas();
     
-    // Lógica de contador REAL de visitas
-    const visitorCountEl = document.getElementById('visitor-count');
-    if (visitorCountEl) {
-        const baseURL = "https://api.counterapi.dev/v1/vozdelosusuarios/homepage";
-        const hasVisited = sessionStorage.getItem('cvdlu_visited');
-        // Si ya visitó en esta sesión, solo lee el valor. Si es nuevo, súmale 1 al servidor.
-        const url = hasVisited ? (baseURL + "/") : (baseURL + "/up");
-
-        fetch(url)
-            .then(res => res.json())
-            .then(data => {
-                const realCount = data.count || 0;
-                const displayCount = 1420 + realCount; // Inicia en 1420 + las visitas reales nuevas
-                visitorCountEl.innerText = displayCount.toLocaleString();
-                
-                if (!hasVisited) {
-                    sessionStorage.setItem('cvdlu_visited', 'true');
-                }
-            })
-            .catch(e => {
-                visitorCountEl.innerText = "1,420"; // Fallback en caso de error
-            });
-    }
-    
     // Configurar formularios
     setupForm("form-reporte", "status-reporte", "btn-reporte", true);
     setupForm("form-voluntario", "status-voluntario", "btn-voluntario", false);
 });
 
-// URL de tu Google Apps Script (OFUSCADA para evitar escaneo de bots)
-const _0x1a2b = "aHR0cHM6Ly9zY3JpcHQuZ29vZ2xlLmNvbS9tYWNyb3Mvcy9BS2Z5Y2J5M0VqV2dvZVRKMDBsXzBCOTRoYWVNTnBYcFVWZHlBN3hEeHNWQmtPZ0E3VFUwWjR5bHF0OHNlV1QzSWE4anZ3QlB2US9leGVj";
-const GOOGLE_SCRIPT_URL = atob(_0x1a2b);
+// URL de tu Google Apps Script (ACTUALIZADA)
+const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyXr0tVhBtgi2su-x_2TKKLYNBi0E6J7PRCle3bolFvJKD50moKu-mSXHBGycCKFn-jOQ/exec";
 
 function setupForm(formId, statusId, btnId, isReporte) {
     const form = document.getElementById(formId);
@@ -79,15 +54,6 @@ function setupForm(formId, statusId, btnId, isReporte) {
         btn.innerText = "Enviando...";
 
         try {
-            // Límite de 3 envíos por día en el navegador
-            const today = new Date().toLocaleDateString();
-            const reportCountKey = `cvdlu_reports_${today}`;
-            let dailyCount = parseInt(localStorage.getItem(reportCountKey) || "0");
-            
-            if (dailyCount >= 3) {
-                throw new Error("Has alcanzado el límite máximo de 3 envíos por día. Inténtalo de nuevo mañana.");
-            }
-
             // Obtener IP por seguridad
             let userIP = "Desconocida";
             try {
@@ -97,19 +63,6 @@ function setupForm(formId, statusId, btnId, isReporte) {
             } catch(e) { console.log("No se pudo obtener la IP"); }
 
             const formData = new FormData(form);
-            
-            // 🛡️ HONEYPOT CHECK: Si el campo invisible está lleno, es un bot.
-            if (formData.get("apellidos_secundarios")) {
-                console.warn("Bot detectado y bloqueado.");
-                // Fingimos éxito para que el bot no intente otras formas de ataque
-                statusDiv.className = "form-status success";
-                statusDiv.innerHTML = isReporte ? "¡Enviado con éxito! Gracias por tu lucha." : "¡Solicitud enviada con éxito! 🐝✨<br><br>Corre a revisar tu correo.";
-                form.reset();
-                btn.disabled = false;
-                btn.innerText = originalBtnText;
-                return; // Cortamos la ejecución aquí, NADA se envía a Google
-            }
-
             const payload = {
                 tipo: isReporte ? "Reporte Ciudadano" : "Voluntario",
                 nombre: formData.get("nombre") || "Anónimo",
@@ -152,9 +105,6 @@ function setupForm(formId, statusId, btnId, isReporte) {
                 method: "POST",
                 body: JSON.stringify(payload)
             });
-
-            // Incrementar contador tras envío exitoso
-            localStorage.setItem(reportCountKey, (dailyCount + 1).toString());
 
             statusDiv.className = "form-status success";
             if (isReporte) {
@@ -224,3 +174,64 @@ document.addEventListener('keydown', e => {
     if (e.key === 'F12') e.preventDefault();
 });
 document.addEventListener('dragstart', e => e.preventDefault()); // Bloquea arrastrar imágenes
+
+// =============================================
+//  MEDIDOR DE PROGRESO — INICIATIVA CIUDADANA
+// =============================================
+const ETAPAS_INFO = {
+    1: {
+        img: 'iniciativa_etapa2_entrega.jpg',
+        caption: 'Etapa 1 · 5 Feb 2026 — Entrega de la iniciativa con 1,000 firmas ciudadanas al Congreso de Nuevo León'
+    },
+    2: {
+        img: 'iniciativa_etapa4_reunion.jpg',
+        caption: 'Etapa 2 · 9 Feb 2026 — Reunión con la Diputada Aile Tamez, Presidenta de la Comisión de Movilidad'
+    },
+    3: {
+        img: 'iniciativa_etapa3_estatus.jpg',
+        caption: 'Etapa 3 · ACTUAL — Iniciativa turnada a la Comisión de Movilidad. En espera de la Junta de Gobierno'
+    },
+    4: {
+        img: 'iniciativa_etapa3_estatus.jpg',
+        caption: 'Etapa 4 · PRÓXIMO — Junta de Gobierno: presentación y evaluación de la iniciativa ciudadana'
+    },
+    5: {
+        img: 'iniciativa_etapa5_ciudadanos.jpg',
+        caption: 'Etapa 5 · META FINAL — Presentación al Pleno del Congreso. ¡Comparte, firma y exige transporte digno!'
+    }
+};
+
+function abrirEtapa(num) {
+    const modal  = document.getElementById('etapa-modal');
+    const img    = document.getElementById('modal-img');
+    const titulo = document.getElementById('modal-titulo');
+    const info   = ETAPAS_INFO[num];
+    if (!modal || !info) return;
+
+    img.src          = info.img;
+    img.alt          = info.caption;
+    titulo.innerText = info.caption;
+
+    modal.classList.add('abierto');
+    document.body.style.overflow = 'hidden';
+}
+
+function cerrarEtapaBtn() {
+    const modal = document.getElementById('etapa-modal');
+    if (!modal) return;
+    modal.classList.remove('abierto');
+    document.body.style.overflow = '';
+}
+
+function cerrarEtapa(e) {
+    // Solo cierra si se hizo clic en el fondo del modal (no en su contenido)
+    if (e.target === document.getElementById('etapa-modal')) {
+        cerrarEtapaBtn();
+    }
+}
+
+// Cerrar con tecla Escape
+document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') cerrarEtapaBtn();
+});
+
