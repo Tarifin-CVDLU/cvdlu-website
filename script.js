@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // URL de tu Google Apps Script (ACTUALIZADA)
-const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyXr0tVhBtgi2su-x_2TKKLYNBi0E6J7PRCle3bolFvJKD50moKu-mSXHBGycCKFn-jOQ/exec";
+const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzAwLYQ6GYxfti7Vjyj0EVmwrVgqXmK5s-b3WSo3c763uYhSastDsPyGWRo9uYLeSoNDg/exec";
 
 function setupForm(formId, statusId, btnId, isReporte) {
     const form = document.getElementById(formId);
