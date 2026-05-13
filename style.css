@@ -949,6 +949,20 @@ footer {
     text-transform: uppercase;
 }
 
+.modal-mensaje {
+    width: 100%;
+    background: rgba(255, 204, 0, 0.08);
+    border: 1px solid rgba(255, 204, 0, 0.3);
+    border-radius: 12px;
+    padding: 28px 24px;
+    color: #FFF;
+    font-size: 1.05rem;
+    line-height: 1.7;
+    text-align: center;
+    white-space: pre-line;
+    margin-bottom: 0;
+}
+
 .modal-cerrar {
     position: absolute;
     top: -16px;
@@ -978,11 +992,11 @@ footer {
     .progreso-track  { padding: 0 4px; }
 
     .progreso-linea-bg,
-    .progreso-linea-fill { left: 30px; right: 30px; top: 22px; }
+    .progreso-linea-fill { left: 30px; right: 30px; top: 20px; }
 
-    .progreso-step  { width: 58px; }
-    .step-circulo   { width: 44px; height: 44px; font-size: 1rem; }
-    .step-fecha     { font-size: 0.58rem; }
-    .step-nombre    { font-size: 0.62rem; }
+    .progreso-step  { width: 52px; }
+    .step-circulo   { width: 40px; height: 40px; font-size: 0.85rem; }
+    .step-fecha     { font-size: 0.55rem; }
+    .step-nombre    { font-size: 0.58rem; }
 }
 

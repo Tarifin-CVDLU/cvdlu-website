@@ -192,8 +192,9 @@ const ETAPAS_INFO = {
         caption: 'Etapa 3 · ACTUAL — Iniciativa turnada a la Comisión de Movilidad. En espera de la Junta de Gobierno'
     },
     4: {
-        img: 'iniciativa_etapa3_estatus.jpg',
-        caption: 'Etapa 4 · PRÓXIMO — Junta de Gobierno: presentación y evaluación de la iniciativa ciudadana'
+        img: null,
+        caption: 'Etapa 4 · Junta de Gobierno — Seguimos esperando la fecha de la siguiente junta. ¡Tu firma suma! 🐝',
+        mensaje: '⏳ Seguimos esperando la fecha de la siguiente Junta de Gobierno.\n\nEn cuanto tengamos confirmación, lo publicaremos en nuestras redes sociales. ¡Mantente pendiente y sigue sumando tu firma!'
     },
     5: {
         img: 'iniciativa_etapa5_ciudadanos.jpg',
@@ -205,11 +206,22 @@ function abrirEtapa(num) {
     const modal  = document.getElementById('etapa-modal');
     const img    = document.getElementById('modal-img');
     const titulo = document.getElementById('modal-titulo');
+    const msgEl  = document.getElementById('modal-mensaje');
     const info   = ETAPAS_INFO[num];
     if (!modal || !info) return;
 
-    img.src          = info.img;
-    img.alt          = info.caption;
+    if (info.img) {
+        img.src     = info.img;
+        img.alt     = info.caption;
+        img.style.display = 'block';
+        if (msgEl) msgEl.style.display = 'none';
+    } else {
+        img.style.display = 'none';
+        if (msgEl) {
+            msgEl.innerText  = info.mensaje || info.caption;
+            msgEl.style.display = 'block';
+        }
+    }
     titulo.innerText = info.caption;
 
     modal.classList.add('abierto');
