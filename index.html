@@ -10,8 +10,8 @@
     <meta name="robots" content="index, follow">
     
     <!-- Favicon (Icono en la pestaña del navegador) -->
-    <link rel="icon" href="https://vozdelosusuarios.org/favicon.png" type="image/png" sizes="192x192">
-    <link rel="apple-touch-icon" href="https://vozdelosusuarios.org/favicon.png">
+    <link rel="icon" href="logo.png" type="image/png">
+    <link rel="apple-touch-icon" href="logo.png">
 
     <!-- Open Graph / Facebook / WhatsApp -->
     <meta property="og:type" content="website">
@@ -31,16 +31,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    
-    <!-- Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-J2CVQPD5BG"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-
-      gtag('config', 'G-J2CVQPD5BG');
-    </script>
 </head>
 <body>
     <!-- Facebook SDK -->
@@ -63,7 +53,6 @@
                 <li><a href="#noticias">Noticias</a></li>
                 <li><a href="#galeria">Galería</a></li>
                 <li><a href="#reportes">Reportes</a></li>
-                <li><a href="#donativos">Apoyar</a></li>
                 <li><a href="#voluntarios">Voluntarios</a></li>
                 <li><a href="#contacto">Contacto</a></li>
             </ul>
@@ -117,7 +106,104 @@
         <div class="iniciativa-box">
             <h2 class="section-title" style="border-left: none; padding-left: 0; color: var(--primary-color);">Iniciativa Ciudadana contra el Tarifazo</h2>
             <p>El 5 de febrero de 2026 presentamos formalmente nuestra Iniciativa Ciudadana ante el Congreso de Nuevo León. Seguimos recolectando firmas para respaldar estos 7 puntos exigidos:</p>
-            
+
+            <!-- ===== MEDIDOR DE PROGRESO DE LA INICIATIVA ===== -->
+            <div class="progreso-iniciativa">
+                <h3 class="progreso-titulo">📊 Estado actual de nuestra iniciativa</h3>
+                <p class="progreso-subtitulo">Haz clic en cada etapa para ver los detalles</p>
+
+                <div class="progreso-track">
+                    <!-- Línea de progreso de fondo -->
+                    <div class="progreso-linea-bg"></div>
+                    <!-- Línea de progreso activo (60% = hasta etapa 3 completada) -->
+                    <div class="progreso-linea-fill" style="width: 45%;"></div>
+
+                    <!-- Etapa 1 -->
+                    <button class="progreso-step completado" id="step-1"
+                        onclick="abrirEtapa(1)"
+                        aria-label="Ver detalles etapa 1: Entrega al Congreso">
+                        <div class="step-circulo">
+                            <i class="fas fa-file-signature"></i>
+                        </div>
+                        <div class="step-label">
+                            <span class="step-fecha">5 Feb 2026</span>
+                            <span class="step-nombre">Entrega al<br>Congreso</span>
+                        </div>
+                    </button>
+
+                    <!-- Etapa 2 -->
+                    <button class="progreso-step completado" id="step-2"
+                        onclick="abrirEtapa(2)"
+                        aria-label="Ver detalles etapa 2: Primer avance">
+                        <div class="step-circulo">
+                            <i class="fas fa-handshake"></i>
+                        </div>
+                        <div class="step-label">
+                            <span class="step-fecha">9 Feb 2026</span>
+                            <span class="step-nombre">Reunión con<br>Diputada</span>
+                        </div>
+                    </button>
+
+                    <!-- Etapa 3 — ETAPA ACTUAL -->
+                    <button class="progreso-step activo" id="step-3"
+                        onclick="abrirEtapa(3)"
+                        aria-label="Ver detalles etapa 3: En Comisión de Movilidad (etapa actual)">
+                        <div class="step-circulo">
+                            <div class="pulso-ring"></div>
+                            <i class="fas fa-balance-scale"></i>
+                        </div>
+                        <div class="step-label">
+                            <span class="step-fecha">⚡ ACTUAL</span>
+                            <span class="step-nombre">Comisión de<br>Movilidad</span>
+                        </div>
+                    </button>
+
+                    <!-- Etapa 4 -->
+                    <button class="progreso-step pendiente" id="step-4"
+                        onclick="abrirEtapa(4)"
+                        aria-label="Ver detalles etapa 4: Junta de Gobierno">
+                        <div class="step-circulo">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="step-label">
+                            <span class="step-fecha">Pendiente</span>
+                            <span class="step-nombre">Junta de<br>Gobierno</span>
+                        </div>
+                    </button>
+
+                    <!-- Etapa 5 -->
+                    <button class="progreso-step pendiente" id="step-5"
+                        onclick="abrirEtapa(5)"
+                        aria-label="Ver detalles etapa 5: Pleno en el Congreso">
+                        <div class="step-circulo">
+                            <i class="fas fa-gavel"></i>
+                        </div>
+                        <div class="step-label">
+                            <span class="step-fecha">Meta final</span>
+                            <span class="step-nombre">Pleno en el<br>Congreso</span>
+                        </div>
+                    </button>
+                </div>
+
+                <p class="progreso-nota">
+                    <i class="fas fa-info-circle"></i>
+                    Seguimos a la espera de la fecha de la próxima Junta de Gobierno.
+                    <strong>¡Tu firma suma!</strong>
+                </p>
+            </div>
+
+            <!-- Modal de imagen por etapa -->
+            <div id="etapa-modal" class="etapa-modal" role="dialog" aria-modal="true" aria-labelledby="modal-titulo" onclick="cerrarEtapa(event)">
+                <div class="etapa-modal-inner">
+                    <button class="modal-cerrar" onclick="cerrarEtapaBtn()" aria-label="Cerrar">
+                        <i class="fas fa-times"></i>
+                    </button>
+                    <img id="modal-img" src="" alt="Detalle de la etapa" class="modal-img">
+                    <p id="modal-titulo" class="modal-caption"></p>
+                </div>
+            </div>
+            <!-- ===== FIN MEDIDOR ===== -->
+
             <ul class="iniciativa-puntos" style="text-align: left; margin: 20px auto; max-width: 700px; color: #EEE; line-height: 1.6; list-style-type: none; padding: 0;">
                 <li style="margin-bottom: 12px;"><i class="fas fa-check-circle" style="color: var(--primary-color); margin-right: 10px;"></i><strong>PRIMERO:</strong> La suspensión inmediata del incremento mensual en las tarifas del transporte público.</li>
                 <li style="margin-bottom: 12px;"><i class="fas fa-check-circle" style="color: var(--primary-color); margin-right: 10px;"></i><strong>SEGUNDO:</strong> Frecuencia adecuada en rutas urbanas y líneas de metro.</li>
@@ -128,13 +214,15 @@
                 <li style="margin-bottom: 12px;"><i class="fas fa-check-circle" style="color: var(--primary-color); margin-right: 10px;"></i><strong>SÉPTIMO:</strong> Que esta iniciativa sea turnada a la Comisión de Transporte y Movilidad para su análisis, y que se convoque a mesas de trabajo con participación ciudadana.</li>
             </ul>
             
-            <a href="https://drive.google.com/file/d/1jcPmvOVYA08BBHRzpiti9A9W9WBMcMNo/view" target="_blank" class="btn-drive">
-                <i class="fas fa-file-pdf"></i> Ver Iniciativa Completa (PDF)
-            </a>
+            <div style="text-align: center; margin: 30px 0;">
+                <a href="https://drive.google.com/file/d/1jcPmvOVYA08BBHRzpiti9A9W9WBMcMNo/view" target="_blank" class="btn-drive">
+                    <i class="fas fa-file-pdf"></i> Ver Iniciativa Completa (PDF)
+                </a>
+            </div>
 
             <div class="puntos-firma">
-                <h3 style="margin-top: 40px; color: var(--primary-color);">📍 Puntos Fijos para Firmar</h3>
-                <p>Te invitamos a acudir a cualquiera de nuestros puntos fijos para plasmar tu firma y apoyar este movimiento:</p>
+                <h3 style="margin-top: 40px; color: var(--primary-color); text-align: center;">📍 Puntos Fijos para Firmar</h3>
+                <p style="text-align: center;">Te invitamos a acudir a cualquiera de nuestros puntos fijos para plasmar tu firma y apoyar este movimiento:</p>
                 
                 <div class="puntos-grid">
                     <a href="https://share.google/LIukH8cQ4xJ5PbNDx" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: inherit; display: block;">
@@ -251,7 +339,11 @@
                 </div>
                 <div class="card-content">
                     <div class="card-date" style="color: #000; font-weight: 900;">PRÓXIMAMENTE</div>
-                    <h3 style="color: #d32f2f; margin-bottom: 0;">Marcha #BoicotFIFAWorldcup</h3>
+                    <h3 style="color: #d32f2f;">Marcha #BoicotFIFAWorldcup</h3>
+                    <p>Monterrey será sede, pero el pueblo no olvida. Nos manifestamos contra el gasto excesivo y la opacidad mientras el transporte público colapsa. ¡No hay mundial sin dignidad!</p>
+                    <div class="hashtags" style="margin-top: 15px;">
+                        <span>#BoicotFIFAWorldcup</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -337,13 +429,8 @@
     <!-- Citizen Report Section -->
     <section id="reportes" style="background: #080808;">
         <h2 class="section-title" style="color: #FFF;">Reporte Ciudadano</h2>
-        <p style="margin-bottom: 20px; color: var(--primary-color);">Envía tu queja o reporte. Se enviará de forma segura y anónima a nuestro buzón oficial.</p>
+        <p style="margin-bottom: 20px; color: var(--primary-color);">Envía tu queja o reporte. Se enviará directamente a cvdlu.buzon@gmail.com</p>
         <form id="form-reporte" enctype="multipart/form-data">
-            <!-- Honeypot -->
-            <div class="form-group" style="display:none;" aria-hidden="true">
-                <label>No llenes este campo si eres humano</label>
-                <input type="text" name="apellidos_secundarios" tabindex="-1" autocomplete="off">
-            </div>
             <div class="form-group">
                 <label>Nombre (Opcional)</label>
                 <input type="text" name="nombre">
@@ -394,31 +481,10 @@
         </div>
     </section>
 
-    <!-- Donativos Section -->
-    <section id="donativos" style="background: var(--primary-color); color: #000; padding: 60px 20px; text-align: center;">
-        <h2 class="section-title" style="color: #000; border-left: none; padding-left: 0;">Apoya la Causa</h2>
-        <p style="max-width: 700px; margin: 0 auto 20px auto; font-size: 1.1rem; font-weight: 600;">La movilización cuesta. Tu donativo voluntario nos ayuda a imprimir más hojas para firmas, fabricar lonas, mantener el sitio web activo y seguir luchando. ¡Cualquier ayuda suma!</p>
-        
-        <div style="background: #FFF; border: 2px solid #000; border-radius: 10px; max-width: 450px; margin: 30px auto 0 auto; padding: 25px; text-align: left; box-shadow: 6px 6px 0px rgba(0,0,0,0.2);">
-            <h3 style="margin-top: 0; margin-bottom: 20px; border-bottom: 2px solid #EEE; padding-bottom: 10px;"><i class="fas fa-university" style="color: #d32f2f;"></i> Datos para transferencia</h3>
-            <ul style="list-style: none; padding: 0; margin: 0; line-height: 1.8; font-size: 1.05rem;">
-                <li><strong>Cuenta / Tarjeta:</strong> <span style="user-select: all; background: #f9f9f9; padding: 3px 8px; border: 1px dashed #ccc; border-radius: 4px; font-weight: bold; font-family: monospace;">4741742974917109</span></li>
-                <li><strong>Banco:</strong> Hey Banco / Banregio</li>
-                <li><strong>A nombre de:</strong> Luis Castillo</li>
-                <li><strong>Concepto sugerido:</strong> Donativo</li>
-            </ul>
-        </div>
-    </section>
-
     <!-- Volunteer Section -->
     <section id="voluntarios">
         <h2 class="section-title">Únete como Voluntario</h2>
         <form id="form-voluntario">
-            <!-- Honeypot -->
-            <div class="form-group" style="display:none;" aria-hidden="true">
-                <label>No llenes este campo si eres humano</label>
-                <input type="text" name="apellidos_secundarios" tabindex="-1" autocomplete="off">
-            </div>
             <div class="form-group">
                 <label>Nombre Completo</label>
                 <input type="text" name="nombre" required>
@@ -463,12 +529,7 @@
             <span class="signature-name">Tarifin en lucha</span>
         </div>
     </footer>
-    <!-- Floating Telegram Button -->
-    <a href="https://t.me/megamarchaciudadananl" target="_blank" class="floating-telegram" title="Únete a la Megamarcha en Telegram">
-        <i class="fab fa-telegram-plane"></i>
-        <span class="telegram-text">Únete al Grupo</span>
-    </a>
 
-    <script src="script.js?v=2"></script>
+    <script src="script.js"></script>
 </body>
 </html>
