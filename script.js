@@ -197,8 +197,9 @@ const ETAPAS_INFO = {
         mensaje: '⏳ Seguimos esperando la fecha de la siguiente Junta de Gobierno.\n\nEn cuanto tengamos confirmación, lo publicaremos en nuestras redes sociales. ¡Mantente pendiente y sigue sumando tu firma!'
     },
     5: {
-        img: 'iniciativa_etapa5_ciudadanos.jpg',
-        caption: 'Etapa 5 · META FINAL — Presentación al Pleno del Congreso. ¡Comparte, firma y exige transporte digno!'
+        img: null,
+        caption: 'Etapa 5 · META FINAL — Presentación al Pleno del Congreso. ¡Comparte, firma y exige transporte digno!',
+        mensaje: '🏛️ Pleno en el Congreso (Meta Final)\n\nUna vez que la iniciativa sea aprobada por la Junta de Gobierno y la Comisión de Movilidad, pasará al Pleno del Congreso para ser votada por todos los diputados.\n\n¡Esta es nuestra meta final y para lograrla necesitamos la presión de todos! ¡Comparte y firma!'
     }
 };
 
