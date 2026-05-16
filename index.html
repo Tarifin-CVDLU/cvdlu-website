@@ -450,16 +450,44 @@
                 <input type="text" id="nombre-reporte" name="nombre" placeholder="Ciudadano Anónimo" style="background: #2a2a2a; border-color: #444; color: #EEE;">
             </div>
             <div class="form-group">
-                <label for="categoria-reporte" style="color: #EEE;">📋 Categoría del problema <span style="color: var(--primary-color);">*</span></label>
+                <label for="categoria-reporte" style="color: #EEE;">🚨 Tipo de problema <span style="color: var(--primary-color);">*</span></label>
                 <select id="categoria-reporte" name="categoria" required style="width: 100%; padding: 12px; background: #2a2a2a; border: 1px solid #444; color: #EEE; border-radius: 6px; outline: none; font-family: var(--font-main);">
-                    <option value="" disabled selected>Selecciona una categoría...</option>
-                    <option value="Tarifa / Cobro excesivo">💰 Tarifa / Cobro excesivo</option>
-                    <option value="Unidad en mal estado">🚌 Unidad en mal estado</option>
-                    <option value="Mal servicio / Conductor">😠 Mal servicio / Conductor</option>
-                    <option value="Frecuencia / Tiempo de espera">⏱️ Frecuencia / Tiempo de espera</option>
-                    <option value="Accesibilidad">♿ Accesibilidad</option>
-                    <option value="Seguridad">🔒 Seguridad</option>
-                    <option value="Otro">📌 Otro</option>
+                    <option value="" disabled selected>Selecciona el tipo de problema...</option>
+                    <optgroup label="🚌 Camión / Autobús" style="color: #FFCC00;">
+                        <option value="Camión - Tarifa / Cobro excesivo">💰 Tarifa o cobro excesivo</option>
+                        <option value="Camión - Unidad en mal estado">🔧 Unidad en mal estado o sucia</option>
+                        <option value="Camión - Mal servicio / Conductor">😠 Mal servicio o conducta del chofer</option>
+                        <option value="Camión - Frecuencia / Tiempo de espera">⏱️ Mala frecuencia / mucho tiempo de espera</option>
+                        <option value="Camión - No acepta efectivo">💵 No acepta pago en efectivo</option>
+                        <option value="Camión - Accesibilidad">♿ Falta de accesibilidad</option>
+                        <option value="Camión - Seguridad">🔒 Problema de seguridad a bordo</option>
+                    </optgroup>
+                    <optgroup label="🚇 Metro" style="color: #FFCC00;">
+                        <option value="Metro - Falla / Retraso">🚇 Falla o retraso en el servicio</option>
+                        <option value="Metro - Saturación / Aglomeración">👥 Saturación o aglomeración</option>
+                        <option value="Metro - Mal estado de instalaciones">🏗️ Mal estado de estaciones o vagones</option>
+                        <option value="Metro - Seguridad">🔒 Problema de seguridad</option>
+                        <option value="Metro - Accesibilidad">♿ Falta de accesibilidad</option>
+                    </optgroup>
+                    <optgroup label="🚌 ECOVÍA" style="color: #FFCC00;">
+                        <option value="ECOVÍA - Falla / Retraso">🚌 Falla o retraso en el servicio</option>
+                        <option value="ECOVÍA - Unidad en mal estado">🔧 Unidad en mal estado</option>
+                        <option value="ECOVÍA - Frecuencia / Tiempo de espera">⏱️ Mala frecuencia / mucho tiempo de espera</option>
+                        <option value="ECOVÍA - Seguridad">🔒 Problema de seguridad</option>
+                        <option value="ECOVÍA - Accesibilidad">♿ Falta de accesibilidad</option>
+                    </optgroup>
+                    <optgroup label="💳 Método de Pago" style="color: #FFCC00;">
+                        <option value="Pago - Solo tarjeta / Sin efectivo">💵 Solo aceptan tarjeta, no efectivo</option>
+                        <option value="Pago - Solo QR en app / Sin efectivo">📱 Solo aceptan QR por app, no efectivo</option>
+                        <option value="Pago - Falla en lector de tarjeta">❌ Falla en lector de tarjeta</option>
+                        <option value="Pago - Cobro incorrecto / doble cobro">💸 Cobro incorrecto o doble cobro</option>
+                    </optgroup>
+                    <optgroup label="📌 Otros" style="color: #FFCC00;">
+                        <option value="Otra falla/problema">📌 Otro tipo de problema</option>
+                    </optgroup>
+                    <optgroup label="👍 Felicitación" style="color: #FFCC00;">
+                        <option value="Felicitación">🌟 Felicitación / Agradecimiento</option>
+                    </optgroup>
                 </select>
             </div>
             <div class="form-group">
