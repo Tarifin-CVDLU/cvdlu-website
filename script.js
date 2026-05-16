@@ -138,12 +138,25 @@ async function cargarEstadisticas() {
         const data = await response.json();
         totalSpan.innerText = data.total;
         container.innerHTML = "";
+        // Agrupar categorías según los grupos principales
+        const grouped = {};
         for (const [cat, cant] of Object.entries(data.categorias)) {
+            let group = cat;
+            if (cat.includes("Camión")) group = "Camión";
+            else if (cat.includes("Metro")) group = "Metro";
+            else if (cat.includes("ECOVÍA")) group = "ECOVÍA";
+            else if (cat.includes("Pago")) group = "Método de Pago";
+            else if (cat.includes("Felicitación")) group = "Felicitación";
+            // Sumar al grupo
+            grouped[group] = (grouped[group] || 0) + cant;
+        }
+        // Renderizar los grupos agregados
+        for (const [group, cant] of Object.entries(grouped)) {
             const porc = data.total > 0 ? (cant / data.total) * 100 : 0;
             container.innerHTML += `
                 <div style="margin-bottom: 15px;">
                     <div style="display: flex; justify-content: space-between; margin-bottom: 5px; font-size: 0.95rem; color: var(--primary-color); font-weight: 600;">
-                        <span>${cat}</span>
+                        <span>${group}</span>
                         <span style="font-weight: 800;">${cant}</span>
                     </div>
                     <div style="background: #333; height: 12px; border-radius: 6px; overflow: hidden;">
