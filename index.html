@@ -444,15 +444,42 @@
     <!-- Citizen Report Section -->
     <section id="reportes" style="background: #080808;">
         <h2 class="section-title" style="color: #FFF;">Reporte Ciudadano</h2>
-        <div style="background: #222; padding: 30px; border-radius: 10px; border: 2px dashed var(--primary-color); text-align: center; max-width: 600px; margin: 0 auto;">
-            <i class="fas fa-tools" style="font-size: 3rem; color: var(--primary-color); margin-bottom: 15px;"></i>
-            <h3 style="color: #FFF; margin-bottom: 10px;">Sección en Mantenimiento</h3>
-            <p style="color: #DDD; font-size: 1.1rem; line-height: 1.5;">Hasta mañana estaremos realizando arreglos en nuestro sistema.</p>
-            <p style="color: #DDD; font-size: 1.1rem; line-height: 1.5; margin-top: 10px;">Mientras tanto, puedes mandar tus reportes o quejas por <strong>mensaje privado a cualquiera de nuestras diferentes redes sociales.</strong></p>
-            <div style="margin-top: 20px;">
-                <a href="#contacto" class="btn-submit" style="display: inline-block; width: auto; padding: 10px 20px; text-decoration: none;">Ver Redes Sociales</a>
+        <form id="form-reporte" style="background: #1a1a1a; border: 1px solid #333; max-width: 700px; margin: 0 auto;">
+            <div class="form-group">
+                <label for="nombre-reporte" style="color: #EEE;">👤 Tu nombre (opcional)</label>
+                <input type="text" id="nombre-reporte" name="nombre" placeholder="Ciudadano Anónimo" style="background: #2a2a2a; border-color: #444; color: #EEE;">
             </div>
-        </div>
+            <div class="form-group">
+                <label for="categoria-reporte" style="color: #EEE;">📋 Categoría del problema <span style="color: var(--primary-color);">*</span></label>
+                <select id="categoria-reporte" name="categoria" required style="width: 100%; padding: 12px; background: #2a2a2a; border: 1px solid #444; color: #EEE; border-radius: 6px; outline: none; font-family: var(--font-main);">
+                    <option value="" disabled selected>Selecciona una categoría...</option>
+                    <option value="Tarifa / Cobro excesivo">💰 Tarifa / Cobro excesivo</option>
+                    <option value="Unidad en mal estado">🚌 Unidad en mal estado</option>
+                    <option value="Mal servicio / Conductor">😠 Mal servicio / Conductor</option>
+                    <option value="Frecuencia / Tiempo de espera">⏱️ Frecuencia / Tiempo de espera</option>
+                    <option value="Accesibilidad">♿ Accesibilidad</option>
+                    <option value="Seguridad">🔒 Seguridad</option>
+                    <option value="Otro">📌 Otro</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="reporte-texto" style="color: #EEE;">📝 Describe tu reporte <span style="color: var(--primary-color);">*</span></label>
+                <textarea id="reporte-texto" name="reporte" rows="5" placeholder="Cuéntanos qué pasó, en qué ruta, a qué hora..." required style="background: #2a2a2a; border-color: #444; color: #EEE;"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="archivo-reporte" style="color: #EEE;">📎 Adjuntar evidencia (foto/video, máx. 40MB)</label>
+                <input type="file" id="archivo-reporte" name="archivo" accept="image/*,video/*" style="background: #2a2a2a; border-color: #444; color: #EEE;">
+            </div>
+            <div id="progress-container" class="progress-container" style="display: none;">
+                <div class="progress-track">
+                    <span id="progress-bus" class="progress-bus">🚌</span>
+                    <span class="progress-goal">🏁</span>
+                </div>
+                <p id="progress-percent" class="progress-text">0%</p>
+            </div>
+            <button type="submit" id="btn-reporte" class="btn-submit">📢 Enviar Reporte</button>
+            <div id="status-reporte" class="form-status"></div>
+        </form>
     </section>
 
     <!-- Statistics Thermometer Section -->
@@ -467,12 +494,23 @@
     <!-- Volunteer Section -->
     <section id="voluntarios">
         <h2 class="section-title">Únete como Voluntario</h2>
-        <div style="background: #FFF; padding: 30px; border-radius: 10px; border: 2px dashed #000; text-align: center; max-width: 600px; margin: 0 auto; color: #000;">
-            <i class="fas fa-hard-hat" style="font-size: 3rem; color: #000; margin-bottom: 15px;"></i>
-            <h3 style="margin-bottom: 10px;">Sección en Mantenimiento</h3>
-            <p style="font-size: 1.1rem; line-height: 1.5;">Hasta mañana estaremos realizando arreglos en nuestro sistema de registro.</p>
-            <p style="font-size: 1.1rem; line-height: 1.5; margin-top: 10px;">Si deseas unirte como voluntario, escríbenos por <strong>mensaje privado a cualquiera de nuestras redes sociales.</strong> ¡Te esperamos!</p>
-        </div>
+        <p style="text-align: center; color: var(--text-muted); margin-bottom: 40px; font-size: 1.1rem;">¿Quieres ser parte del cambio? Forma parte de nuestro colectivo ciudadano 🐝</p>
+        <form id="form-voluntario" style="max-width: 700px; margin: 0 auto;">
+            <div class="form-group">
+                <label for="nombre-voluntario">👤 Tu nombre completo <span style="color: var(--primary-color);">*</span></label>
+                <input type="text" id="nombre-voluntario" name="nombre" placeholder="¿Cómo te llamas?" required>
+            </div>
+            <div class="form-group">
+                <label for="email-voluntario">📧 Correo electrónico <span style="color: var(--primary-color);">*</span></label>
+                <input type="email" id="email-voluntario" name="email" placeholder="tu@correo.com" required>
+            </div>
+            <div class="form-group">
+                <label for="mensaje-voluntario">💬 ¿Por qué quieres ser voluntario? <span style="color: var(--primary-color);">*</span></label>
+                <textarea id="mensaje-voluntario" name="mensaje" rows="4" placeholder="Cuéntanos un poco sobre ti y cómo te gustaría apoyar al colectivo..." required></textarea>
+            </div>
+            <button type="submit" id="btn-voluntario" class="btn-submit">🐝 ¡Quiero Unirme!</button>
+            <div id="status-voluntario" class="form-status"></div>
+        </form>
     </section>
 
     <!-- Visitor Counter -->

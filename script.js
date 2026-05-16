@@ -53,6 +53,7 @@ function setupForm(formId, statusId, btnId, isReporte) {
         btn.disabled = true;
         btn.innerText = "Enviando...";
 
+        let progressInterval = null; // Referencia al interval para poder limpiarlo
         try {
             // Obtener IP por seguridad
             let userIP = "Desconocida";
@@ -67,7 +68,7 @@ function setupForm(formId, statusId, btnId, isReporte) {
                 tipo: isReporte ? "Reporte Ciudadano" : "Voluntario",
                 nombre: formData.get("nombre") || "Anónimo",
                 userIP: userIP,
-                userAgent: navigator.userAgent // Información del dispositivo y navegador
+                userAgent: navigator.userAgent
             };
 
             if (isReporte) {
@@ -89,9 +90,9 @@ function setupForm(formId, statusId, btnId, isReporte) {
                     payload.mimeType = file.type;
                     
                     let p = 0;
-                    const interval = setInterval(() => {
+                    progressInterval = setInterval(() => {
                         p += 5;
-                        if (p > 95) clearInterval(interval);
+                        if (p > 95) clearInterval(progressInterval);
                         if (bus) bus.style.left = p + "%";
                         if (percentText) percentText.innerText = p + "%";
                     }, 200);
@@ -122,6 +123,7 @@ function setupForm(formId, statusId, btnId, isReporte) {
         } finally {
             btn.disabled = false;
             btn.innerText = originalBtnText;
+            if (progressInterval) clearInterval(progressInterval);
         }
     });
 }
@@ -165,13 +167,14 @@ function toBase64(file) {
 }
 
 // PROTECCIÓN BÁSICA DEL SITIO
-document.addEventListener('contextmenu', event => event.preventDefault()); // Bloquea clic derecho
+document.addEventListener('contextmenu', event => event.preventDefault());
 document.addEventListener('keydown', e => {
-    // Bloquea Ctrl+U (Ver código), Ctrl+S (Guardar), Ctrl+Shift+I (Inspeccionar)
     if (e.ctrlKey && (e.key === 'u' || e.key === 's' || e.key === 'i' || e.key === 'J')) {
         e.preventDefault();
     }
     if (e.key === 'F12') e.preventDefault();
+    // Cierre del modal con Escape (fusionado para evitar listeners duplicados)
+    if (e.key === 'Escape') cerrarEtapaBtn();
 });
 document.addEventListener('dragstart', e => e.preventDefault()); // Bloquea arrastrar imágenes
 
@@ -243,8 +246,5 @@ function cerrarEtapa(e) {
     }
 }
 
-// Cerrar con tecla Escape
-document.addEventListener('keydown', e => {
-    if (e.key === 'Escape') cerrarEtapaBtn();
-});
+// NOTA: El cierre con Escape está integrado en el listener keydown de protección del sitio (arriba).
 
