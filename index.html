@@ -453,12 +453,12 @@
                 <label for="categoria-reporte" style="color: #EEE;">🚨 Tipo de problema <span style="color: var(--primary-color);">*</span></label>
                 <select id="categoria-reporte" name="categoria" required style="width: 100%; padding: 12px; background: #2a2a2a; border: 1px solid #444; color: #EEE; border-radius: 6px; outline: none; font-family: var(--font-main);">
                     <option value="" disabled selected>Selecciona el tipo de problema...</option>
-                    <optgroup label="🚌 Camión / Autobús" style="color: #FFCC00;">
+                    <optgroup label="🚌 Camión" style="color: #FFCC00;">
                         <option value="Camión - Tarifa / Cobro excesivo">💰 Tarifa o cobro excesivo</option>
                         <option value="Camión - Unidad en mal estado">🔧 Unidad en mal estado o sucia</option>
                         <option value="Camión - Mal servicio / Conductor">😠 Mal servicio o conducta del chofer</option>
                         <option value="Camión - Frecuencia / Tiempo de espera">⏱️ Mala frecuencia / mucho tiempo de espera</option>
-                        <option value="Camión - No acepta efectivo">💵 No acepta pago en efectivo</option>
+
                         <option value="Camión - Accesibilidad">♿ Falta de accesibilidad</option>
                         <option value="Camión - Seguridad">🔒 Problema de seguridad a bordo</option>
                     </optgroup>
@@ -477,8 +477,8 @@
                         <option value="ECOVÍA - Accesibilidad">♿ Falta de accesibilidad</option>
                     </optgroup>
                     <optgroup label="💳 Método de Pago" style="color: #FFCC00;">
-                        <option value="Pago - Solo tarjeta / Sin efectivo">💵 Solo aceptan tarjeta, no efectivo</option>
-                        <option value="Pago - Solo QR en app / Sin efectivo">📱 Solo aceptan QR por app, no efectivo</option>
+
+
                         <option value="Pago - Falla en lector de tarjeta">❌ Falla en lector de tarjeta</option>
                         <option value="Pago - Cobro incorrecto / doble cobro">💸 Cobro incorrecto o doble cobro</option>
                     </optgroup>
@@ -492,8 +492,8 @@
             </div>
             <div class="form-group">
                 <label for="reporte-texto" style="color: #EEE;">📝 Describe tu reporte <span style="color: var(--primary-color);">*</span></label>
-                <textarea id="reporte-texto" name="reporte" rows="5" placeholder="Cuéntanos qué pasó, en qué ruta, a qué hora..." required style="background: #2a2a2a; border-color: #444; color: #EEE;"></textarea>
-            </div>
+                <textarea id="reporte-texto" name="reporte" rows="5" placeholder="Cuéntanos qué pasó, en qué ruta, a qué hora... Sé lo más detallado posible. Si no adjuntas foto/video, describe todo." required style="background: #2a2a2a; border-color: #444; color: #EEE;"></textarea>
+                <p class="form-hint" style="color:#ccc;font-size:0.9rem; margin-top:5px;">Sé lo más detallado posible. Si no adjuntas foto o video, detalla todo en el texto.</p>
             <div class="form-group">
                 <label for="archivo-reporte" style="color: #EEE;">📎 Adjuntar evidencia (foto/video, máx. 40MB)</label>
                 <input type="file" id="archivo-reporte" name="archivo" accept="image/*,video/*" style="background: #2a2a2a; border-color: #444; color: #EEE;">
