@@ -205,6 +205,7 @@
             </div>
             <!-- ===== FIN MEDIDOR ===== -->
 
+            <h3 style="text-align: center; color: var(--primary-color); margin-top: 40px; margin-bottom: 20px; font-size: 1.8rem; letter-spacing: 1px;">EXIGIMOS:</h3>
             <ul class="iniciativa-puntos" style="text-align: left; margin: 20px auto; max-width: 700px; color: #EEE; line-height: 1.6; list-style-type: none; padding: 0;">
                 <li style="margin-bottom: 12px;"><i class="fas fa-check-circle" style="color: var(--primary-color); margin-right: 10px;"></i><strong>PRIMERO:</strong> La suspensión inmediata del incremento mensual en las tarifas del transporte público.</li>
                 <li style="margin-bottom: 12px;"><i class="fas fa-check-circle" style="color: var(--primary-color); margin-right: 10px;"></i><strong>SEGUNDO:</strong> Frecuencia adecuada en rutas urbanas y líneas de metro.</li>
@@ -443,47 +444,15 @@
     <!-- Citizen Report Section -->
     <section id="reportes" style="background: #080808;">
         <h2 class="section-title" style="color: #FFF;">Reporte Ciudadano</h2>
-        <p style="margin-bottom: 20px; color: var(--primary-color);">Envía tu queja o reporte. Se enviará directamente a cvdlu.buzon@gmail.com</p>
-        <form id="form-reporte" enctype="multipart/form-data">
-            <div class="form-group">
-                <label>Nombre (Opcional)</label>
-                <input type="text" name="nombre">
+        <div style="background: #222; padding: 30px; border-radius: 10px; border: 2px dashed var(--primary-color); text-align: center; max-width: 600px; margin: 0 auto;">
+            <i class="fas fa-tools" style="font-size: 3rem; color: var(--primary-color); margin-bottom: 15px;"></i>
+            <h3 style="color: #FFF; margin-bottom: 10px;">Sección en Mantenimiento</h3>
+            <p style="color: #DDD; font-size: 1.1rem; line-height: 1.5;">Hasta mañana estaremos realizando arreglos en nuestro sistema.</p>
+            <p style="color: #DDD; font-size: 1.1rem; line-height: 1.5; margin-top: 10px;">Mientras tanto, puedes mandar tus reportes o quejas por <strong>mensaje privado a cualquiera de nuestras diferentes redes sociales.</strong></p>
+            <div style="margin-top: 20px;">
+                <a href="#contacto" class="btn-submit" style="display: inline-block; width: auto; padding: 10px 20px; text-decoration: none;">Ver Redes Sociales</a>
             </div>
-            <div class="form-group">
-                <label>Tipo de Reporte</label>
-                <select name="categoria" required style="width: 100%; padding: 12px; border: 2px solid #333; border-radius: 8px; background: #222; color: #FFF; font-family: inherit; font-size: 1rem;">
-                    <option value="" disabled selected>Selecciona una categoría...</option>
-                    <option value="Mala frecuencia camión">Mala frecuencia camión</option>
-                    <option value="Mala frecuencia metro">Mala frecuencia metro</option>
-                    <option value="Error al pagar con app">Error al pagar con app</option>
-                    <option value="Error al pagar con tarjeta">Error al pagar con tarjeta</option>
-                    <option value="Error QR">Error QR</option>
-                    <option value="Falla en camión">Falla en camión</option>
-                    <option value="Falla en metro">Falla en metro</option>
-                    <option value="Otra falla/problema">Otra falla/problema</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label>Descripción del Reporte</label>
-                <textarea name="reporte" rows="5" required placeholder="Describe qué sucedió, ruta de transporte, hora, etc. Recuerda subir una imagen o video abajo para publicar el reporte como evidencia."></textarea>
-            </div>
-            <div class="form-group">
-                <label>Adjuntar Imagen o Video</label>
-                <input type="file" name="archivo" accept="image/*,video/*">
-            </div>
-            
-            <!-- Indicador de Progreso Creativo -->
-            <div id="progress-container" class="progress-container" style="display: none;">
-                <div class="progress-track">
-                    <div id="progress-bus" class="progress-bus">🚌</div>
-                    <div class="progress-goal">🚩</div>
-                </div>
-                <div class="progress-text">Enviando evidencia a la base... <span id="progress-percent">0%</span></div>
-            </div>
-
-            <button type="submit" class="btn-submit" id="btn-reporte">Enviar Reporte</button>
-            <div id="status-reporte" class="form-status"></div>
-        </form>
+        </div>
     </section>
 
     <!-- Statistics Thermometer Section -->
@@ -498,22 +467,12 @@
     <!-- Volunteer Section -->
     <section id="voluntarios">
         <h2 class="section-title">Únete como Voluntario</h2>
-        <form id="form-voluntario">
-            <div class="form-group">
-                <label>Nombre Completo</label>
-                <input type="text" name="nombre" required>
-            </div>
-            <div class="form-group">
-                <label>Correo Electrónico</label>
-                <input type="email" name="email" required>
-            </div>
-            <div class="form-group">
-                <label>¿Cómo te gustaría ayudar?</label>
-                <textarea name="mensaje" rows="3"></textarea>
-            </div>
-            <button type="submit" class="btn-submit" id="btn-voluntario">Quiero ser Voluntario</button>
-            <div id="status-voluntario" class="form-status"></div>
-        </form>
+        <div style="background: #FFF; padding: 30px; border-radius: 10px; border: 2px dashed #000; text-align: center; max-width: 600px; margin: 0 auto; color: #000;">
+            <i class="fas fa-hard-hat" style="font-size: 3rem; color: #000; margin-bottom: 15px;"></i>
+            <h3 style="margin-bottom: 10px;">Sección en Mantenimiento</h3>
+            <p style="font-size: 1.1rem; line-height: 1.5;">Hasta mañana estaremos realizando arreglos en nuestro sistema de registro.</p>
+            <p style="font-size: 1.1rem; line-height: 1.5; margin-top: 10px;">Si deseas unirte como voluntario, escríbenos por <strong>mensaje privado a cualquiera de nuestras redes sociales.</strong> ¡Te esperamos!</p>
+        </div>
     </section>
 
     <!-- Visitor Counter -->
