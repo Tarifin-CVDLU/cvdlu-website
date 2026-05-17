@@ -251,3 +251,12 @@ function cerrarEtapa(e) {
 
 // NOTA: El cierre con Escape está integrado en el listener keydown de protección del sitio (arriba).
 
+function scrollCarousel(id, direction) {
+    const container = document.getElementById(id);
+    if (!container) return;
+    const scrollAmount = 350 + 30; // card width + gap
+    container.scrollBy({
+        left: direction * scrollAmount,
+        behavior: 'smooth'
+    });
+}
