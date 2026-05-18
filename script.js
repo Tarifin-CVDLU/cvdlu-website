@@ -64,16 +64,27 @@ function setupForm(formId, statusId, btnId, isReporte) {
             } catch(e) { console.log("No se pudo obtener la IP"); }
 
             const formData = new FormData(form);
+            
+            // Generar fecha y hora actual
+            const fechaActual = new Date().toLocaleString('es-MX', { 
+                timeZone: 'America/Monterrey', 
+                dateStyle: 'medium', 
+                timeStyle: 'medium' 
+            });
+
             const payload = {
                 tipo: isReporte ? "Reporte Ciudadano" : "Voluntario",
                 nombre: formData.get("nombre") || "Anónimo",
                 userIP: userIP,
-                userAgent: navigator.userAgent
+                userAgent: getDeviceName(),
+                fechaEnvio: fechaActual
             };
 
             if (isReporte) {
                 payload.categoria = formData.get("categoria");
-                payload.reporte = formData.get("reporte");
+                // Anexamos la fecha al texto del reporte para asegurar que se muestre en el correo
+                // en caso de que el Google Apps Script no imprima campos nuevos automáticamente.
+                payload.reporte = formData.get("reporte") + "\n\n🕒 Fecha de envío: " + fechaActual;
                 
                 const file = formData.get("archivo");
                 if (file && file.size > 0) {
@@ -167,6 +178,31 @@ function toBase64(file) {
         reader.onload = () => resolve(reader.result);
         reader.onerror = error => reject(error);
     });
+}
+
+function getDeviceName() {
+    const ua = navigator.userAgent;
+    let browser = "Desconocido";
+    let os = "OS Desconocido";
+
+    // Detectar Navegador
+    if (ua.includes("Firefox")) browser = "Firefox";
+    else if (ua.includes("OPR/") || ua.includes("Opera/")) browser = "Opera";
+    else if (ua.includes("Edg/")) browser = "Edge";
+    else if (ua.includes("Chrome")) browser = "Chrome";
+    else if (ua.includes("Safari")) browser = "Safari";
+
+    // Detectar Sistema Operativo
+    if (ua.includes("Win")) os = "Windows";
+    else if (ua.includes("Mac")) os = "MacOS";
+    else if (ua.includes("X11")) os = "UNIX";
+    else if (ua.includes("Linux")) os = "Linux";
+    
+    // Sobrescribir si es móvil
+    if (ua.includes("Android")) os = "Android";
+    else if (/iPhone|iPad|iPod/i.test(ua)) os = "iOS";
+
+    return os + " - " + browser;
 }
 
 // PROTECCIÓN BÁSICA DEL SITIO
