@@ -115,6 +115,7 @@ function setupForm(formId, statusId, btnId, isReporte) {
 
             await fetch(GOOGLE_SCRIPT_URL, {
                 method: "POST",
+                mode: "no-cors",
                 body: JSON.stringify(payload)
             });
 
