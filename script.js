@@ -65,6 +65,12 @@ function setupForm(formId, statusId, btnId, isReporte) {
 
             const formData = new FormData(form);
             
+            // Verificación del Honeypot (Anti-Spam)
+            if (formData.get("telefono_falso")) {
+                console.warn("Spam detectado");
+                throw new Error("Petición inválida.");
+            }
+
             // Generar fecha y hora actual
             const fechaActual = new Date().toLocaleString('es-MX', { 
                 timeZone: 'America/Monterrey', 
@@ -113,11 +119,17 @@ function setupForm(formId, statusId, btnId, isReporte) {
                 payload.mensaje = formData.get("mensaje");
             }
 
-            await fetch(GOOGLE_SCRIPT_URL, {
+            const response = await fetch(GOOGLE_SCRIPT_URL, {
                 method: "POST",
-                mode: "no-cors",
+                headers: {
+                    "Content-Type": "text/plain;charset=utf-8"
+                },
                 body: JSON.stringify(payload)
             });
+            
+            if (!response.ok) {
+                throw new Error(`Error en el servidor (${response.status})`);
+            }
 
             statusDiv.className = "form-status success";
             if (isReporte) {
@@ -174,9 +186,49 @@ async function cargarEstadisticas() {
 
 function toBase64(file) {
     return new Promise((resolve, reject) => {
+        // Si no es imagen (ej. video), lo convierte normal
+        if (!file.type.startsWith('image/')) {
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = () => resolve(reader.result);
+            reader.onerror = error => reject(error);
+            return;
+        }
+        
+        // Si es imagen, la comprime usando Canvas
         const reader = new FileReader();
         reader.readAsDataURL(file);
-        reader.onload = () => resolve(reader.result);
+        reader.onload = (e) => {
+            const img = new Image();
+            img.src = e.target.result;
+            img.onload = () => {
+                const canvas = document.createElement('canvas');
+                const MAX_WIDTH = 1200;
+                const MAX_HEIGHT = 1200;
+                let width = img.width;
+                let height = img.height;
+
+                if (width > height) {
+                    if (width > MAX_WIDTH) {
+                        height *= MAX_WIDTH / width;
+                        width = MAX_WIDTH;
+                    }
+                } else {
+                    if (height > MAX_HEIGHT) {
+                        width *= MAX_HEIGHT / height;
+                        height = MAX_HEIGHT;
+                    }
+                }
+                
+                canvas.width = width;
+                canvas.height = height;
+                const ctx = canvas.getContext('2d');
+                ctx.drawImage(img, 0, 0, width, height);
+                // Comprime como JPEG al 70% de calidad
+                resolve(canvas.toDataURL('image/jpeg', 0.7));
+            };
+            img.onerror = error => reject(error);
+        };
         reader.onerror = error => reject(error);
     });
 }
@@ -208,15 +260,11 @@ function getDeviceName() {
 
 // PROTECCIÓN BÁSICA DEL SITIO
 document.addEventListener('contextmenu', event => event.preventDefault());
+
+// Cierre del modal con Escape
 document.addEventListener('keydown', e => {
-    if (e.ctrlKey && (e.key === 'u' || e.key === 's' || e.key === 'i' || e.key === 'J')) {
-        e.preventDefault();
-    }
-    if (e.key === 'F12') e.preventDefault();
-    // Cierre del modal con Escape (fusionado para evitar listeners duplicados)
     if (e.key === 'Escape') cerrarEtapaBtn();
 });
-document.addEventListener('dragstart', e => e.preventDefault()); // Bloquea arrastrar imágenes
 
 // =============================================
 //  MEDIDOR DE PROGRESO — INICIATIVA CIUDADANA
