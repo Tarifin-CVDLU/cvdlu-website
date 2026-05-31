@@ -162,10 +162,35 @@ async function cargarEstadisticas() {
         const data = await response.json();
         totalSpan.innerText = data.total;
         container.innerHTML = "";
-        // Mostrar cada problema específico (sin agrupar)
+        
+        // Mapeo para unificar categorías históricas y estandarizadas
+        const unifiedCategories = {};
+        const mapCategory = (cat) => {
+            const mapping = {
+                "Error al pagar con app": "Pago - Falla en app/tarjeta",
+                "Pago - Falla en lector de tarjeta": "Pago - Falla en lector de tarjeta",
+                "Mala frecuencia camión": "Camión - Frecuencia / Tiempo de espera",
+                "Falla de camión / Unidad en mal estado o sucia": "Camión - Unidad en mal estado o sucia",
+                "Falla en metro": "Metro - Falla o retraso en el servicio",
+                "Falla de metro / Retraso en el servicio": "Metro - Falla o retraso en el servicio",
+                "Frecuencia / Tiempo de espera": "Camión - Frecuencia / Tiempo de espera",
+                "Mal servicio / Conductor": "Camión - Mal servicio / Conductor",
+                "Accesibilidad": "Camión - Accesibilidad", // Histórico
+                "Otra falla/problema": "Otros - Falla o problema",
+                "Felicitación": "Otros - Felicitación / Agradecimiento"
+            };
+            return mapping[cat] || cat;
+        };
+
         for (const [cat, cant] of Object.entries(data.categorias)) {
-            // Limpiar el prefijo "Camión - ", "Metro - ", etc. para mostrar solo el problema
-            const nombre = cat.replace(/^(Camión|Metro|ECOVÍA|Pago) - /, '');
+            const unifiedName = mapCategory(cat);
+            unifiedCategories[unifiedName] = (unifiedCategories[unifiedName] || 0) + cant;
+        }
+
+        // Ordenar por cantidad de mayor a menor
+        const sortedCategories = Object.entries(unifiedCategories).sort((a, b) => b[1] - a[1]);
+
+        for (const [nombre, cant] of sortedCategories) {
             const porc = data.total > 0 ? (cant / data.total) * 100 : 0;
             container.innerHTML += `
                 <div style="margin-bottom: 15px;">
