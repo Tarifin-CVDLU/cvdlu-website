@@ -1470,4 +1470,17 @@ footer {
     }
 }
 
+/* =============================================
+   MIGRACIÓN DE ESTILOS INLINE DE SECCIONES
+   ============================================= */
+#reportes {
+    background: #080808;
+}
+
+#termometro {
+    background: #111;
+    padding-top: 60px;
+    padding-bottom: 40px;
+}
+
 

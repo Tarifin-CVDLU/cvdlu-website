@@ -33,6 +33,24 @@ document.addEventListener('DOMContentLoaded', () => {
     // Configurar formularios
     setupForm("form-reporte", "status-reporte", "btn-reporte", true);
     setupForm("form-voluntario", "status-voluntario", "btn-voluntario", false);
+
+    // Validación de peso de archivo en tiempo real
+    const archivoInput = document.getElementById("archivo-reporte");
+    const statusReporte = document.getElementById("status-reporte");
+    if (archivoInput && statusReporte) {
+        archivoInput.addEventListener("change", (e) => {
+            const file = e.target.files[0];
+            if (file && file.size > 40 * 1024 * 1024) {
+                statusReporte.className = "form-status error";
+                statusReporte.innerText = "Error: El archivo seleccionado supera el límite de 40MB. Por favor, selecciona un archivo más pequeño.";
+                statusReporte.style.display = "block";
+                archivoInput.value = ""; // Limpiar la selección de archivo
+            } else {
+                statusReporte.style.display = "none";
+                statusReporte.innerText = "";
+            }
+        });
+    }
 });
 
 // URL de tu Google Apps Script (ACTUALIZADA)
