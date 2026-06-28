@@ -1594,13 +1594,19 @@ footer {
 
 /* Clases Modificadoras de Accesibilidad */
 body.a11y-high-contrast {
+    --secondary-color: #000 !important;
+    --text-main: #FFF !important;
+    --text-muted: #CCC !important;
+    --glass-bg: rgba(0, 0, 0, 0.9) !important;
     background-color: #000 !important;
     color: #FFF !important;
 }
 
 body.a11y-high-contrast section,
-body.a11y-high-contrast footer {
-    background-color: #000 !important;
+body.a11y-high-contrast header,
+body.a11y-high-contrast footer,
+body.a11y-high-contrast .hero {
+    background: #000 !important; /* overrides linear-gradient and background-color */
     border-color: #555 !important;
 }
 
@@ -1615,8 +1621,28 @@ body.a11y-high-contrast p,
 body.a11y-high-contrast h1,
 body.a11y-high-contrast h2,
 body.a11y-high-contrast h3,
-body.a11y-high-contrast span {
+body.a11y-high-contrast span,
+body.a11y-high-contrast a {
     color: #FFF !important;
+}
+
+/* Proteger botones y elementos flotantes */
+body.a11y-high-contrast .btn-submit,
+body.a11y-high-contrast .btn-drive {
+    color: #000 !important;
+}
+
+body.a11y-high-contrast a.whatsapp-float {
+    background-color: #25d366 !important;
+}
+
+body.a11y-high-contrast .a11y-float button {
+    color: #000 !important;
+}
+
+body.a11y-high-contrast .a11y-menu button {
+    color: #FFF !important;
+    background: transparent !important;
 }
 
 .a11y-large-text {
