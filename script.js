@@ -32,37 +32,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Lógica de Accesibilidad (A11y)
-    const btnA11y = document.getElementById('btn-a11y');
-    const a11yMenu = document.getElementById('a11y-menu');
-    const btnContrast = document.getElementById('btn-a11y-contrast');
-    const btnText = document.getElementById('btn-a11y-text');
-    
-    if (btnA11y && a11yMenu) {
-        btnA11y.addEventListener('click', (e) => {
-            e.stopPropagation();
-            a11yMenu.classList.toggle('show');
-        });
-        document.addEventListener('click', () => {
-            a11yMenu.classList.remove('show');
-        });
-        
-        // Recuperar preferencias
-        if (localStorage.getItem('a11y-contrast') === 'true') document.body.classList.add('a11y-high-contrast');
-        if (localStorage.getItem('a11y-text') === 'true') document.body.classList.add('a11y-large-text');
-
-        btnContrast.addEventListener('click', () => {
-            document.body.classList.toggle('a11y-high-contrast');
-            localStorage.setItem('a11y-contrast', document.body.classList.contains('a11y-high-contrast'));
-            mostrarToast('Modo contraste actualizado', 'info');
-        });
-
-        btnText.addEventListener('click', () => {
-            document.body.classList.toggle('a11y-large-text');
-            localStorage.setItem('a11y-text', document.body.classList.contains('a11y-large-text'));
-            mostrarToast('Tamaño de texto actualizado', 'info');
-        });
-    }
 
     // Menu Móvil (Corregido)
     const mobileMenu = document.getElementById('mobile-menu');
