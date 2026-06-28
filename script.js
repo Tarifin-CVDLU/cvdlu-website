@@ -180,6 +180,18 @@ async function cargarEstadisticas() {
             throw new Error("Chart.js no está cargado");
         }
 
+        const escapeHTML = (str) => {
+            return str.replace(/[&<>'"]/g, 
+                tag => ({
+                    '&': '&amp;',
+                    '<': '&lt;',
+                    '>': '&gt;',
+                    "'": '&#39;',
+                    '"': '&quot;'
+                }[tag] || tag)
+            );
+        };
+
         const response = await fetch(GOOGLE_SCRIPT_URL + "?action=stats");
         const data = await response.json();
         totalSpan.innerText = data.total;
@@ -320,7 +332,7 @@ async function cargarEstadisticas() {
             legendItem.innerHTML = `
                 <div class="legend-left">
                     <div class="legend-color-dot" style="background-color: ${color};"></div>
-                    <span class="legend-text">${label}</span>
+                    <span class="legend-text">${escapeHTML(label)}</span>
                 </div>
                 <div class="legend-right">
                     <span class="legend-count">${cant}</span>
