@@ -1,4 +1,4 @@
-const CACHE_NAME = 'cvdlu-cache-v1';
+const CACHE_NAME = 'cvdlu-cache-v2';
 const urlsToCache = [
   '/',
   '/index.html',
@@ -8,11 +8,27 @@ const urlsToCache = [
 ];
 
 self.addEventListener('install', event => {
+  self.skipWaiting(); // Forza al nuevo service worker a activarse inmediatamente
   event.waitUntil(
     caches.open(CACHE_NAME)
       .then(cache => {
         return cache.addAll(urlsToCache);
       })
+  );
+});
+
+self.addEventListener('activate', event => {
+  // Limpia los cachés antiguos cuando hay una nueva versión (v2)
+  event.waitUntil(
+    caches.keys().then(cacheNames => {
+      return Promise.all(
+        cacheNames.map(cacheName => {
+          if (cacheName !== CACHE_NAME) {
+            return caches.delete(cacheName);
+          }
+        })
+      );
+    }).then(() => self.clients.claim()) // Toma control de los clientes abiertos sin tener que recargar
   );
 });
 
@@ -22,7 +38,6 @@ self.addEventListener('fetch', event => {
   event.respondWith(
     caches.match(event.request)
       .then(response => {
-        // Devuelve del caché si lo encuentra, de lo contrario lo pide a la red
         return response || fetch(event.request);
       })
   );
