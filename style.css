@@ -1297,4 +1297,108 @@ footer {
     }
 }
 
+/* =============================================
+   WHATSAPP INTEGRATION & CALL TO ACTION
+   ============================================= */
+.btn-aviso-social.whatsapp-aviso-btn:hover {
+    background: #25D366;
+    border-color: #25D366;
+    color: #FFF;
+    box-shadow: 0 5px 15px rgba(37, 211, 102, 0.4);
+}
+
+.whatsapp-join-banner {
+    max-width: 700px;
+    margin: 40px auto 0 auto;
+    background: linear-gradient(135deg, #075e54 0%, #128c7e 100%);
+    color: #FFF;
+    border-radius: var(--border-radius);
+    padding: 25px 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    box-shadow: 0 10px 25px rgba(18, 140, 126, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.whatsapp-join-banner:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 15px 35px rgba(18, 140, 126, 0.3);
+}
+
+.wa-icon {
+    font-size: 2.8rem;
+    color: #25D366;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: waPulse 2s infinite;
+}
+
+@keyframes waPulse {
+    0%, 100% { transform: scale(1); filter: drop-shadow(0 0 0px rgba(37, 211, 102, 0)); }
+    50% { transform: scale(1.08); filter: drop-shadow(0 0 10px rgba(37, 211, 102, 0.6)); }
+}
+
+.wa-text {
+    flex-grow: 1;
+}
+
+.wa-text h3 {
+    font-size: 1.3rem;
+    font-weight: 800;
+    margin-bottom: 6px;
+    color: #FFF;
+}
+
+.wa-text p {
+    font-size: 0.92rem;
+    color: #E0F2F1;
+    line-height: 1.4;
+    margin-bottom: 0;
+}
+
+.btn-wa-direct {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: #25D366;
+    color: #FFF;
+    padding: 12px 24px;
+    border-radius: 50px;
+    font-weight: 700;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    transition: all 0.25s ease;
+    border: 2px solid transparent;
+    flex-shrink: 0;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.btn-wa-direct:hover {
+    background: #FFF;
+    color: #128c7e;
+    transform: scale(1.05);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25);
+}
+
+@media (max-width: 600px) {
+    .whatsapp-join-banner {
+        flex-direction: column;
+        text-align: center;
+        padding: 25px 20px;
+        gap: 15px;
+    }
+    .wa-text {
+        text-align: center;
+    }
+    .btn-wa-direct {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
 
