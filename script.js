@@ -158,6 +158,10 @@ async function cargarEstadisticas() {
     if (!container || !totalSpan) return;
 
     try {
+        if (typeof Chart === 'undefined') {
+            throw new Error("Chart.js no está cargado");
+        }
+
         const response = await fetch(GOOGLE_SCRIPT_URL + "?action=stats");
         const data = await response.json();
         totalSpan.innerText = data.total;
@@ -188,23 +192,144 @@ async function cargarEstadisticas() {
         }
 
         // Ordenar por cantidad de mayor a menor
-        const sortedCategories = Object.entries(unifiedCategories).sort((a, b) => b[1] - a[1]);
+        let sortedCategories = Object.entries(unifiedCategories)
+            .filter(([_, cant]) => cant > 0)
+            .sort((a, b) => b[1] - a[1]);
 
-        for (const [nombre, cant] of sortedCategories) {
-            const porc = data.total > 0 ? (cant / data.total) * 100 : 0;
-            container.innerHTML += `
-                <div style="margin-bottom: 15px;">
-                    <div style="display: flex; justify-content: space-between; margin-bottom: 5px; font-size: 0.95rem; color: var(--primary-color); font-weight: 600;">
-                        <span>${nombre}</span>
-                        <span style="font-weight: 800;">${cant}</span>
-                    </div>
-                    <div style="background: #333; height: 12px; border-radius: 6px; overflow: hidden;">
-                        <div style="background: var(--primary-color); width: ${porc}%; height: 100%; transition: width 1s ease-out;"></div>
+        // Agrupar categorías menores si hay demasiadas (más de 6)
+        const maxCategoriasVisibles = 6;
+        let finalCategories = [];
+        let otrosTotal = 0;
+
+        if (sortedCategories.length > maxCategoriasVisibles) {
+            finalCategories = sortedCategories.slice(0, maxCategoriasVisibles - 1);
+            const sobrantes = sortedCategories.slice(maxCategoriasVisibles - 1);
+            for (const [_, cant] of sobrantes) {
+                otrosTotal += cant;
+            }
+            if (otrosTotal > 0) {
+                finalCategories.push(["Otros reportes menores", otrosTotal]);
+            }
+        } else {
+            finalCategories = sortedCategories;
+        }
+
+        // Estructura HTML de la dona y leyenda
+        container.innerHTML = `
+            <div class="thermometer-layout">
+                <div class="chart-wrapper">
+                    <canvas id="chart-termometro"></canvas>
+                    <div class="chart-center-text">
+                        <span id="center-total">${data.total}</span>
+                        <span class="center-label">Reportes</span>
                     </div>
                 </div>
+                <div id="chart-legend" class="chart-legend"></div>
+            </div>
+        `;
+
+        // Colores premium y armoniosos para la dona
+        const colorPalette = [
+            '#FFCC00', // Amarillo Colectivo (CVDLU)
+            '#FF8800', // Naranja
+            '#FF4444', // Rojo / Coral
+            '#00D2FF', // Celeste
+            '#00E676', // Verde brillante
+            '#B388FF'  // Violeta suave
+        ];
+        const colorOtros = '#666666'; // Gris neutro para "Otros"
+
+        const labels = finalCategories.map(item => item[0]);
+        const values = finalCategories.map(item => item[1]);
+        const backgroundColors = finalCategories.map((item, index) => {
+            if (item[0] === "Otros reportes menores") return colorOtros;
+            return colorPalette[index % colorPalette.length];
+        });
+
+        const ctx = document.getElementById('chart-termometro').getContext('2d');
+        const myChart = new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: labels,
+                datasets: [{
+                    data: values,
+                    backgroundColor: backgroundColors,
+                    borderWidth: 2,
+                    borderColor: '#111',
+                    hoverOffset: 12
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                cutout: '72%',
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    tooltip: {
+                        enabled: true,
+                        backgroundColor: 'rgba(0, 0, 0, 0.9)',
+                        titleFont: { family: 'Outfit', size: 14, weight: 'bold' },
+                        bodyFont: { family: 'Outfit', size: 13 },
+                        padding: 12,
+                        cornerRadius: 8,
+                        borderColor: 'rgba(255, 204, 0, 0.3)',
+                        borderWidth: 1,
+                        callbacks: {
+                            label: function(context) {
+                                const value = context.raw;
+                                const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                                const percentage = total > 0 ? ((value / total) * 100).toFixed(1) : 0;
+                                return ` ${value} reportes (${percentage}%)`;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        // Crear la leyenda interactiva
+        const legendContainer = document.getElementById('chart-legend');
+        finalCategories.forEach((item, index) => {
+            const label = item[0];
+            const cant = item[1];
+            const porc = data.total > 0 ? ((cant / data.total) * 100).toFixed(1) : 0;
+            const color = backgroundColors[index];
+
+            const legendItem = document.createElement('div');
+            legendItem.className = 'legend-item';
+            legendItem.innerHTML = `
+                <div class="legend-left">
+                    <div class="legend-color-dot" style="background-color: ${color};"></div>
+                    <span class="legend-text">${label}</span>
+                </div>
+                <div class="legend-right">
+                    <span class="legend-count">${cant}</span>
+                    <span class="legend-percentage">${porc}%</span>
+                </div>
             `;
-        }
+
+            // Efecto hover interactivo cruzado (Leyenda -> Gráfico)
+            legendItem.addEventListener('mouseenter', () => {
+                myChart.setActiveElements([{ datasetIndex: 0, index: index }]);
+                myChart.tooltip.setActiveElements([{ datasetIndex: 0, index: index }], { x: 0, y: 0 });
+                myChart.update();
+                legendItem.classList.add('highlighted');
+            });
+
+            legendItem.addEventListener('mouseleave', () => {
+                myChart.setActiveElements([]);
+                myChart.tooltip.setActiveElements([]);
+                myChart.update();
+                legendItem.classList.remove('highlighted');
+            });
+
+            legendContainer.appendChild(legendItem);
+        });
+
     } catch (e) {
+        console.error("Error al cargar estadísticas:", e);
         container.innerHTML = "<p style='color: #666; text-align: center;'>Estadísticas no disponibles por ahora.</p>";
     }
 }

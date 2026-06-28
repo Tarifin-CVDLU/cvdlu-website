@@ -1167,4 +1167,134 @@ footer {
     box-shadow: 0 5px 15px rgba(255, 204, 0, 0.3);
 }
 
+/* =============================================
+   TERMÓMETRO CIUDADANO — DISEÑO DE DONA
+   ============================================= */
+.thermometer-layout {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 50px;
+    flex-wrap: wrap;
+    margin-top: 30px;
+}
+
+.chart-wrapper {
+    position: relative;
+    width: 280px;
+    height: 280px;
+    flex-shrink: 0;
+}
+
+.chart-center-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    pointer-events: none;
+}
+
+#center-total {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: #FFF;
+    line-height: 1;
+}
+
+.center-label {
+    font-size: 0.8rem;
+    color: var(--primary-color);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-top: 5px;
+    font-weight: 700;
+}
+
+.chart-legend {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-width: 480px;
+    width: 100%;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 16px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 10px;
+    transition: all 0.25s ease;
+    cursor: pointer;
+}
+
+.legend-item:hover, .legend-item.highlighted {
+    background: rgba(255, 204, 0, 0.08);
+    border-color: var(--primary-color);
+    transform: translateX(6px);
+}
+
+.legend-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.legend-color-dot {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    box-shadow: 0 0 8px rgba(0,0,0,0.5);
+}
+
+.legend-text {
+    font-size: 0.95rem;
+    color: #EEE;
+    font-weight: 500;
+}
+
+.legend-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.legend-count {
+    font-weight: 800;
+    color: var(--primary-color);
+    font-size: 1rem;
+}
+
+.legend-percentage {
+    color: #888;
+    font-size: 0.85rem;
+    font-weight: 600;
+    min-width: 45px;
+    text-align: right;
+}
+
+@media (max-width: 768px) {
+    .thermometer-layout {
+        flex-direction: column;
+        gap: 30px;
+    }
+    .chart-wrapper {
+        width: 250px;
+        height: 250px;
+    }
+    #center-total {
+        font-size: 2.2rem;
+    }
+    .legend-item:hover {
+        transform: none;
+    }
+}
+
 
