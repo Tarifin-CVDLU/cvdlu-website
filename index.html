@@ -8,10 +8,11 @@
     <meta name="keywords" content="movilidad, transporte público, activismo, participación ciudadana, Nuevo León, Monterrey, CVDLU, colectivo ciudadano, derechos ciudadanos, no al tarifazo">
     <meta name="author" content="Voz de los Usuarios">
     <meta name="robots" content="index, follow">
-    
-    <!-- Favicon (Icono en la pestaña del navegador) -->
+    <!-- PWA y Favicon -->
     <link rel="icon" href="logo.png" type="image/png">
     <link rel="apple-touch-icon" href="logo.png">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#FFCC00">
 
     <!-- Open Graph / Facebook / WhatsApp -->
     <meta property="og:type" content="website">
@@ -536,6 +537,10 @@
                 </select>
             </div>
             <div class="form-group">
+                <label for="ubicacion-reporte" style="color: #EEE;">📍 Ubicación aproximada (opcional)</label>
+                <input type="text" id="ubicacion-reporte" name="ubicacion" placeholder="Colonia, municipio o cruce de calles" style="background: #2a2a2a; border-color: #444; color: #EEE;">
+            </div>
+            <div class="form-group">
                 <label for="reporte-texto" style="color: #EEE;">📝 Describe tu reporte <span style="color: var(--primary-color);">*</span></label>
                 <textarea id="reporte-texto" name="reporte" rows="5" placeholder="Cuéntanos qué pasó, en qué ruta, a qué hora... Sé lo más detallado posible. Si no adjuntas foto/video, describe todo." required style="background: #2a2a2a; border-color: #444; color: #EEE;"></textarea>
                 <p class="form-hint" style="color:#ccc;font-size:0.9rem; margin-top:5px;">Sé lo más detallado posible. Si no adjuntas foto o video, detalla todo en el texto.</p>
@@ -645,6 +650,20 @@
         <i class="fab fa-whatsapp"></i>
         <span class="whatsapp-float-tooltip">Grupo de WhatsApp</span>
     </a>
+
+    <!-- Botón Flotante de Accesibilidad -->
+    <div class="a11y-float">
+        <button id="btn-a11y" aria-label="Opciones de accesibilidad" title="Accesibilidad">
+            <i class="fas fa-universal-access"></i>
+        </button>
+        <div class="a11y-menu" id="a11y-menu">
+            <button id="btn-a11y-contrast"><i class="fas fa-adjust"></i> Alto Contraste</button>
+            <button id="btn-a11y-text"><i class="fas fa-text-height"></i> Aumentar Texto</button>
+        </div>
+    </div>
+
+    <!-- Contenedor para Notificaciones Toast -->
+    <div id="toast-container" class="toast-container" aria-live="polite"></div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js" integrity="sha512-CQBWl4fJHWbryGE+Pc7UAxWMUMNMWzWxF4SQo9CgkJIN1kx6djDQZjh3Y8SZ1d+6I+1zze6Z7kHXO7q3UyZAWw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="script.js"></script>

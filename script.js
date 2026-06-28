@@ -1,5 +1,69 @@
 // CVDLU - Lógica de Reportes y Estadísticas
+
+// Función para mostrar notificaciones Toast
+function mostrarToast(mensaje, tipo = 'success') {
+    const container = document.getElementById('toast-container');
+    if (!container) return;
+    const toast = document.createElement('div');
+    toast.className = `toast ${tipo}`;
+    
+    let icon = 'info-circle';
+    if (tipo === 'success') icon = 'check-circle';
+    if (tipo === 'error') icon = 'exclamation-circle';
+    
+    toast.innerHTML = `<i class="fas fa-${icon}"></i> <span>${mensaje}</span>`;
+    container.appendChild(toast);
+    
+    // Animar entrada
+    requestAnimationFrame(() => toast.classList.add('show'));
+    
+    // Remover tras 4 segundos
+    setTimeout(() => {
+        toast.classList.remove('show');
+        setTimeout(() => toast.remove(), 300);
+    }, 4000);
+}
+
 document.addEventListener('DOMContentLoaded', () => {
+    // Registro de Service Worker (PWA)
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/sw.js').catch(err => {
+            console.log('Fallo al registrar SW:', err);
+        });
+    }
+
+    // Lógica de Accesibilidad (A11y)
+    const btnA11y = document.getElementById('btn-a11y');
+    const a11yMenu = document.getElementById('a11y-menu');
+    const btnContrast = document.getElementById('btn-a11y-contrast');
+    const btnText = document.getElementById('btn-a11y-text');
+    
+    if (btnA11y && a11yMenu) {
+        btnA11y.addEventListener('click', (e) => {
+            e.stopPropagation();
+            a11yMenu.classList.toggle('show');
+        });
+        document.addEventListener('click', () => {
+            a11yMenu.classList.remove('show');
+        });
+        
+        // Recuperar preferencias
+        if (localStorage.getItem('a11y-contrast') === 'true') document.body.classList.add('a11y-high-contrast');
+        if (localStorage.getItem('a11y-text') === 'true') document.body.classList.add('a11y-large-text');
+
+        btnContrast.addEventListener('click', () => {
+            document.body.classList.toggle('a11y-high-contrast');
+            localStorage.setItem('a11y-contrast', document.body.classList.contains('a11y-high-contrast'));
+            mostrarToast('Modo contraste actualizado', 'info');
+        });
+
+        btnText.addEventListener('click', () => {
+            document.body.classList.toggle('a11y-large-text');
+            localStorage.setItem('a11y-text', document.body.classList.contains('a11y-large-text'));
+            mostrarToast('Tamaño de texto actualizado', 'info');
+        });
+    }
+
     // Menu Móvil (Corregido)
     const mobileMenu = document.getElementById('mobile-menu');
     const navMenu = document.getElementById('nav-menu');
@@ -41,8 +105,9 @@ document.addEventListener('DOMContentLoaded', () => {
         archivoInput.addEventListener("change", (e) => {
             const file = e.target.files[0];
             if (file && file.size > 40 * 1024 * 1024) {
+                mostrarToast("El archivo supera el límite de 40MB.", "error");
                 statusReporte.className = "form-status error";
-                statusReporte.innerText = "Error: El archivo seleccionado supera el límite de 40MB. Por favor, selecciona un archivo más pequeño.";
+                statusReporte.innerText = "Error: El archivo es muy grande.";
                 statusReporte.style.display = "block";
                 archivoInput.value = ""; // Limpiar la selección de archivo
             } else {
@@ -66,8 +131,13 @@ function setupForm(formId, statusId, btnId, isReporte) {
         const btn = document.getElementById(btnId);
         const originalBtnText = btn.innerText;
 
-        statusDiv.innerText = "Procesando...";
-        statusDiv.className = "form-status";
+        // Limpiar mensajes visuales previos
+        if (statusDiv) {
+            statusDiv.innerText = "Procesando...";
+            statusDiv.className = "form-status";
+            statusDiv.style.display = "block";
+        }
+        
         btn.disabled = true;
         btn.innerText = "Enviando...";
 
@@ -106,9 +176,12 @@ function setupForm(formId, statusId, btnId, isReporte) {
 
             if (isReporte) {
                 payload.categoria = formData.get("categoria");
-                // Anexamos la fecha al texto del reporte para asegurar que se muestre en el correo
-                // en caso de que el Google Apps Script no imprima campos nuevos automáticamente.
-                payload.reporte = formData.get("reporte") + "\n\n🕒 Fecha de envío: " + fechaActual;
+                
+                // Recopilar ubicación si existe
+                const ubicacion = formData.get("ubicacion") || "No especificada";
+                
+                // Anexamos la fecha y ubicación al texto del reporte
+                payload.reporte = formData.get("reporte") + "\n\n📍 Ubicación: " + ubicacion + "\n🕒 Fecha de envío: " + fechaActual;
                 
                 const file = formData.get("archivo");
                 if (file && file.size > 0) {
@@ -149,19 +222,24 @@ function setupForm(formId, statusId, btnId, isReporte) {
                 throw new Error(`Error en el servidor (${response.status})`);
             }
 
-            statusDiv.className = "form-status success";
+            if (statusDiv) statusDiv.style.display = "none"; // Ocultamos texto plano y usamos Toast
+            
             if (isReporte) {
-                statusDiv.innerText = "¡Enviado con éxito! Gracias por tu lucha.";
+                mostrarToast("¡Enviado con éxito! Gracias por tu lucha.", "success");
             } else {
-                statusDiv.innerHTML = "¡Solicitud enviada con éxito! 🐝✨<br><br>Corre a revisar tu correo para el siguiente paso (¡y échale un ojo a la carpeta de <strong>SPAM</strong> por si las moscas!).";
+                mostrarToast("¡Solicitud enviada! Revisa tu correo electrónico (incluso en SPAM).", "success");
             }
+            
             form.reset();
             const progressContainer = document.getElementById("progress-container");
             if (progressContainer) progressContainer.style.display = "none";
 
         } catch (error) {
-            statusDiv.className = "form-status error";
-            statusDiv.innerText = "Error: " + error.message;
+            if (statusDiv) {
+                statusDiv.className = "form-status error";
+                statusDiv.innerText = "Error: " + error.message;
+            }
+            mostrarToast("Fallo al enviar: " + error.message, "error");
         } finally {
             btn.disabled = false;
             btn.innerText = originalBtnText;
