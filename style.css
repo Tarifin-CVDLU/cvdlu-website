@@ -1593,12 +1593,29 @@ footer {
 }
 
 /* Clases Modificadoras de Accesibilidad */
-.a11y-high-contrast {
-    filter: contrast(1.5);
+body.a11y-high-contrast {
+    background-color: #000 !important;
+    color: #FFF !important;
 }
 
-.a11y-high-contrast body {
+body.a11y-high-contrast section,
+body.a11y-high-contrast footer {
     background-color: #000 !important;
+    border-color: #555 !important;
+}
+
+body.a11y-high-contrast .punto-card, 
+body.a11y-high-contrast .stats-card,
+body.a11y-high-contrast .noticia-card {
+    background: #111 !important;
+    border: 1px solid #FFF !important;
+}
+
+body.a11y-high-contrast p,
+body.a11y-high-contrast h1,
+body.a11y-high-contrast h2,
+body.a11y-high-contrast h3,
+body.a11y-high-contrast span {
     color: #FFF !important;
 }
 
