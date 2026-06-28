@@ -32,7 +32,40 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // Lógica para Prompt de Instalación PWA
+    let deferredPrompt;
+    const pwaBanner = document.getElementById('pwa-install-banner');
+    const pwaInstallBtn = document.getElementById('pwa-install-btn');
+    const pwaCloseBtn = document.getElementById('pwa-close-btn');
 
+    window.addEventListener('beforeinstallprompt', (e) => {
+        // Prevenir el banner nativo de Chrome
+        e.preventDefault();
+        // Guardar el evento
+        deferredPrompt = e;
+        
+        // Mostrar nuestro banner si el usuario no lo ha cerrado antes
+        if (localStorage.getItem('pwa-prompt-closed') !== 'true' && pwaBanner) {
+            pwaBanner.style.display = 'flex';
+        }
+    });
+
+    if (pwaInstallBtn && pwaCloseBtn) {
+        pwaCloseBtn.addEventListener('click', () => {
+            pwaBanner.style.display = 'none';
+            localStorage.setItem('pwa-prompt-closed', 'true');
+        });
+
+        pwaInstallBtn.addEventListener('click', async () => {
+            pwaBanner.style.display = 'none';
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                const { outcome } = await deferredPrompt.userChoice;
+                console.log(`Respuesta al instalar PWA: ${outcome}`);
+                deferredPrompt = null;
+            }
+        });
+    }
     // Menu Móvil (Corregido)
     const mobileMenu = document.getElementById('mobile-menu');
     const navMenu = document.getElementById('nav-menu');

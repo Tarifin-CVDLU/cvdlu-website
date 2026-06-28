@@ -653,6 +653,18 @@
 
 
 
+    <!-- Banner Flotante para Instalar PWA -->
+    <div id="pwa-install-banner" style="display: none; position: fixed; bottom: 80px; left: 50%; transform: translateX(-50%); background: #111; color: #FFF; padding: 12px 20px; border-radius: 12px; border: 1px solid var(--primary-color); z-index: 9999; align-items: center; gap: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.5); width: 90%; max-width: 400px; justify-content: space-between;">
+        <div style="display: flex; align-items: center; gap: 10px;">
+            <img src="logo.png" alt="Logo" style="width: 30px; height: 30px; border-radius: 5px; object-fit: contain;">
+            <span style="font-size: 0.9rem; line-height: 1.2;">Instala nuestra App para un acceso más rápido.</span>
+        </div>
+        <div style="display: flex; gap: 10px; align-items: center;">
+            <button id="pwa-install-btn" style="background: var(--primary-color); color: #000; border: none; padding: 6px 12px; border-radius: 4px; font-weight: bold; cursor: pointer;">Instalar</button>
+            <button id="pwa-close-btn" style="background: transparent; color: #999; border: none; font-size: 1.2rem; cursor: pointer; padding: 0 5px;" aria-label="Cerrar"><i class="fas fa-times"></i></button>
+        </div>
+    </div>
+
     <!-- Contenedor para Notificaciones Toast -->
     <div id="toast-container" class="toast-container" aria-live="polite"></div>
 
