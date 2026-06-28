@@ -288,6 +288,20 @@
         <div class="carousel-wrapper">
             <button class="carousel-btn left-btn" onclick="scrollCarousel('noticias-carousel', -1)" aria-label="Anterior"><i class="fas fa-chevron-left"></i></button>
             <div class="grid-container carousel-container" id="noticias-carousel">
+            <!-- Nueva noticia: Libertad de Luis Castillo (Video YouTube) -->
+            <div class="card">
+                <a href="https://youtu.be/Z3eF97AkHxM" target="_blank" style="text-decoration: none; color: inherit;">
+                    <div class="card-img">
+                        <img src="https://img.youtube.com/vi/Z3eF97AkHxM/maxresdefault.jpg" alt="Un paso firme de Voz de los Usuarios #JusticiaParaLuis">
+                        <i class="fas fa-play play-icon"></i>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-date">27 de Junio, 2026</div>
+                        <h3>¡Un paso firme hacia la libertad! Le retiran el brazalete a Luis Castillo</h3>
+                        <p>Tras más de un año bajo arresto domiciliario y con brazalete electrónico, el vocero del colectivo logra modificar su medida cautelar. La lucha ciudadana y organizada da resultados.</p>
+                    </div>
+                </a>
+            </div>
             <!-- Nueva noticia: Luis Castillo -->
             <div class="card">
                 <a href="https://www.facebook.com/LaBocaNostra106.7FM/posts/pfbid024W8jd63XUjJYqX1umQKRNfkyUd6jfmHvkJA8gnQmVUgqWWaMoiVeoBVbSExP5jHHl" target="_blank" style="text-decoration: none; color: inherit;">
@@ -364,20 +378,15 @@
     <!-- Convocatorias Section -->
     <section id="convocatorias">
         <h2 class="section-title">Convocatorias</h2>
-        <div class="grid-container" style="justify-content: center;">
-            <!-- Evento 3: Boicot FIFA -->
-            <div class="card" style="border: 2px solid #000; flex: 0 0 100%; max-width: 450px;">
-                <div class="card-img" style="height: auto;">
-                    <img src="convocatoria_boicot.jpg" alt="Cartel de Convocatoria Boicot FIFA" style="width: 100%; height: auto; object-fit: contain;">
-                </div>
-                <div class="card-content">
-                    <div class="card-date" style="color: #000; font-weight: 900;">PRÓXIMAMENTE</div>
-                    <h3 style="color: #d32f2f;">Marcha #BoicotFIFAWorldcup</h3>
-                    <p>Monterrey será sede, pero el pueblo no olvida. Nos manifestamos contra el gasto excesivo y la opacidad mientras el transporte público colapsa. ¡No hay mundial sin dignidad!</p>
-                    <div class="hashtags" style="margin-top: 15px;">
-                        <span>#BoicotFIFAWorldcup</span>
-                    </div>
-                </div>
+        <div class="aviso-contenedor">
+            <div class="aviso-icono">
+                <i class="fas fa-bell"></i>
+            </div>
+            <h3>¡Mantente en sintonía! 🐝</h3>
+            <p>Por el momento no hay convocatorias activas, pero el movimiento sigue vibrando tras bambalinas. Activa tus notificaciones y síguenos en redes sociales para enterarte antes que nadie de nuestras próximas asambleas, marchas y brigadas.</p>
+            <div class="aviso-redes">
+                <a href="https://www.facebook.com/vozdelosusuarios" target="_blank" rel="noopener noreferrer" class="btn-aviso-social"><i class="fab fa-facebook-f"></i> Facebook</a>
+                <a href="https://instagram.com/cvdlu.nl" target="_blank" rel="noopener noreferrer" class="btn-aviso-social"><i class="fab fa-instagram"></i> Instagram</a>
             </div>
         </div>
     </section>
@@ -529,6 +538,7 @@
                 <label for="reporte-texto" style="color: #EEE;">📝 Describe tu reporte <span style="color: var(--primary-color);">*</span></label>
                 <textarea id="reporte-texto" name="reporte" rows="5" placeholder="Cuéntanos qué pasó, en qué ruta, a qué hora... Sé lo más detallado posible. Si no adjuntas foto/video, describe todo." required style="background: #2a2a2a; border-color: #444; color: #EEE;"></textarea>
                 <p class="form-hint" style="color:#ccc;font-size:0.9rem; margin-top:5px;">Sé lo más detallado posible. Si no adjuntas foto o video, detalla todo en el texto.</p>
+            </div>
             <div class="form-group">
                 <label for="archivo-reporte" style="color: #EEE;">📎 Adjuntar evidencia (foto/video, máx. 40MB)</label>
                 <input type="file" id="archivo-reporte" name="archivo" accept="image/*,video/*" style="background: #2a2a2a; border-color: #444; color: #EEE;">
