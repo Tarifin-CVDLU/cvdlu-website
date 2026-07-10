@@ -537,8 +537,30 @@
                 </select>
             </div>
             <div class="form-group">
-                <label for="ubicacion-reporte" style="color: #EEE;">📍 Ubicación aproximada (opcional)</label>
-                <input type="text" id="ubicacion-reporte" name="ubicacion" placeholder="Colonia, municipio o cruce de calles" style="background: #2a2a2a; border-color: #444; color: #EEE;">
+                <label for="ubicacion-reporte" style="color: #EEE;">📍 Municipio donde ocurrió el problema <span style="color: var(--primary-color);">*</span></label>
+                <select id="ubicacion-reporte" name="ubicacion" required style="background: #2a2a2a; border-color: #444; color: #EEE;">
+                    <option value="" disabled selected>Selecciona un municipio...</option>
+                    <option value="Abasolo">Abasolo</option>
+                    <option value="Apodaca">Apodaca</option>
+                    <option value="Cadereyta Jiménez">Cadereyta Jiménez</option>
+                    <option value="Carmen">Carmen (El Carmen)</option>
+                    <option value="Ciénega de Flores">Ciénega de Flores</option>
+                    <option value="García">García</option>
+                    <option value="General Escobedo">General Escobedo</option>
+                    <option value="General Zuazua">General Zuazua</option>
+                    <option value="Guadalupe">Guadalupe</option>
+                    <option value="Hidalgo">Hidalgo</option>
+                    <option value="Juárez">Juárez</option>
+                    <option value="Mina">Mina</option>
+                    <option value="Monterrey">Monterrey</option>
+                    <option value="Pesquería">Pesquería</option>
+                    <option value="Salinas Victoria">Salinas Victoria</option>
+                    <option value="San Nicolás de los Garza">San Nicolás de los Garza</option>
+                    <option value="San Pedro Garza García">San Pedro Garza García</option>
+                    <option value="Santa Catarina">Santa Catarina</option>
+                    <option value="Santiago">Santiago</option>
+                    <option value="Otro">Otro (fuera del Área Metropolitana)</option>
+                </select>
             </div>
             <div class="form-group">
                 <label for="reporte-texto" style="color: #EEE;">📝 Describe tu reporte <span style="color: var(--primary-color);">*</span></label>

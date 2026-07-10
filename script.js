@@ -179,11 +179,11 @@ function setupForm(formId, statusId, btnId, isReporte) {
             if (isReporte) {
                 payload.categoria = formData.get("categoria");
                 
-                // Recopilar ubicación si existe
-                const ubicacion = formData.get("ubicacion") || "No especificada";
+                // Recopilar municipio (ahora obligatorio, pero por si acaso)
+                const ubicacion = formData.get("ubicacion") || "No especificado";
                 
-                // Anexamos la fecha y ubicación al texto del reporte
-                payload.reporte = formData.get("reporte") + "\n\n📍 Ubicación: " + ubicacion + "\n🕒 Fecha de envío: " + fechaActual;
+                // Anexamos la fecha y municipio al texto del reporte
+                payload.reporte = formData.get("reporte") + "\n\n📍 Municipio: " + ubicacion + "\n🕒 Fecha de envío: " + fechaActual;
                 
                 const file = formData.get("archivo");
                 if (file && file.size > 0) {
