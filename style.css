@@ -102,6 +102,13 @@ nav ul li a:hover {
     margin-bottom: 30px;
 }
 
+.hero-buttons {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+
 .hero-image img {
     max-width: 450px;
     filter: drop-shadow(0 10px 20px rgba(0,0,0,0.1));
@@ -750,6 +757,7 @@ footer {
     }
     
     .hero-content h1 { font-size: 2.5rem; }
+    .hero-buttons { justify-content: center; }
     .hero-image img { max-width: 300px; margin-top: 30px; }
     
     .mision-vision-grid { grid-template-columns: 1fr; }
