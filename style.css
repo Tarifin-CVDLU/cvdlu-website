@@ -1094,6 +1094,87 @@ footer {
 /* =============================================
    AVISO DE CONVOCATORIAS FRESCO
    ============================================= */
+
+.convocatoria-card {
+    display: flex;
+    background: #111;
+    border: 2px solid var(--primary-color);
+    border-radius: var(--border-radius);
+    padding: 30px;
+    align-items: center;
+    gap: 30px;
+    margin-bottom: 30px;
+    transition: transform 0.3s;
+    box-shadow: 0 10px 30px rgba(255, 204, 0, 0.05);
+}
+
+.convocatoria-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(255, 204, 0, 0.15);
+}
+
+.conv-date {
+    background: var(--primary-color);
+    color: #000;
+    min-width: 120px;
+    height: 120px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 15px;
+    font-weight: 800;
+}
+
+.conv-date .day {
+    font-size: 3rem;
+    line-height: 1;
+}
+
+.conv-date .month {
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.conv-info {
+    text-align: left;
+}
+
+.conv-info h3 {
+    color: var(--primary-color);
+    font-size: 2.2rem;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+}
+
+.conv-time-loc {
+    color: #FFF;
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.conv-desc {
+    color: #DDD;
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+    .convocatoria-card {
+        flex-direction: column;
+        text-align: center;
+        padding: 20px;
+    }
+    .conv-info {
+        text-align: center;
+    }
+    .conv-info h3 {
+        font-size: 1.8rem;
+    }
+}
+
 .aviso-contenedor {
     background: linear-gradient(135deg, #111111 0%, #222222 100%);
     border: 2px solid var(--primary-color);
