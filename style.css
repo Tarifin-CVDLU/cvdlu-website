@@ -1612,4 +1612,179 @@ footer {
 .toast.error { background-color: #d32f2f; }
 .toast.info { background-color: #0277bd; }
 
+/* =============================================
+   SECCIÓN DESCARGA Y LLENADO DE FIRMAS
+   ============================================= */
+.descarga-firmas-box {
+    margin: 50px auto 30px;
+    padding: 40px;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 204, 0, 0.15);
+    border-radius: var(--border-radius);
+    max-width: 850px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+.descarga-firmas-box h3 {
+    color: var(--primary-color);
+    font-size: 1.8rem;
+    margin-top: 0;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+}
+
+.descarga-firmas-box > p {
+    font-size: 1.1rem;
+    color: #DDD;
+    line-height: 1.6;
+    margin-bottom: 35px;
+}
+
+.indicaciones-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 20px;
+    text-align: left;
+    margin-bottom: 40px;
+}
+
+.indicacion-card {
+    background: rgba(255, 255, 255, 0.04);
+    padding: 22px;
+    border-radius: 10px;
+    border-left: 4px solid var(--primary-color);
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.indicacion-card:hover {
+    transform: translateY(-3px);
+    background: rgba(255, 255, 255, 0.07);
+}
+
+.indicacion-card h4 {
+    font-size: 1.1rem;
+    color: var(--primary-color);
+    margin-top: 0;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.indicacion-card h4 i {
+    font-size: 1.1rem;
+}
+
+.indicacion-card p {
+    font-size: 0.92rem;
+    color: #CCC;
+    line-height: 1.5;
+    margin-bottom: 0 !important;
+}
+
+.contacto-entrega {
+    background: rgba(255, 204, 0, 0.05);
+    border: 1px dashed rgba(255, 204, 0, 0.4);
+    padding: 25px;
+    border-radius: 10px;
+    margin-top: 35px;
+    color: #FFF;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+}
+
+.contacto-entrega p {
+    font-size: 1.05rem;
+    margin: 0;
+    color: #EEE;
+    text-align: center;
+}
+
+.contacto-entrega strong {
+    color: var(--primary-color);
+}
+
+.contacto-entrega-links {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-top: 5px;
+}
+
+.contacto-entrega-links a {
+    background: rgba(255, 255, 255, 0.08);
+    color: #FFF;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 0.95rem;
+    padding: 10px 20px;
+    border-radius: 30px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    transition: all 0.3s ease;
+}
+
+.contacto-entrega-links a.link-fb {
+    border-color: #1877F2;
+}
+.contacto-entrega-links a.link-fb:hover {
+    background: #1877F2;
+    box-shadow: 0 0 15px rgba(24, 119, 242, 0.4);
+}
+
+.contacto-entrega-links a.link-ig {
+    border-color: #E1306C;
+}
+.contacto-entrega-links a.link-ig:hover {
+    background: #E1306C;
+    box-shadow: 0 0 15px rgba(225, 48, 108, 0.4);
+}
+
+.contacto-entrega-links a.link-wa {
+    border-color: #25D366;
+}
+.contacto-entrega-links a.link-wa:hover {
+    background: #25D366;
+    box-shadow: 0 0 15px rgba(37, 211, 102, 0.4);
+}
+
+@media (max-width: 768px) {
+    .descarga-firmas-box {
+        padding: 25px 15px;
+    }
+    
+    .descarga-firmas-box h3 {
+        font-size: 1.5rem;
+    }
+    
+    .indicaciones-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    
+    .contacto-entrega {
+        padding: 20px 15px;
+    }
+    
+    .contacto-entrega-links {
+        flex-direction: column;
+        width: 100%;
+        gap: 10px;
+    }
+    
+    .contacto-entrega-links a {
+        justify-content: center;
+    }
+}
+
+
 
