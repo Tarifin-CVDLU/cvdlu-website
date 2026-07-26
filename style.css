@@ -1161,6 +1161,17 @@ footer {
     line-height: 1.6;
 }
 
+.btn-outline-minimal {
+    transition: all 0.3s ease !important;
+}
+
+.btn-outline-minimal:hover {
+    background: var(--primary-color) !important;
+    color: #000 !important;
+    box-shadow: 0 4px 15px rgba(255, 204, 0, 0.3);
+    transform: translateY(-2px);
+}
+
 @media (max-width: 768px) {
     .convocatoria-card {
         flex-direction: column;
