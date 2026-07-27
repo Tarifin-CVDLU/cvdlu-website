@@ -523,7 +523,10 @@ document.addEventListener('contextmenu', event => event.preventDefault());
 
 // Cierre del modal con Escape
 document.addEventListener('keydown', e => {
-    if (e.key === 'Escape') cerrarEtapaBtn();
+    if (e.key === 'Escape') {
+        cerrarEtapaBtn();
+        cerrarNoticiaModalBtn();
+    }
 });
 
 // =============================================
@@ -591,6 +594,29 @@ function cerrarEtapa(e) {
     // Solo cierra si se hizo clic en el fondo del modal (no en su contenido)
     if (e.target === document.getElementById('etapa-modal')) {
         cerrarEtapaBtn();
+    }
+}
+
+// =============================================
+//  PUBLICACIÓN PROPIA / NOTICIA MODAL
+// =============================================
+function abrirNoticiaModal() {
+    const modal = document.getElementById('noticia-modal');
+    if (!modal) return;
+    modal.classList.add('abierto');
+    document.body.style.overflow = 'hidden';
+}
+
+function cerrarNoticiaModalBtn() {
+    const modal = document.getElementById('noticia-modal');
+    if (!modal) return;
+    modal.classList.remove('abierto');
+    document.body.style.overflow = '';
+}
+
+function cerrarNoticiaModal(e) {
+    if (e.target === document.getElementById('noticia-modal')) {
+        cerrarNoticiaModalBtn();
     }
 }
 
