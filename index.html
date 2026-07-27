@@ -209,40 +209,49 @@
                 </div>
             </div>
 
-            <!-- Modal de Noticia / Publicación Propia -->
+            <!-- Modal de Noticia / Publicación Propia — Solicitud de Transparencia -->
             <div id="noticia-modal" class="noticia-modal" role="dialog" aria-modal="true" onclick="cerrarNoticiaModal(event)">
                 <div class="noticia-modal-inner">
                     <button class="modal-cerrar" onclick="cerrarNoticiaModalBtn()" aria-label="Cerrar">
                         <i class="fas fa-times"></i>
                     </button>
-                    <div class="noticia-modal-badge"><i class="fas fa-bullhorn" style="margin-right: 6px;"></i> Comunicado Oficial CVDLU</div>
-                    <h2 class="noticia-modal-title">¿Dónde está tu Seguro de Viajero? Exponemos la verdad detrás de los accidentes</h2>
-                    <div class="noticia-modal-date"><i class="fas fa-newspaper" style="margin-right: 6px;"></i> Publicación Oficial · Colectivo Voz de los Usuarios</div>
-                    <img src="noticia_seguro_viajero.jpg" alt="Seguro de Viajero CVDLU" class="noticia-modal-img">
-                    <div class="noticia-modal-body">
-                        <p>El <strong>Seguro de Viajero</strong> en el transporte público no es una concesión ni un favor de las empresas transportistas: es un <strong>derecho legal y obligatorio</strong> consagrado en las leyes de movilidad para proteger la integridad de cada usuario que aborda una unidad.</p>
-                        
-                        <p>Sin embargo, ante la alarmante frecuencia de accidentes, volcaduras y choques en el área metropolitana de Monterrey, la respuesta recurrente es el desamparo hacia las víctimas, dejando a los usuarios lesionados enfrentando por su cuenta gastos médicos, cirugías y rehabilitación.</p>
+                    <div class="noticia-modal-badge"><i class="fas fa-file-contract" style="margin-right: 6px;"></i> Acción por la Transparencia CVDLU</div>
+                    <h2 class="noticia-modal-title">¿Dónde está tu Seguro de Viajero? Ingresamos solicitud en el Portal de Transparencia</h2>
+                    <div class="noticia-modal-date"><i class="fas fa-clock" style="margin-right: 6px;"></i> Estatus: En espera de respuesta oficial de las autoridades</div>
+                    
+                    <img id="noticia-principal-img" src="transparencia_seguro_1.jpg" alt="Solicitud de Transparencia Seguro de Viajero" class="noticia-modal-img">
+                    
+                    <!-- Galería de 4 imágenes oficial -->
+                    <p style="font-size: 0.85rem; color: var(--primary-color); font-weight: 700; text-transform: uppercase; margin-bottom: 8px;">📷 Documentación Oficial (Haz clic en una imagen para ampliarla):</p>
+                    <div class="noticia-modal-gallery" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 10px; margin-bottom: 25px;">
+                        <img src="transparencia_seguro_1.jpg" alt="Exposición del Seguro de Viajero" style="width:100%; height: 100px; object-fit: cover; border-radius: 8px; border: 2px solid var(--primary-color); cursor: pointer;" onclick="cambiarImagenPrincipal(this.src)">
+                        <img src="transparencia_seguro_2.jpg" alt="Folio en Portal de Transparencia" style="width:100%; height: 100px; object-fit: cover; border-radius: 8px; border: 1px solid #444; cursor: pointer;" onclick="cambiarImagenPrincipal(this.src)">
+                        <img src="transparencia_seguro_3.jpg" alt="Desglose de Puntos Exigidos" style="width:100%; height: 100px; object-fit: cover; border-radius: 8px; border: 1px solid #444; cursor: pointer;" onclick="cambiarImagenPrincipal(this.src)">
+                        <img src="transparencia_seguro_4.jpg" alt="Estatus En Espera de Respuesta" style="width:100%; height: 100px; object-fit: cover; border-radius: 8px; border: 1px solid #444; cursor: pointer;" onclick="cambiarImagenPrincipal(this.src)">
+                    </div>
 
-                        <h4>🚨 ¿Qué debe cubrir por ley tu Seguro de Viajero?</h4>
+                    <div class="noticia-modal-body">
+                        <p>Como parte de nuestras acciones colectivas en defensa de los usuarios del transporte público en Nuevo León, <strong>hemos ingresado una solicitud formal a través del Portal Nacional de Transparencia</strong> para exigir cuentas claras sobre la cobertura y aplicación del Seguro de Viajero.</p>
+                        
+                        <p>El Seguro de Viajero no es opcional: es una obligación legal para todos los concesionarios y rutas del transporte público. Sin embargo, cuando ocurren accidentes, la constante es la falta de pases médicos, la evasión de responsabilidades y el abandono a las víctimas.</p>
+
+                        <h4>📜 Puntos clave solicitados a la autoridad:</h4>
                         <ul>
-                            <li><strong>Atención médica inmediata:</strong> Hospitalización, intervención quirúrgica, medicamentos y atención de urgencia sin cobros adicionales.</li>
-                            <li><strong>Indemnización por daños:</strong> Cobertura por incapacidad temporal o permanente derivada de un incidente durante el trayecto.</li>
-                            <li><strong>Protección integral del trayecto:</strong> Desde el momento en que el usuario aborda hasta que desciende en su destino.</li>
+                            <li><strong>Pólizas activas y vigentes:</strong> Copia completa de las pólizas de seguro contratadas por cada ruta urbana y línea de transporte en el estado.</li>
+                            <li><strong>Historial de pases e indemnizaciones:</strong> Reporte transparente del número de accidentes atendidos y cuántos usuarios han recibido atención médica completa o indemnización.</li>
+                            <li><strong>Protocolos de verificación:</strong> La metodología con la que se vigila que ninguna unidad circule sin seguro vigente.</li>
                         </ul>
 
-                        <h4>⚠️ Irregularidades que denunciamos:</h4>
-                        <p>Muchas líneas y rutas urbanas operan con pólizas vencidas, limitadas o con deducibles inaplicables para evadir responsabilidades. Además, condicionan el pase médico a peritajes o prolongados trámites viales que postergan la atención de urgencia de los pasajeros.</p>
-
-                        <h4>🐝 Exigencias e instrucciones para los usuarios:</h4>
-                        <p>Exigimos a la Secretaría de Movilidad la auditoría inmediata y pública de todas las pólizas de seguro del transporte público en Nuevo León. Si sufres un percance, exige inmediatamente el pase médico al chofer o a la empresa responsable, toma fotos del número de unidad y genera tu reporte ciudadano en nuestra plataforma para darle seguimiento colectivo.</p>
+                        <h4>⏳ Estado de la Solicitud:</h4>
+                        <p>La solicitud ha sido registrada exitosamente en la plataforma. <strong>Nos encontramos a la espera del término legal para recibir la respuesta oficial</strong> por parte de las autoridades competentes. Haremos públicos los resultados en cuanto nos sean notificados.</p>
                     </div>
+
                     <div class="noticia-modal-footer">
                         <a href="#reportes" onclick="cerrarNoticiaModalBtn()" class="btn-submit" style="display: inline-block; padding: 12px 24px; text-decoration: none; width: auto;">
                             <i class="fas fa-exclamation-triangle" style="margin-right: 6px;"></i> Reportar un Incidente
                         </a>
                         <a href="https://chat.whatsapp.com/COHEoNINaP4JKqAfX6Fdej" target="_blank" rel="noopener noreferrer" class="btn-submit btn-outline-minimal" style="display: inline-block; padding: 12px 24px; text-decoration: none; width: auto; background: transparent; border: 2px solid var(--primary-color); color: var(--primary-color);">
-                            <i class="fab fa-whatsapp" style="margin-right: 6px;"></i> Sumarme a la Lucha
+                            <i class="fab fa-whatsapp" style="margin-right: 6px;"></i> Recibir Avances en WhatsApp
                         </a>
                     </div>
                 </div>
@@ -386,15 +395,15 @@
         <div class="carousel-wrapper">
             <button class="carousel-btn left-btn" onclick="scrollCarousel('noticias-carousel', -1)" aria-label="Anterior"><i class="fas fa-chevron-left"></i></button>
             <div class="grid-container carousel-container" id="noticias-carousel">
-            <!-- Nueva noticia: Seguro de Viajero (Publicación Propia Modal) -->
+            <!-- Nueva noticia: Solicitud de Transparencia (Publicación Propia Modal) -->
             <div class="card" onclick="abrirNoticiaModal()" style="cursor: pointer;">
                 <div class="card-img">
-                    <img src="noticia_seguro_viajero.jpg" alt="¿Dónde está tu Seguro de Viajero?" loading="lazy">
+                    <img src="transparencia_seguro_1.jpg" alt="Solicitud de Transparencia Seguro de Viajero" loading="lazy">
                 </div>
                 <div class="card-content">
-                    <div class="card-date"><i class="fas fa-newspaper" style="color: var(--primary-color);"></i> Comunicado Oficial</div>
-                    <h3>¿Dónde está tu Seguro de Viajero? Exponemos la verdad en el transporte</h3>
-                    <p>El Seguro de Viajero debería activarse de forma inmediata en cualquier accidente. Exponemos las irregularidades y exigimos garantías. <em>(Haz clic para leer la publicación completa)</em></p>
+                    <div class="card-date"><i class="fas fa-file-contract" style="color: var(--primary-color);"></i> Acción de Transparencia</div>
+                    <h3>¿Dónde está tu Seguro de Viajero? Exigimos respuestas en el Portal de Transparencia</h3>
+                    <p>Ingresamos una solicitud formal exigiendo pólizas vigentes e historial de indemnizaciones. Estamos a la espera de respuesta oficial. <em>(Haz clic para ver las 4 imágenes y detalles)</em></p>
                 </div>
             </div>
             <!-- Nueva noticia: Libertad de Luis Castillo (Video YouTube) -->

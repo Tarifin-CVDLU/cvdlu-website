@@ -620,6 +620,13 @@ function cerrarNoticiaModal(e) {
     }
 }
 
+function cambiarImagenPrincipal(src) {
+    const mainImg = document.getElementById('noticia-principal-img');
+    if (mainImg) {
+        mainImg.src = src;
+    }
+}
+
 // NOTA: El cierre con Escape está integrado en el listener keydown de protección del sitio (arriba).
 
 function scrollCarousel(id, direction) {
