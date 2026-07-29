@@ -256,6 +256,46 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Modal de Noticia / Publicación Propia — Análisis Colectivo Mesas de Diálogo -->
+            <div id="noticia-analisis-modal" class="noticia-modal" role="dialog" aria-modal="true" onclick="cerrarNoticiaAnalisisModal(event)">
+                <div class="noticia-modal-inner">
+                    <button class="modal-cerrar" onclick="cerrarNoticiaAnalisisModalBtn()" aria-label="Cerrar">
+                        <i class="fas fa-times"></i>
+                    </button>
+                    <div class="noticia-modal-badge"><i class="fas fa-bullhorn" style="margin-right: 6px;"></i> Posición Colectiva CVDLU</div>
+                    <h2 class="noticia-modal-title">Análisis colectivo: Por qué el diálogo sin resultados y sin apertura no es la vía</h2>
+                    <div class="noticia-modal-date"><i class="fas fa-clock" style="margin-right: 6px;"></i> Publicado: 28 de Julio, 2026 | Movilidad y Dignidad Ciudadana</div>
+                    
+                    <img src="noticia_analisis_dialogo.jpg" alt="Análisis colectivo: Por qué el diálogo sin resultados y sin apertura no es la vía" class="noticia-modal-img">
+
+                    <div class="noticia-modal-body">
+                        <p>A raíz de las inquietudes de nuestros seguidores y de la comunidad movilizada, reflexionamos abiertamente sobre el panorama del transporte público en Nuevo León y la postura de nuestro colectivo frente a los procesos convocados por la autoridad.</p>
+                        
+                        <p>Al examinar lo sucedido entre <strong>abril de 2025 y la Audiencia Pública de julio de 2026</strong>, el patrón es contundente: la autoridad utiliza las <em>"mesas de diálogo"</em> y los formalismos administrativos como una estrategia de dilación para ganar tiempo mientras <strong>el tarifazo jamás se detiene</strong>. Cuidar la causa exige mantener la firmeza y no caer en dinámicas de desgaste que solo benefician al estado.</p>
+
+                        <h4>1️⃣ El bucle de las reuniones sin resultados:</h4>
+                        <p>Pasar de ofrecer mesas técnicas en 2025 a firmar actas para mesas bimestrales en 2026 no constituye un avance; <strong>es simulación</strong>. Acudir a reuniones con mandos intermedios sin capacidad legal de decisión, o recibir capacitaciones en lugar de unidades nuevas y funcionales en las rutas colapsadas, neutraliza la protesta social mientras el costo del pasaje sigue subiendo día con día.</p>
+
+                        <h4>2️⃣ La falta de pluralidad y la exclusión detrás del telón:</h4>
+                        <p>Los espacios de interlocución deben ser genuinamente abiertos, transparentes e incluyentes. Aclaramos que no lo decimos por un interés personal —nuestro colectivo ni siquiera pretendía integrarnos a esa mesa—, sino por la gravedad de validar exclusiones de representaciones legítimas, como la que existe formalmente ante la Junta de Gobierno.</p>
+
+                        <p>Genera inquietud ver cómo en lo público se apela al apoyo del auditorio preguntando quién quiere sumarse, mientras que detrás del telón se cerraron las puertas y se impidió el paso a vocerías clave. Ese tipo de prácticas fragmentan el movimiento y alimentan la división que a la autoridad le conviene.</p>
+
+                        <h4>✊ Nuestra Postura Colectiva:</h4>
+                        <p>No juzgamos intenciones, pero al analizar los hechos y la historia reciente, es indispensable señalar estas inconsistencias para no prestar la legitimidad de la movilización ciudadana a procesos excluyentes o dilatorios. La dignidad y los derechos de los usuarios del transporte no son negociables.</p>
+                    </div>
+
+                    <div class="noticia-modal-footer">
+                        <a href="https://www.facebook.com/share/p/1Jr3UJ4jZ3/" target="_blank" rel="noopener noreferrer" class="btn-submit" style="display: inline-block; padding: 12px 24px; text-decoration: none; width: auto; background-color: #1877F2;">
+                            <i class="fab fa-facebook" style="margin-right: 6px;"></i> Ver Publicación en Facebook
+                        </a>
+                        <a href="https://chat.whatsapp.com/COHEoNINaP4JKqAfX6Fdej" target="_blank" rel="noopener noreferrer" class="btn-submit btn-outline-minimal" style="display: inline-block; padding: 12px 24px; text-decoration: none; width: auto; background: transparent; border: 2px solid var(--primary-color); color: var(--primary-color);">
+                            <i class="fab fa-whatsapp" style="margin-right: 6px;"></i> Sumarme a la Comunidad
+                        </a>
+                    </div>
+                </div>
+            </div>
             <!-- ===== FIN MEDIDOR ===== -->
 
             <h3 style="text-align: center; color: var(--primary-color); margin-top: 40px; margin-bottom: 20px; font-size: 1.8rem; letter-spacing: 1px;">EXIGIMOS:</h3>
@@ -395,6 +435,17 @@
         <div class="carousel-wrapper">
             <button class="carousel-btn left-btn" onclick="scrollCarousel('noticias-carousel', -1)" aria-label="Anterior"><i class="fas fa-chevron-left"></i></button>
             <div class="grid-container carousel-container" id="noticias-carousel">
+            <!-- Nueva noticia: Análisis colectivo - Mesas de diálogo (Publicación Propia Modal) -->
+            <div class="card" onclick="abrirNoticiaAnalisisModal()" style="cursor: pointer;">
+                <div class="card-img">
+                    <img src="noticia_analisis_dialogo.jpg" alt="Análisis colectivo: Por qué el diálogo sin resultados no es la vía" loading="lazy">
+                </div>
+                <div class="card-content">
+                    <div class="card-date"><i class="fas fa-bullhorn" style="color: var(--primary-color);"></i> Posición Colectiva</div>
+                    <h3>Análisis colectivo: Por qué el diálogo sin resultados y sin apertura no es la vía</h3>
+                    <p>Reflexionamos abiertamente sobre el transporte en NL: de las mesas de diálogo en 2025 a la Audiencia Pública 2026, la dilación no detiene el tarifazo. <em>(Haz clic para leer el análisis completo)</em></p>
+                </div>
+            </div>
             <!-- Nueva noticia: Solicitud de Transparencia (Publicación Propia Modal) -->
             <div class="card" onclick="abrirNoticiaModal()" style="cursor: pointer;">
                 <div class="card-img">

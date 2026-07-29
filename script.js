@@ -620,6 +620,26 @@ function cerrarNoticiaModal(e) {
     }
 }
 
+function abrirNoticiaAnalisisModal() {
+    const modal = document.getElementById('noticia-analisis-modal');
+    if (!modal) return;
+    modal.classList.add('abierto');
+    document.body.style.overflow = 'hidden';
+}
+
+function cerrarNoticiaAnalisisModalBtn() {
+    const modal = document.getElementById('noticia-analisis-modal');
+    if (!modal) return;
+    modal.classList.remove('abierto');
+    document.body.style.overflow = '';
+}
+
+function cerrarNoticiaAnalisisModal(e) {
+    if (e.target === document.getElementById('noticia-analisis-modal')) {
+        cerrarNoticiaAnalisisModalBtn();
+    }
+}
+
 function cambiarImagenPrincipal(src) {
     const mainImg = document.getElementById('noticia-principal-img');
     if (mainImg) {
