@@ -1,0 +1,2 @@
+# CVDLU - Configuración General de Apache
+# El bloqueo de IP para reportes ciudadanos se gestiona en la capa de aplicación (script.js).

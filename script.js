@@ -123,6 +123,58 @@ document.addEventListener('DOMContentLoaded', () => {
 // URL de tu Google Apps Script (ACTUALIZADA)
 const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycby3EjWgoeTJ00l_0B94haeMNpXpUVdyA7xDxsVBkOgA7TU0Z4ylqt8seWT3Ia8jvwBPvQ/exec";
 
+// Configuración de límites y bloqueos de reportes por dirección IP
+// Asigna 0 para bloqueo total del formulario de reportes o un número N para límite de envíos por semana.
+const RESTRICTED_IPS_CONFIG = {
+    "187.190.173.169": 0 // Bloqueo total de envío de reportes ciudadanos para esta IP
+};
+
+function obtenerMaxSemanalIP(userIP) {
+    if (typeof RESTRICTED_IPS_CONFIG[userIP] === 'number') {
+        return RESTRICTED_IPS_CONFIG[userIP];
+    }
+    return null; // Sin restricciones para el resto de los usuarios
+}
+
+function validarLimiteEnviosIP(userIP, isReporte) {
+    if (!isReporte || !userIP) return;
+
+    const maxSemanal = obtenerMaxSemanalIP(userIP);
+    if (maxSemanal === null) return;
+
+    if (maxSemanal === 0) {
+        throw new Error("¡Gracias por sumar tu voz! Para mantener la comunidad ordenada y evitar reportes duplicados, esta opción está pausada para ti. Si necesitas ayuda o reactivarla, contacta a un administrador.");
+    }
+
+    const key = `cvdlu_historial_ip_${userIP.replace(/[^a-zA-Z0-9]/g, '_')}`;
+    const historial = JSON.parse(localStorage.getItem(key) || '[]');
+    const sieteDiasMs = 7 * 24 * 60 * 60 * 1000;
+    const ahora = Date.now();
+
+    // Filtrar envíos realizados en los últimos 7 días
+    const enviosRecientes = historial.filter(timestamp => (ahora - timestamp) < sieteDiasMs);
+
+    if (enviosRecientes.length >= maxSemanal) {
+        throw new Error(`¡Gracias por participar! Has alcanzado el límite de ${maxSemanal} reportes por semana para evitar duplicados. Si necesitas ayuda, contacta a un administrador.`);
+    }
+}
+
+function registrarEnvioExitosoIP(userIP, isReporte) {
+    if (!isReporte || !userIP) return;
+
+    const maxSemanal = obtenerMaxSemanalIP(userIP);
+    if (maxSemanal === null) return;
+
+    const key = `cvdlu_historial_ip_${userIP.replace(/[^a-zA-Z0-9]/g, '_')}`;
+    const historial = JSON.parse(localStorage.getItem(key) || '[]');
+    const sieteDiasMs = 7 * 24 * 60 * 60 * 1000;
+    const ahora = Date.now();
+
+    const enviosRecientes = historial.filter(timestamp => (ahora - timestamp) < sieteDiasMs);
+    enviosRecientes.push(ahora);
+    localStorage.setItem(key, JSON.stringify(enviosRecientes));
+}
+
 function setupForm(formId, statusId, btnId, isReporte) {
     const form = document.getElementById(formId);
     if (!form) return;
@@ -152,6 +204,9 @@ function setupForm(formId, statusId, btnId, isReporte) {
                 const ipData = await ipRes.json();
                 userIP = ipData.ip;
             } catch(e) { console.log("No se pudo obtener la IP"); }
+
+            // Validar límite de envíos por IP para reportes
+            validarLimiteEnviosIP(userIP, isReporte);
 
             const formData = new FormData(form);
             
@@ -223,6 +278,9 @@ function setupForm(formId, statusId, btnId, isReporte) {
             if (!response.ok) {
                 throw new Error(`Error en el servidor (${response.status})`);
             }
+
+            // Registrar el envío en el historial local tras éxito
+            registrarEnvioExitosoIP(userIP, isReporte);
 
             if (statusDiv) statusDiv.style.display = "none"; // Ocultamos texto plano y usamos Toast
             
