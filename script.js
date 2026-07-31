@@ -584,6 +584,7 @@ document.addEventListener('keydown', e => {
     if (e.key === 'Escape') {
         cerrarEtapaBtn();
         cerrarNoticiaModalBtn();
+        cerrarPrivacidadModalBtn();
     }
 });
 
@@ -705,7 +706,28 @@ function cambiarImagenPrincipal(src) {
     }
 }
 
-// NOTA: El cierre con Escape está integrado en el listener keydown de protección del sitio (arriba).
+// =============================================
+//  AVISO DE PRIVACIDAD MODAL
+// =============================================
+function abrirModalPrivacidad() {
+    const modal = document.getElementById('privacidad-modal');
+    if (!modal) return;
+    modal.classList.add('abierto');
+    document.body.style.overflow = 'hidden';
+}
+
+function cerrarPrivacidadModalBtn() {
+    const modal = document.getElementById('privacidad-modal');
+    if (!modal) return;
+    modal.classList.remove('abierto');
+    document.body.style.overflow = '';
+}
+
+function cerrarPrivacidadModal(e) {
+    if (e.target === document.getElementById('privacidad-modal')) {
+        cerrarPrivacidadModalBtn();
+    }
+}
 
 function scrollCarousel(id, direction) {
     const container = document.getElementById(id);

@@ -27,7 +27,7 @@
     <meta property="twitter:title" content="Voz de los Usuarios - Activismo y Participación Ciudadana">
     <meta property="twitter:description" content="Únete al colectivo ciudadano por un transporte digno en Nuevo León. Tu voz cuenta en nuestra lucha por la movilidad y los derechos ciudadanos.">
     <meta property="twitter:image" content="https://vozdelosusuarios.org/logo.png">
-    <link rel="stylesheet" href="style.css?v=4">
+    <link rel="stylesheet" href="style.css?v=5">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&display=swap" rel="stylesheet">
@@ -196,106 +196,8 @@
                     <strong>¡Tu firma suma!</strong>
                 </p>
             </div>
-
-            <!-- Modal de imagen por etapa -->
-            <div id="etapa-modal" class="etapa-modal" role="dialog" aria-modal="true" aria-labelledby="modal-titulo" onclick="cerrarEtapa(event)">
-                <div class="etapa-modal-inner">
-                    <button class="modal-cerrar" onclick="cerrarEtapaBtn()" aria-label="Cerrar">
-                        <i class="fas fa-times"></i>
-                    </button>
-                    <img id="modal-img" src="" alt="Detalle de la etapa" class="modal-img">
-                    <div id="modal-mensaje" class="modal-mensaje" style="display:none;"></div>
-                    <p id="modal-titulo" class="modal-caption"></p>
-                </div>
             </div>
 
-            <!-- Modal de Noticia / Publicación Propia — Solicitud de Transparencia -->
-            <div id="noticia-modal" class="noticia-modal" role="dialog" aria-modal="true" onclick="cerrarNoticiaModal(event)">
-                <div class="noticia-modal-inner">
-                    <button class="modal-cerrar" onclick="cerrarNoticiaModalBtn()" aria-label="Cerrar">
-                        <i class="fas fa-times"></i>
-                    </button>
-                    <div class="noticia-modal-badge"><i class="fas fa-file-contract" style="margin-right: 6px;"></i> Acción por la Transparencia CVDLU</div>
-                    <h2 class="noticia-modal-title">¿Dónde está tu Seguro de Viajero? Ingresamos solicitud en el Portal de Transparencia</h2>
-                    <div class="noticia-modal-date"><i class="fas fa-clock" style="margin-right: 6px;"></i> Estatus: En espera de respuesta oficial de las autoridades</div>
-                    
-                    <img id="noticia-principal-img" src="transparencia_seguro_1.jpg" alt="Solicitud de Transparencia Seguro de Viajero" class="noticia-modal-img">
-                    
-                    <!-- Galería de 4 imágenes oficial -->
-                    <p style="font-size: 0.85rem; color: var(--primary-color); font-weight: 700; text-transform: uppercase; margin-bottom: 8px;">📷 Documentación Oficial (Haz clic en una imagen para ampliarla):</p>
-                    <div class="noticia-modal-gallery" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 10px; margin-bottom: 25px;">
-                        <img src="transparencia_seguro_1.jpg" alt="Exposición del Seguro de Viajero" style="width:100%; height: 100px; object-fit: cover; border-radius: 8px; border: 2px solid var(--primary-color); cursor: pointer;" onclick="cambiarImagenPrincipal(this.src)">
-                        <img src="transparencia_seguro_2.jpg" alt="Folio en Portal de Transparencia" style="width:100%; height: 100px; object-fit: cover; border-radius: 8px; border: 1px solid #444; cursor: pointer;" onclick="cambiarImagenPrincipal(this.src)">
-                        <img src="transparencia_seguro_3.jpg" alt="Desglose de Puntos Exigidos" style="width:100%; height: 100px; object-fit: cover; border-radius: 8px; border: 1px solid #444; cursor: pointer;" onclick="cambiarImagenPrincipal(this.src)">
-                        <img src="transparencia_seguro_4.jpg" alt="Estatus En Espera de Respuesta" style="width:100%; height: 100px; object-fit: cover; border-radius: 8px; border: 1px solid #444; cursor: pointer;" onclick="cambiarImagenPrincipal(this.src)">
-                    </div>
-
-                    <div class="noticia-modal-body">
-                        <p>Como parte de nuestras acciones colectivas en defensa de los usuarios del transporte público en Nuevo León, <strong>hemos ingresado una solicitud formal a través del Portal Nacional de Transparencia</strong> para exigir cuentas claras sobre la cobertura y aplicación del Seguro de Viajero.</p>
-                        
-                        <p>El Seguro de Viajero no es opcional: es una obligación legal para todos los concesionarios y rutas del transporte público. Sin embargo, cuando ocurren accidentes, la constante es la falta de pases médicos, la evasión de responsabilidades y el abandono a las víctimas.</p>
-
-                        <h4>📜 Puntos clave solicitados a la autoridad:</h4>
-                        <ul>
-                            <li><strong>Pólizas activas y vigentes:</strong> Copia completa de las pólizas de seguro contratadas por cada ruta urbana y línea de transporte en el estado.</li>
-                            <li><strong>Historial de pases e indemnizaciones:</strong> Reporte transparente del número de accidentes atendidos y cuántos usuarios han recibido atención médica completa o indemnización.</li>
-                            <li><strong>Protocolos de verificación:</strong> La metodología con la que se vigila que ninguna unidad circule sin seguro vigente.</li>
-                        </ul>
-
-                        <h4>⏳ Estado de la Solicitud:</h4>
-                        <p>La solicitud ha sido registrada exitosamente en la plataforma. <strong>Nos encontramos a la espera del término legal para recibir la respuesta oficial</strong> por parte de las autoridades competentes. Haremos públicos los resultados en cuanto nos sean notificados.</p>
-                    </div>
-
-                    <div class="noticia-modal-footer">
-                        <a href="#reportes" onclick="cerrarNoticiaModalBtn()" class="btn-submit" style="display: inline-block; padding: 12px 24px; text-decoration: none; width: auto;">
-                            <i class="fas fa-exclamation-triangle" style="margin-right: 6px;"></i> Reportar un Incidente
-                        </a>
-                        <a href="https://chat.whatsapp.com/COHEoNINaP4JKqAfX6Fdej" target="_blank" rel="noopener noreferrer" class="btn-submit btn-outline-minimal" style="display: inline-block; padding: 12px 24px; text-decoration: none; width: auto; background: transparent; border: 2px solid var(--primary-color); color: var(--primary-color);">
-                            <i class="fab fa-whatsapp" style="margin-right: 6px;"></i> Recibir Avances en WhatsApp
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Modal de Noticia / Publicación Propia — Análisis Colectivo Mesas de Diálogo -->
-            <div id="noticia-analisis-modal" class="noticia-modal" role="dialog" aria-modal="true" onclick="cerrarNoticiaAnalisisModal(event)">
-                <div class="noticia-modal-inner">
-                    <button class="modal-cerrar" onclick="cerrarNoticiaAnalisisModalBtn()" aria-label="Cerrar">
-                        <i class="fas fa-times"></i>
-                    </button>
-                    <div class="noticia-modal-badge"><i class="fas fa-bullhorn" style="margin-right: 6px;"></i> Posición Colectiva CVDLU</div>
-                    <h2 class="noticia-modal-title">Análisis colectivo: Por qué el diálogo sin resultados y sin apertura no es la vía</h2>
-                    <div class="noticia-modal-date"><i class="fas fa-clock" style="margin-right: 6px;"></i> Publicado: 28 de Julio, 2026 | Movilidad y Dignidad Ciudadana</div>
-                    
-                    <img src="noticia_analisis_dialogo.jpg" alt="Análisis colectivo: Por qué el diálogo sin resultados y sin apertura no es la vía" class="noticia-modal-img">
-
-                    <div class="noticia-modal-body">
-                        <p>A raíz de las inquietudes de nuestros seguidores y de la comunidad movilizada, reflexionamos abiertamente sobre el panorama del transporte público en Nuevo León y la postura de nuestro colectivo frente a los procesos convocados por la autoridad.</p>
-                        
-                        <p>Al examinar lo sucedido entre <strong>abril de 2025 y la Audiencia Pública de julio de 2026</strong>, el patrón es contundente: la autoridad utiliza las <em>"mesas de diálogo"</em> y los formalismos administrativos como una estrategia de dilación para ganar tiempo mientras <strong>el tarifazo jamás se detiene</strong>. Cuidar la causa exige mantener la firmeza y no caer en dinámicas de desgaste que solo benefician al estado.</p>
-
-                        <h4>1️⃣ El bucle de las reuniones sin resultados:</h4>
-                        <p>Pasar de ofrecer mesas técnicas en 2025 a firmar actas para mesas bimestrales en 2026 no constituye un avance; <strong>es simulación</strong>. Acudir a reuniones con mandos intermedios sin capacidad legal de decisión, o recibir capacitaciones en lugar de unidades nuevas y funcionales en las rutas colapsadas, neutraliza la protesta social mientras el costo del pasaje sigue subiendo día con día.</p>
-
-                        <h4>2️⃣ La falta de pluralidad y la exclusión detrás del telón:</h4>
-                        <p>Los espacios de interlocución deben ser genuinamente abiertos, transparentes e incluyentes. Aclaramos que no lo decimos por un interés personal —nuestro colectivo ni siquiera pretendía integrarnos a esa mesa—, sino por la gravedad de validar exclusiones de representaciones legítimas, como la que existe formalmente ante la Junta de Gobierno.</p>
-
-                        <p>Genera inquietud ver cómo en lo público se apela al apoyo del auditorio preguntando quién quiere sumarse, mientras que detrás del telón se cerraron las puertas y se impidió el paso a vocerías clave. Ese tipo de prácticas fragmentan el movimiento y alimentan la división que a la autoridad le conviene.</p>
-
-                        <h4>✊ Nuestra Postura Colectiva:</h4>
-                        <p>No juzgamos intenciones, pero al analizar los hechos y la historia reciente, es indispensable señalar estas inconsistencias para no prestar la legitimidad de la movilización ciudadana a procesos excluyentes o dilatorios. La dignidad y los derechos de los usuarios del transporte no son negociables.</p>
-                    </div>
-
-                    <div class="noticia-modal-footer">
-                        <a href="https://www.facebook.com/share/p/1Jr3UJ4jZ3/" target="_blank" rel="noopener noreferrer" class="btn-submit" style="display: inline-block; padding: 12px 24px; text-decoration: none; width: auto; background-color: #1877F2;">
-                            <i class="fab fa-facebook" style="margin-right: 6px;"></i> Ver Publicación en Facebook
-                        </a>
-                        <a href="https://chat.whatsapp.com/COHEoNINaP4JKqAfX6Fdej" target="_blank" rel="noopener noreferrer" class="btn-submit btn-outline-minimal" style="display: inline-block; padding: 12px 24px; text-decoration: none; width: auto; background: transparent; border: 2px solid var(--primary-color); color: var(--primary-color);">
-                            <i class="fab fa-whatsapp" style="margin-right: 6px;"></i> Sumarme a la Comunidad
-                        </a>
-                    </div>
-                </div>
-            </div>
             <!-- ===== FIN MEDIDOR ===== -->
 
             <h3 style="text-align: center; color: var(--primary-color); margin-top: 40px; margin-bottom: 20px; font-size: 1.8rem; letter-spacing: 1px;">EXIGIMOS:</h3>
@@ -820,7 +722,19 @@
     <!-- Volunteer Section -->
     <section id="voluntarios">
         <h2 class="section-title">Únete como Voluntario</h2>
-        <p style="text-align: center; color: var(--text-muted); margin-bottom: 40px; font-size: 1.1rem;">¿Quieres ser parte del cambio? Forma parte de nuestro colectivo ciudadano 🐝</p>
+        <p style="text-align: center; color: var(--text-muted); margin-bottom: 25px; font-size: 1.1rem;">¿Quieres ser parte del cambio? Forma parte de nuestro colectivo ciudadano 🐝</p>
+
+        <!-- Privacy Notice Badge & Button -->
+        <div class="privacy-notice-badge-box">
+            <div class="privacy-badge-info">
+                <i class="fas fa-shield-alt"></i>
+                <span>Tus datos están protegidos bajo la Ley Federal de Protección de Datos Personales (LFPDPPP).</span>
+            </div>
+            <button type="button" class="btn-privacy-toggle" onclick="abrirModalPrivacidad()">
+                <i class="fas fa-file-contract"></i> Leer Aviso de Privacidad Integral
+            </button>
+        </div>
+
         <form id="form-voluntario" style="max-width: 700px; margin: 0 auto;">
             <input type="text" name="telefono_falso" style="display:none !important;" tabindex="-1" autocomplete="off">
             <div class="form-group">
@@ -835,9 +749,57 @@
                 <label for="mensaje-voluntario">💬 ¿Por qué quieres ser voluntario? <span style="color: var(--primary-color);">*</span></label>
                 <textarea id="mensaje-voluntario" name="mensaje" rows="4" placeholder="Cuéntanos un poco sobre ti y cómo te gustaría apoyar al colectivo..." required></textarea>
             </div>
+            <div class="form-group privacy-check-group">
+                <label for="acepto-privacidad" class="checkbox-label">
+                    <input type="checkbox" id="acepto-privacidad" name="acepto_privacidad" required>
+                    <span>He leído y acepto el <a href="javascript:void(0)" onclick="abrirModalPrivacidad()" class="privacy-link">Aviso de Privacidad Integral</a> para nuevos voluntarios. <span style="color: var(--primary-color);">*</span></span>
+                </label>
+            </div>
             <button type="submit" id="btn-voluntario" class="btn-submit">🐝 ¡Quiero Unirme!</button>
             <div id="status-voluntario" class="form-status"></div>
         </form>
+
+        <!-- Acordeón / Vista Desplegable del Aviso de Privacidad Integrado -->
+        <details class="privacy-accordion">
+            <summary class="privacy-accordion-summary">
+                <span><i class="fas fa-gavel"></i> Consultar Aviso de Privacidad Integral en texto directo</span>
+                <i class="fas fa-chevron-down summary-icon"></i>
+            </summary>
+            <div class="privacy-accordion-content">
+                <h3>AVISO DE PRIVACIDAD INTEGRAL</h3>
+                <p><strong>Registro, Evaluación y Admisión Gradual de Voluntarios — Colectivo Voz de los Usuarios</strong></p>
+                <p><strong>Responsable:</strong> Colectivo Voz de los Usuarios (CVDLU) | <strong>Ubicación:</strong> Monterrey, Nuevo León, México | <strong>Contacto ARCO:</strong> cvdlu.buzon@gmail.com | <strong>Teléfono:</strong> 9987864260</p>
+                <hr style="border-color: rgba(255,204,0,0.2); margin: 15px 0;">
+                <p>En cumplimiento con la Ley Federal de Protección de Datos Personales en Posesión de los Particulares (LFPDPPP) y su Reglamento, el Colectivo Voz de los Usuarios (CVDLU) pone a su disposición el presente Aviso de Privacidad Integral para regular el tratamiento de los datos personales proporcionados en las solicitudes de ingreso a nuestro equipo de voluntarios.</p>
+                
+                <h4>1. Datos Personales que se Recaban</h4>
+                <p><strong>Identificación y Contacto:</strong> Nombre completo, apodo/nombre de preferencia, edad, municipio de residencia y medios de contacto (correo electrónico, teléfono y/o redes sociales).<br>
+                <strong>Contexto Socio-laboral:</strong> Ocupación actual.<br>
+                <strong>Perfil Organizativo:</strong> Motivaciones personales, experiencia previa en movimientos comunitarios, habilidades a aportar, disponibilidad de tiempo y expectativas.<br>
+                <strong>Criterio y Alineación Social:</strong> Aceptación expresada de principios apartidistas, horizontales y perspectiva crítica sociopolítica local.</p>
+
+                <div class="privacidad-alerta-salud" style="margin: 15px 0;">
+                    <p><strong>Trato Especial de Datos Personales Sensibles (Salud):</strong> El formulario recopila información sobre estado de salud o tratamientos médicos vigentes. Este dato es clasificado formalmente como <strong>Dato Personal Sensible</strong> conforme a la LFPDPPP. Finalidad exclusiva de seguridad para proteger la salud e integridad física en brigadas y eventos públicos.</p>
+                </div>
+
+                <h4>2. Finalidades del Tratamiento de Datos</h4>
+                <p>Evaluación y filtro de perfil, estructura organizativa por niveles, seguridad e integridad física en campo y canales de comunicación.<br>
+                <em>Cláusula de no comercialización: El CVDLU no comercializa ni comparte sus datos con fines mercadotécnicos, comerciales ni de proselitismo político.</em></p>
+
+                <h4>3. Protección de Estrategia Organizativa y Reserva de Criterios Internos</h4>
+                <p>El llenado del formulario web constituye únicamente una solicitud de ingreso inicial. El colectivo se reserva la facultad discrecional de aplicar etapas posteriores de verificación antes de otorgar acceso a espacios de decisión o canales restringidos.</p>
+
+                <h4>4. Transferencia de Datos Personales</h4>
+                <p>El CVDLU se compromete a no transferir, vender ni compartir sus datos personales con terceros, partidos políticos, entes gubernamentales ni empresas privadas.</p>
+
+                <h4>5. Derechos ARCO (Acceso, Rectificación, Cancelación y Oposición)</h4>
+                <p>Dirigir solicitudes por escrito a <strong>cvdlu.buzon@gmail.com</strong> o al teléfono <strong>9987864260</strong> en Monterrey, N.L. Plazo de atención: máximo 15 días hábiles.</p>
+
+                <h4>6. Modificaciones y 7. Aceptación de Términos</h4>
+                <p>Las versiones vigentes se mantendrán disponibles en este sitio. Al enviar la solicitud, el titular manifiesta expresamente su conformidad.</p>
+                <p style="font-size: 0.85rem; color: #888; margin-top: 10px;"><em>Última actualización: Julio de 2026 | Colectivo Voz de los Usuarios</em></p>
+            </div>
+        </details>
 
         <!-- WhatsApp Banner / Alternative Direct Join -->
         <div class="whatsapp-join-banner">
@@ -870,6 +832,11 @@
         </div>
         <p>&copy; 2026 Voz de los Usuarios - Colectivo Ciudadano Apartidista</p>
         <p style="font-size: 0.8rem; margin-top: 10px; color: #999;">Movimiento por la Dignidad y la Movilidad en Nuevo León</p>
+        <p style="font-size: 0.85rem; margin-top: 15px;">
+            <a href="javascript:void(0)" onclick="abrirModalPrivacidad()" style="color: var(--primary-color); text-decoration: underline; font-weight: 600;">
+                <i class="fas fa-user-shield" style="margin-right: 5px;"></i> Aviso de Privacidad Integral (Voluntarios)
+            </a>
+        </p>
         <div class="creative-signature">
             <p>Sitio creado con <i class="fas fa-heart" style="color: #e25555;"></i> y rebeldía por:</p>
             <span class="signature-name">Tarifin en lucha</span>
@@ -898,6 +865,248 @@
 
     <!-- Contenedor para Notificaciones Toast -->
     <div id="toast-container" class="toast-container" aria-live="polite"></div>
+
+    <!-- ===== MODALES DE LA PLATAFORMA ===== -->
+
+    <!-- Modal de imagen por etapa -->
+    <div id="etapa-modal" class="etapa-modal" role="dialog" aria-modal="true" aria-labelledby="modal-titulo" onclick="cerrarEtapa(event)">
+        <div class="etapa-modal-inner">
+            <button class="modal-cerrar" onclick="cerrarEtapaBtn()" aria-label="Cerrar">
+                <i class="fas fa-times"></i>
+            </button>
+            <img id="modal-img" src="" alt="Detalle de la etapa" class="modal-img">
+            <div id="modal-mensaje" class="modal-mensaje" style="display:none;"></div>
+            <p id="modal-titulo" class="modal-caption"></p>
+        </div>
+    </div>
+
+    <!-- Modal de Noticia / Publicación Propia — Solicitud de Transparencia -->
+    <div id="noticia-modal" class="noticia-modal" role="dialog" aria-modal="true" onclick="cerrarNoticiaModal(event)">
+        <div class="noticia-modal-inner">
+            <button class="modal-cerrar" onclick="cerrarNoticiaModalBtn()" aria-label="Cerrar">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="noticia-modal-badge"><i class="fas fa-file-contract" style="margin-right: 6px;"></i> Acción por la Transparencia CVDLU</div>
+            <h2 class="noticia-modal-title">¿Dónde está tu Seguro de Viajero? Ingresamos solicitud en el Portal de Transparencia</h2>
+            <div class="noticia-modal-date"><i class="fas fa-clock" style="margin-right: 6px;"></i> Estatus: En espera de respuesta oficial de las autoridades</div>
+            
+            <img id="noticia-principal-img" src="transparencia_seguro_1.jpg" alt="Solicitud de Transparencia Seguro de Viajero" class="noticia-modal-img">
+            
+            <p style="font-size: 0.85rem; color: var(--primary-color); font-weight: 700; text-transform: uppercase; margin-bottom: 8px;">📷 Documentación Oficial (Haz clic en una imagen para ampliarla):</p>
+            <div class="noticia-modal-gallery" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 10px; margin-bottom: 25px;">
+                <img src="transparencia_seguro_1.jpg" alt="Exposición del Seguro de Viajero" style="width:100%; height: 100px; object-fit: cover; border-radius: 8px; border: 2px solid var(--primary-color); cursor: pointer;" onclick="cambiarImagenPrincipal(this.src)">
+                <img src="transparencia_seguro_2.jpg" alt="Folio en Portal de Transparencia" style="width:100%; height: 100px; object-fit: cover; border-radius: 8px; border: 1px solid #444; cursor: pointer;" onclick="cambiarImagenPrincipal(this.src)">
+                <img src="transparencia_seguro_3.jpg" alt="Desglose de Puntos Exigidos" style="width:100%; height: 100px; object-fit: cover; border-radius: 8px; border: 1px solid #444; cursor: pointer;" onclick="cambiarImagenPrincipal(this.src)">
+                <img src="transparencia_seguro_4.jpg" alt="Estatus En Espera de Respuesta" style="width:100%; height: 100px; object-fit: cover; border-radius: 8px; border: 1px solid #444; cursor: pointer;" onclick="cambiarImagenPrincipal(this.src)">
+            </div>
+
+            <div class="noticia-modal-body">
+                <p>Como parte de nuestras acciones colectivas en defensa de los usuarios del transporte público en Nuevo León, <strong>hemos ingresado una solicitud formal a través del Portal Nacional de Transparencia</strong> para exigir cuentas claras sobre la cobertura y aplicación del Seguro de Viajero.</p>
+                
+                <p>El Seguro de Viajero no es opcional: es una obligación legal para todos los concesionarios y rutas del transporte público. Sin embargo, cuando ocurren accidentes, la constante es la falta de pases médicos, la evasión de responsabilidades y el abandono a las víctimas.</p>
+
+                <h4>📜 Puntos clave solicitados a la autoridad:</h4>
+                <ul>
+                    <li><strong>Pólizas activas y vigentes:</strong> Copia completa de las pólizas de seguro contratadas por cada ruta urbana y línea de transporte en el estado.</li>
+                    <li><strong>Historial de pases e indemnizaciones:</strong> Reporte transparente del número de accidentes atendidos y cuántos usuarios han recibido atención médica completa o indemnización.</li>
+                    <li><strong>Protocolos de verificación:</strong> La metodología con la que se vigila que ninguna unidad circule sin seguro vigente.</li>
+                </ul>
+
+                <h4>⏳ Estado de la Solicitud:</h4>
+                <p>La solicitud ha sido registrada exitosamente en la plataforma. <strong>Nos encontramos a la espera del término legal para recibir la respuesta oficial</strong> por parte de las autoridades competentes. Haremos públicos los resultados en cuanto nos sean notificados.</p>
+            </div>
+
+            <div class="noticia-modal-footer">
+                <a href="#reportes" onclick="cerrarNoticiaModalBtn()" class="btn-submit" style="display: inline-block; padding: 12px 24px; text-decoration: none; width: auto;">
+                    <i class="fas fa-exclamation-triangle" style="margin-right: 6px;"></i> Reportar un Incidente
+                </a>
+                <a href="https://chat.whatsapp.com/COHEoNINaP4JKqAfX6Fdej" target="_blank" rel="noopener noreferrer" class="btn-submit btn-outline-minimal" style="display: inline-block; padding: 12px 24px; text-decoration: none; width: auto; background: transparent; border: 2px solid var(--primary-color); color: var(--primary-color);">
+                    <i class="fab fa-whatsapp" style="margin-right: 6px;"></i> Recibir Avances en WhatsApp
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Noticia / Publicación Propia — Análisis Colectivo Mesas de Diálogo -->
+    <div id="noticia-analisis-modal" class="noticia-modal" role="dialog" aria-modal="true" onclick="cerrarNoticiaAnalisisModal(event)">
+        <div class="noticia-modal-inner">
+            <button class="modal-cerrar" onclick="cerrarNoticiaAnalisisModalBtn()" aria-label="Cerrar">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="noticia-modal-badge"><i class="fas fa-bullhorn" style="margin-right: 6px;"></i> Posición Colectiva CVDLU</div>
+            <h2 class="noticia-modal-title">Análisis colectivo: Por qué el diálogo sin resultados y sin apertura no es la vía</h2>
+            <div class="noticia-modal-date"><i class="fas fa-clock" style="margin-right: 6px;"></i> Publicado: 28 de Julio, 2026 | Movilidad y Dignidad Ciudadana</div>
+            
+            <img src="noticia_analisis_dialogo.jpg" alt="Análisis colectivo: Por qué el diálogo sin resultados y sin apertura no es la vía" class="noticia-modal-img">
+
+            <div class="noticia-modal-body">
+                <p>A raíz de las inquietudes de nuestros seguidores y de la comunidad movilizada, reflexionamos abiertamente sobre el panorama del transporte público en Nuevo León y la postura de nuestro colectivo frente a los procesos convocados por la autoridad.</p>
+                
+                <p>Al examinar lo sucedido entre <strong>abril de 2025 y la Audiencia Pública de julio de 2026</strong>, el patrón es contundente: la autoridad utiliza las <em>"mesas de diálogo"</em> y los formalismos administrativos como una estrategia de dilación para ganar tiempo mientras <strong>el tarifazo jamás se detiene</strong>. Cuidar la causa exige mantener la firmeza y no caer en dinámicas de desgaste que solo benefician al estado.</p>
+
+                <h4>1️⃣ El bucle de las reuniones sin resultados:</h4>
+                <p>Pasar de ofrecer mesas técnicas en 2025 a firmar actas para mesas bimestrales en 2026 no constituye un avance; <strong>es simulación</strong>. Acudir a reuniones con mandos intermedios sin capacidad legal de decisión, o recibir capacitaciones en lugar de unidades nuevas y funcionales en las rutas colapsadas, neutraliza la protesta social mientras el costo del pasaje sigue subiendo día con día.</p>
+
+                <h4>2️⃣ La falta de pluralidad y la exclusión detrás del telón:</h4>
+                <p>Los espacios de interlocución deben ser genuinamente abiertos, transparentes e incluyentes. Aclaramos que no lo decimos por un interés personal —nuestro colectivo ni siquiera pretendía integrarnos a esa mesa—, sino por la gravedad de validar exclusiones de representaciones legítimas, como la que existe formalmente ante la Junta de Gobierno.</p>
+
+                <p>Genera inquietud ver cómo en lo público se apela al apoyo del auditorio preguntando quién quiere sumarse, mientras que detrás del telón se cerraron las puertas y se impidió el paso a vocerías clave. Ese tipo de prácticas fragmentan el movimiento y alimentan la división que a la autoridad le conviene.</p>
+
+                <h4>✊ Nuestra Postura Colectiva:</h4>
+                <p>No juzgamos intenciones, pero al analizar los hechos y la historia reciente, es indispensable señalar estas inconsistencias para no prestar la legitimidad de la movilización ciudadana a procesos excluyentes o dilatorios. La dignidad y los derechos de los usuarios del transporte no son negociables.</p>
+            </div>
+
+            <div class="noticia-modal-footer">
+                <a href="https://www.facebook.com/share/p/1Jr3UJ4jZ3/" target="_blank" rel="noopener noreferrer" class="btn-submit" style="display: inline-block; padding: 12px 24px; text-decoration: none; width: auto; background-color: #1877F2;">
+                    <i class="fab fa-facebook" style="margin-right: 6px;"></i> Ver Publicación en Facebook
+                </a>
+                <a href="https://chat.whatsapp.com/COHEoNINaP4JKqAfX6Fdej" target="_blank" rel="noopener noreferrer" class="btn-submit btn-outline-minimal" style="display: inline-block; padding: 12px 24px; text-decoration: none; width: auto; background: transparent; border: 2px solid var(--primary-color); color: var(--primary-color);">
+                    <i class="fab fa-whatsapp" style="margin-right: 6px;"></i> Sumarme a la Comunidad
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Aviso de Privacidad Integral (Voluntarios) -->
+    <div id="privacidad-modal" class="etapa-modal privacidad-modal" role="dialog" aria-modal="true" aria-labelledby="privacidad-modal-title" onclick="cerrarPrivacidadModal(event)">
+        <div class="etapa-modal-inner privacidad-modal-inner">
+            <button class="modal-cerrar" onclick="cerrarPrivacidadModalBtn()" aria-label="Cerrar Aviso de Privacidad">
+                <i class="fas fa-times"></i>
+            </button>
+
+            <div class="privacidad-modal-header">
+                <div class="privacidad-badge"><i class="fas fa-user-shield"></i> LFPDPPP</div>
+                <h2 id="privacidad-modal-title" class="privacidad-title">AVISO DE PRIVACIDAD INTEGRAL</h2>
+                <p class="privacidad-subtitle">Registro, Evaluación y Admisión Gradual de Voluntarios — Colectivo Voz de los Usuarios</p>
+            </div>
+
+            <div class="privacidad-meta-grid">
+                <div class="privacidad-meta-item">
+                    <i class="fas fa-building"></i>
+                    <div>
+                        <strong>Responsable:</strong>
+                        <span>Colectivo Voz de los Usuarios (CVDLU)</span>
+                    </div>
+                </div>
+                <div class="privacidad-meta-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <div>
+                        <strong>Ubicación:</strong>
+                        <span>Monterrey, Nuevo León, México</span>
+                    </div>
+                </div>
+                <div class="privacidad-meta-item">
+                    <i class="fas fa-envelope"></i>
+                    <div>
+                        <strong>Contacto ARCO:</strong>
+                        <span>cvdlu.buzon@gmail.com | Teléfono: 9987864260</span>
+                    </div>
+                </div>
+                <div class="privacidad-meta-item">
+                    <i class="fas fa-globe"></i>
+                    <div>
+                        <strong>Aplicabilidad:</strong>
+                        <span>Sitio Web Oficial (Sección: "Nuevos Voluntarios")</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="privacidad-modal-body">
+                <p class="privacidad-preamble">
+                    En cumplimiento con la <strong>Ley Federal de Protección de Datos Personales en Posesión de los Particulares (LFPDPPP)</strong> y su Reglamento, el <strong>Colectivo Voz de los Usuarios (CVDLU)</strong>, con domicilio en la ciudad de Monterrey, Nuevo León, México, pone a su disposición el presente Aviso de Privacidad Integral para regular el tratamiento de los datos personales proporcionados en las solicitudes de ingreso a nuestro equipo de voluntarios.
+                </p>
+
+                <div class="privacidad-seccion">
+                    <h3>1. Datos Personales que se Recaban</h3>
+                    <p>Para procesar el registro inicial a la sección de voluntarios en nuestro sitio web, recabamos las siguientes categorías de información:</p>
+                    
+                    <div class="privacidad-tabla">
+                        <div class="tabla-row header">
+                            <div class="col-cat">Categoría</div>
+                            <div class="col-datos">Datos Específicos Solicitados</div>
+                        </div>
+                        <div class="tabla-row">
+                            <div class="col-cat"><strong>Identificación y Contacto</strong></div>
+                            <div class="col-datos">Nombre completo, apodo/nombre de preferencia, edad, municipio de residencia y medios de contacto (correo electrónico, teléfono y/o redes sociales).</div>
+                        </div>
+                        <div class="tabla-row">
+                            <div class="col-cat"><strong>Contexto Socio-laboral</strong></div>
+                            <div class="col-datos">Ocupación actual (estudiante, trabajador/a independiente, oficio, etc.).</div>
+                        </div>
+                        <div class="tabla-row">
+                            <div class="col-cat"><strong>Perfil Organizativo</strong></div>
+                            <div class="col-datos">Motivaciones personales, experiencia previa en movimientos comunitarios, habilidades/herramientas a aportar (redes sociales, diseño, logística, etc.), disponibilidad de tiempo semanal y expectativas de voluntariado.</div>
+                        </div>
+                        <div class="tabla-row">
+                            <div class="col-cat"><strong>Criterio y Alineación Social</strong></div>
+                            <div class="col-datos">Aceptación expresada de los principios apartidistas, horizontales y de respeto del colectivo, así como su perspectiva crítica sobre el contexto sociopolítico local.</div>
+                        </div>
+                    </div>
+
+                    <div class="privacidad-alerta-salud">
+                        <h4><i class="fas fa-notes-medical"></i> Trato Especial de Datos Personales Sensibles (Salud)</h4>
+                        <p>El formulario recopila información sobre estado de salud o tratamientos médicos vigentes (<em>"¿Padeces alguna enfermedad o estás bajo algún tratamiento que debamos considerar?"</em>). Este dato es clasificado formalmente como <strong>Dato Personal Sensible</strong> conforme a la LFPDPPP.</p>
+                        <p><strong>Finalidad exclusiva de seguridad:</strong> Proteger la salud, integridad física y bienestar personal durante la participación en brigadas, marchas, volanteos u operaciones públicas del colectivo, permitiendo actuar oportunamente ante eventualidades médicas.</p>
+                    </div>
+                </div>
+
+                <div class="privacidad-seccion">
+                    <h3>2. Finalidades del Tratamiento de Datos</h3>
+                    <p>Sus datos personales serán tratados de forma confidencial para las siguientes finalidades primarias y necesarias:</p>
+                    <ul>
+                        <li><strong>Evaluación y filtro de perfil:</strong> Evaluar las solicitudes de ingreso para validar la alineación con los principios apartidistas y horizontales de la organización.</li>
+                        <li><strong>Estructura organizativa por niveles:</strong> Asignar tareas y niveles de participación comunitaria considerando municipio de residencia, habilidades y disponibilidad de tiempo.</li>
+                        <li><strong>Seguridad e integridad física:</strong> Prever atención prioritaria o protocolos de apoyo médico en caso de emergencias durante actividades públicas o de campo.</li>
+                        <li><strong>Canales de comunicación:</strong> Incorporar su contacto a listas de difusión generales o convocatorias abiertas del CVDLU.</li>
+                    </ul>
+                    <div class="privacidad-clausula">
+                        <strong>Cláusula de no comercialización:</strong> El CVDLU no comercializa, utiliza ni comparte sus datos con fines mercadotécnicos, comerciales, de proselitismo político ni electorales de ninguna especie.
+                    </div>
+                </div>
+
+                <div class="privacidad-seccion">
+                    <h3>3. Protección de Estrategia Organizativa y Reserva de Criterios Internos</h3>
+                    <p>El llenado del formulario web constituye únicamente una solicitud de ingreso inicial. Por razones de seguridad interna, integridad del colectivo y prevención de perfiles incompatibles o infiltraciones, el colectivo se reserva la facultad discrecional de aplicar etapas posteriores de verificación (entrevistas presenciales o telefónicas, participación observada en actividades comunitarias) antes de otorgar acceso a espacios de toma de decisiones o canales de comunicación interna restringidos. La metodología y criterios puntuales de evaluación interna son de carácter estrictamente confidencial y de uso exclusivo de la coordinación del colectivo.</p>
+                </div>
+
+                <div class="privacidad-seccion">
+                    <h3>4. Transferencia de Datos Personales</h3>
+                    <p>El Colectivo Voz de los Usuarios se compromete a <strong>no transferir, vender ni compartir sus datos personales con terceros</strong>, partidos políticos, entes gubernamentales ni empresas privadas. El manejo de la información es exclusivo del equipo coordinador bajo protocolos de absoluta confidencialidad.</p>
+                </div>
+
+                <div class="privacidad-seccion">
+                    <h3>5. Derechos ARCO (Acceso, Rectificación, Cancelación y Oposición)</h3>
+                    <p>Usted tiene derecho a conocer qué datos tenemos registrados de su persona, para qué los utilizamos y las condiciones de su tratamiento (<strong>Acceso</strong>); solicitar su corrección en caso de inexactitud o actualización (<strong>Rectificación</strong>); requerir su eliminación de nuestras bases de datos (<strong>Cancelación</strong>); u oponerse al uso de sus datos para fines específicos (<strong>Oposición</strong>).</p>
+
+                    <div class="privacidad-arco-box">
+                        <h4><i class="fas fa-paper-plane"></i> Canal para Ejercicio de Derechos ARCO o Revocación de Consentimiento</h4>
+                        <p>Deberá dirigir su solicitud por escrito al equipo de atención del colectivo a través de los siguientes datos:</p>
+                        <ul>
+                            <li><strong>Correo electrónico:</strong> <a href="mailto:cvdlu.buzon@gmail.com">cvdlu.buzon@gmail.com</a></li>
+                            <li><strong>Teléfono de contacto:</strong> <a href="tel:9987864260">9987864260</a></li>
+                            <li><strong>Ubicación:</strong> Monterrey, Nuevo León, México</li>
+                        </ul>
+                        <p class="arco-requisitos"><strong>Requisitos:</strong> Adjuntar nombre completo del titular, descripción clara de la solicitud y medio de respuesta. Las solicitudes serán atendidas en un plazo máximo de 15 días hábiles.</p>
+                    </div>
+                </div>
+
+                <div class="privacidad-seccion">
+                    <h3>6. Modificaciones al Aviso de Privacidad</h3>
+                    <p>El presente aviso puede actualizarse debido a cambios normativos o adecuaciones organizativas de nuestras actividades comunitarias. Las versiones vigentes estarán siempre disponibles para consulta en este sitio web oficial.</p>
+                </div>
+
+                <div class="privacidad-seccion">
+                    <h3>7. Aceptación de Términos</h3>
+                    <p>Al enviar el formulario de registro de nuevos voluntarios, el titular manifiesta expresamente haber leído y comprendido las condiciones de este Aviso de Privacidad, autorizando el tratamiento de sus datos personales y sensibles bajo los términos expuestos.</p>
+                </div>
+
+                <div class="privacidad-modal-footer">
+                    <p class="privacidad-timestamp">Última actualización: Julio de 2026 | Colectivo Voz de los Usuarios — Monterrey, Nuevo León, México</p>
+                    <button type="button" class="btn-submit" onclick="cerrarPrivacidadModalBtn()" style="width: auto; padding: 10px 24px;">Entendido y Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js" integrity="sha512-CQBWl4fJHWbryGE+Pc7UAxWMUMNMWzWxF4SQo9CgkJIN1kx6djDQZjh3Y8SZ1d+6I+1zze6Z7kHXO7q3UyZAWw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="script.js"></script>

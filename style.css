@@ -1919,5 +1919,492 @@ footer {
     }
 }
 
+/* =============================================
+   AVISO DE PRIVACIDAD INTEGRAL — ESTILOS
+   ============================================= */
+.privacidad-modal-inner {
+    max-width: 800px;
+    background: #141414;
+    border: 1px solid rgba(255, 204, 0, 0.35);
+    border-radius: 16px;
+    padding: 30px;
+    color: #EEE;
+    box-shadow: 0 25px 50px rgba(0,0,0,0.8), 0 0 30px rgba(255, 204, 0, 0.15);
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.privacidad-modal-header {
+    border-bottom: 2px solid rgba(255, 204, 0, 0.2);
+    padding-bottom: 15px;
+    margin-bottom: 20px;
+}
+
+.privacidad-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(255, 204, 0, 0.15);
+    color: var(--primary-color);
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+}
+
+.privacidad-title {
+    color: var(--primary-color);
+    font-size: 1.6rem;
+    font-weight: 800;
+    margin-bottom: 5px;
+    letter-spacing: 0.5px;
+}
+
+.privacidad-subtitle {
+    color: #AAA;
+    font-size: 0.9rem;
+}
+
+.privacidad-meta-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 12px;
+    background: rgba(255, 255, 255, 0.04);
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.privacidad-meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 0.85rem;
+}
+
+.privacidad-meta-item i {
+    color: var(--primary-color);
+    font-size: 1.1rem;
+    margin-top: 3px;
+}
+
+.privacidad-meta-item strong {
+    display: block;
+    color: #FFF;
+}
+
+.privacidad-meta-item span {
+    color: #BBB;
+}
+
+.privacidad-modal-body {
+    overflow-y: auto;
+    padding-right: 10px;
+    line-height: 1.6;
+    font-size: 0.95rem;
+}
+
+.privacidad-modal-body::-webkit-scrollbar {
+    width: 6px;
+}
+.privacidad-modal-body::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 4px;
+}
+.privacidad-modal-body::-webkit-scrollbar-thumb {
+    background: var(--primary-color);
+    border-radius: 4px;
+}
+
+.privacidad-preamble {
+    background: rgba(255, 204, 0, 0.05);
+    padding: 15px;
+    border-radius: 8px;
+    border-left: 3px solid var(--primary-color);
+    margin-bottom: 25px;
+    color: #DDD;
+}
+
+.privacidad-seccion {
+    margin-bottom: 25px;
+}
+
+.privacidad-seccion h3 {
+    color: var(--primary-color);
+    font-size: 1.25rem;
+    margin-bottom: 12px;
+    border-bottom: 1px dashed rgba(255, 204, 0, 0.3);
+    padding-bottom: 5px;
+}
+
+.privacidad-seccion ul {
+    padding-left: 20px;
+    margin-top: 10px;
+}
+
+.privacidad-seccion ul li {
+    margin-bottom: 8px;
+    color: #CCC;
+}
+
+.privacidad-tabla {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin: 15px 0;
+}
+
+.tabla-row {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 15px;
+    background: rgba(255, 255, 255, 0.03);
+    padding: 12px 15px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    font-size: 0.9rem;
+}
+
+.tabla-row.header {
+    background: rgba(255, 204, 0, 0.15);
+    color: var(--primary-color);
+    font-weight: 700;
+    border-color: rgba(255, 204, 0, 0.3);
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    letter-spacing: 0.5px;
+}
+
+.privacidad-alerta-salud {
+    background: rgba(220, 53, 69, 0.12);
+    border: 1px solid rgba(220, 53, 69, 0.4);
+    border-left: 4px solid #dc3545;
+    padding: 15px 18px;
+    border-radius: 8px;
+    margin-top: 15px;
+}
+
+.privacidad-alerta-salud h4 {
+    color: #ff6b6b;
+    margin-bottom: 8px;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.privacidad-alerta-salud p {
+    color: #EEE;
+    font-size: 0.9rem;
+    margin-bottom: 6px;
+}
+
+.privacidad-clausula {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 12px 15px;
+    border-radius: 6px;
+    margin-top: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: 0.9rem;
+}
+
+.privacidad-arco-box {
+    background: rgba(255, 204, 0, 0.08);
+    border: 1px solid rgba(255, 204, 0, 0.25);
+    border-radius: 10px;
+    padding: 18px;
+    margin-top: 15px;
+}
+
+.privacidad-arco-box h4 {
+    color: var(--primary-color);
+    margin-bottom: 10px;
+    font-size: 1.05rem;
+}
+
+.privacidad-arco-box ul {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0;
+}
+
+.privacidad-arco-box ul li {
+    margin-bottom: 6px;
+    color: #DDD;
+}
+
+.privacidad-arco-box a {
+    color: var(--primary-color);
+    text-decoration: underline;
+}
+
+.arco-requisitos {
+    font-size: 0.85rem;
+    color: #AAA;
+    margin-top: 10px;
+    border-top: 1px dashed rgba(255, 255, 255, 0.15);
+    padding-top: 8px;
+}
+
+.privacidad-modal-footer {
+    margin-top: 25px;
+    padding-top: 15px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.privacidad-timestamp {
+    font-size: 0.8rem;
+    color: #888;
+    margin: 0 !important;
+}
+
+/* Badge y Botón de Privacidad en Sección Voluntarios */
+.privacy-notice-badge-box {
+    max-width: 700px;
+    margin: 0 auto 25px auto;
+    background: rgba(255, 204, 0, 0.06);
+    border: 1px solid rgba(255, 204, 0, 0.25);
+    border-radius: 12px;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.privacy-badge-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #DDD;
+    font-size: 0.9rem;
+}
+
+.privacy-badge-info i {
+    color: var(--primary-color);
+    font-size: 1.2rem;
+}
+
+.btn-privacy-toggle {
+    background: transparent;
+    border: 1px solid var(--primary-color);
+    color: var(--primary-color);
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-weight: 700;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.btn-privacy-toggle:hover {
+    background: var(--primary-color);
+    color: #000;
+    box-shadow: 0 4px 15px rgba(255, 204, 0, 0.3);
+}
+
+.privacy-check-group {
+    margin-top: 15px;
+    margin-bottom: 20px;
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    cursor: pointer;
+    font-size: 0.92rem;
+    color: #333;
+}
+
+.checkbox-label input[type="checkbox"] {
+    margin-top: 3px;
+    width: 18px;
+    height: 18px;
+    accent-color: var(--primary-color);
+    cursor: pointer;
+}
+
+.privacy-link {
+    color: #000;
+    font-weight: 700;
+    text-decoration: underline;
+}
+.privacy-link:hover {
+    color: var(--primary-color);
+}
+
+/* Acordeón en sección voluntarios */
+.privacy-accordion {
+    max-width: 700px;
+    margin: 35px auto 0 auto;
+    background: rgba(26, 26, 26, 0.03);
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.privacy-accordion-summary {
+    padding: 16px 20px;
+    font-weight: 700;
+    font-size: 0.95rem;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #222;
+    background: #f9f9f9;
+    user-select: none;
+    transition: background 0.3s ease;
+}
+
+.privacy-accordion-summary:hover {
+    background: #f0f0f0;
+}
+
+.privacy-accordion-summary i {
+    color: var(--primary-color);
+}
+
+.privacy-accordion-summary .summary-icon {
+    transition: transform 0.3s ease;
+    color: #666;
+}
+
+.privacy-accordion[open] .summary-icon {
+    transform: rotate(180deg);
+}
+
+.privacy-accordion-content {
+    padding: 20px;
+    background: #FFF;
+    border-top: 1px solid #EEE;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: #444;
+}
+
+.privacy-accordion-content h3 {
+    color: #111;
+    font-size: 1.1rem;
+    margin-bottom: 5px;
+}
+
+.privacy-accordion-content h4 {
+    color: #111;
+    font-size: 0.95rem;
+    margin-top: 15px;
+    margin-bottom: 5px;
+}
+
+@media (max-width: 768px) {
+    .tabla-row {
+        grid-template-columns: 1fr;
+        gap: 6px;
+        padding: 10px;
+    }
+    .privacidad-meta-grid {
+        grid-template-columns: 1fr;
+        gap: 8px;
+        padding: 12px;
+    }
+    .privacy-notice-badge-box {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 12px 15px;
+    }
+    .btn-privacy-toggle {
+        width: 100%;
+        justify-content: center;
+        padding: 10px 16px;
+        font-size: 0.9rem;
+    }
+    .privacidad-modal-inner {
+        padding: 20px 14px;
+        max-height: 92vh;
+        width: 95vw;
+        border-radius: 14px;
+    }
+    .privacidad-title {
+        font-size: 1.3rem;
+    }
+    .privacidad-subtitle {
+        font-size: 0.82rem;
+    }
+    .privacidad-modal-footer {
+        flex-direction: column;
+        text-align: center;
+        gap: 12px;
+    }
+    .privacidad-modal-footer button {
+        width: 100% !important;
+        padding: 12px 20px !important;
+        font-size: 0.95rem;
+    }
+    .checkbox-label {
+        font-size: 0.95rem;
+        line-height: 1.4;
+        padding: 6px 0;
+    }
+    .checkbox-label input[type="checkbox"] {
+        width: 22px;
+        height: 22px;
+        margin-top: 2px;
+    }
+    .privacy-accordion-summary {
+        padding: 14px 15px;
+        font-size: 0.88rem;
+    }
+    .privacy-accordion-content {
+        padding: 15px;
+        font-size: 0.85rem;
+    }
+    .modal-cerrar {
+        top: -12px;
+        right: -12px;
+        width: 42px;
+        height: 42px;
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .privacidad-modal-inner {
+        padding: 16px 12px;
+        max-height: 95vh;
+        width: 98vw;
+    }
+    .privacidad-title {
+        font-size: 1.15rem;
+    }
+    .privacidad-seccion h3 {
+        font-size: 1.1rem;
+    }
+    .privacidad-preamble {
+        font-size: 0.85rem;
+        padding: 12px;
+    }
+    .privacidad-alerta-salud {
+        padding: 10px 12px;
+        font-size: 0.82rem;
+    }
+}
+
+
+
 
 
