@@ -463,13 +463,13 @@
         </div>
 
         <!-- Tarjeta 2: Colmena 3.1 -->
-        <div class="convocatoria-card" style="border-color: rgba(255, 204, 0, 0.5); background: linear-gradient(145deg, #141414 0%, #0d0d0d 100%);">
-            <div class="conv-date" style="background: linear-gradient(135deg, var(--primary-color) 0%, #E6B800 100%);">
+        <div class="convocatoria-card convocatoria-card-gradient">
+            <div class="conv-date conv-date-gradient">
                 <span class="day" style="font-size: 1.3rem; font-weight: 800;">COLMENA</span>
                 <span class="month" style="font-size: 0.85rem; letter-spacing: 1px; font-weight: 800;">3.1</span>
             </div>
             <div class="conv-info">
-                <div style="display: inline-block; background: rgba(255, 204, 0, 0.12); color: var(--primary-color); border: 1px solid rgba(255, 204, 0, 0.3); padding: 4px 14px; border-radius: 20px; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1.2px; margin-bottom: 12px;">
+                <div class="badge-proximamente">
                     <i class="fas fa-palette" style="margin-right: 6px;"></i> Próximamente
                 </div>
                 <h3>Colmena 3.1: Arte y Protesta Ciudadana</h3>
@@ -483,13 +483,13 @@
         </div>
 
         <!-- Tarjeta 3: 2ª Asamblea Ciudadana -->
-        <div class="convocatoria-card" style="border-color: rgba(255, 204, 0, 0.5); background: linear-gradient(145deg, #141414 0%, #0d0d0d 100%);">
-            <div class="conv-date" style="background: linear-gradient(135deg, var(--primary-color) 0%, #E6B800 100%);">
+        <div class="convocatoria-card convocatoria-card-gradient">
+            <div class="conv-date conv-date-gradient">
                 <span class="day" style="font-size: 1.5rem; font-weight: 800;">2ª</span>
                 <span class="month" style="font-size: 0.8rem; letter-spacing: 1px;">ASAMBLEA</span>
             </div>
             <div class="conv-info">
-                <div style="display: inline-block; background: rgba(255, 204, 0, 0.12); color: var(--primary-color); border: 1px solid rgba(255, 204, 0, 0.3); padding: 4px 14px; border-radius: 20px; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1.2px; margin-bottom: 12px;">
+                <div class="badge-proximamente">
                     <i class="fas fa-hourglass-half" style="margin-right: 6px;"></i> Próximamente
                 </div>
                 <h3>2ª Asamblea Ciudadana: Acciones Colectivas</h3>
@@ -703,14 +703,14 @@
     </section>
 
     <!-- Donativos Section -->
-    <section id="donativos" style="background: var(--primary-color); color: #000; padding: 60px 20px; text-align: center;">
-        <h2 class="section-title" style="color: #000; border-left: none; padding-left: 0;">Apoya la Causa</h2>
-        <p style="max-width: 700px; margin: 0 auto 20px auto; font-size: 1.1rem; font-weight: 600;">La movilización cuesta. Tu donativo voluntario nos ayuda a imprimir más hojas para firmas, fabricar lonas, mantener el sitio web activo y seguir luchando. ¡Cualquier ayuda suma!</p>
+    <section id="donativos">
+        <h2 class="section-title">Apoya la Causa</h2>
+        <p class="donativos-intro">La movilización cuesta. Tu donativo voluntario nos ayuda a imprimir más hojas para firmas, fabricar lonas, mantener el sitio web activo y seguir luchando. ¡Cualquier ayuda suma!</p>
         
-        <div style="background: #FFF; border: 2px solid #000; border-radius: 10px; max-width: 450px; margin: 30px auto 0 auto; padding: 25px; text-align: left; box-shadow: 6px 6px 0px rgba(0,0,0,0.2);">
-            <h3 style="margin-top: 0; margin-bottom: 20px; border-bottom: 2px solid #EEE; padding-bottom: 10px;"><i class="fas fa-university" style="color: #d32f2f;"></i> Datos para transferencia</h3>
-            <ul style="list-style: none; padding: 0; margin: 0; line-height: 1.8; font-size: 1.05rem;">
-                <li><strong>Cuenta / Tarjeta:</strong> <span style="user-select: all; background: #f9f9f9; padding: 3px 8px; border: 1px dashed #ccc; border-radius: 4px; font-weight: bold; font-family: monospace;">4741742974917109</span></li>
+        <div class="donativos-card">
+            <h3><i class="fas fa-university" style="color: #d32f2f;"></i> Datos para transferencia</h3>
+            <ul>
+                <li><strong>Cuenta / Tarjeta:</strong> <span class="account-number">4741742974917109</span></li>
                 <li><strong>Banco:</strong> Hey Banco / Banregio</li>
                 <li><strong>A nombre de:</strong> Colectivo Voz de los Usuarios</li>
                 <li><strong>Concepto sugerido:</strong> Donativo</li>
@@ -751,45 +751,24 @@
             <div id="status-voluntario" class="form-status"></div>
         </form>
 
-        <!-- Acordeón / Vista Desplegable del Aviso de Privacidad Integrado -->
+        <!-- Acordeón / Vista Desplegable del Resumen de Privacidad -->
         <details class="privacy-accordion">
             <summary class="privacy-accordion-summary">
-                <span><i class="fas fa-gavel"></i> Consultar Aviso de Privacidad Integral en texto directo</span>
+                <span><i class="fas fa-gavel"></i> Resumen del Aviso de Privacidad para Voluntarios</span>
                 <i class="fas fa-chevron-down summary-icon"></i>
             </summary>
             <div class="privacy-accordion-content">
-                <h3>AVISO DE PRIVACIDAD INTEGRAL</h3>
-                <p><strong>Registro, Evaluación y Admisión Gradual de Voluntarios — Colectivo Voz de los Usuarios</strong></p>
-                <p><strong>Responsable:</strong> Colectivo Voz de los Usuarios (CVDLU) | <strong>Ubicación:</strong> Monterrey, Nuevo León, México | <strong>Contacto ARCO:</strong> cvdlu.buzon@gmail.com | <strong>Teléfono:</strong> 9987864260</p>
-                <hr style="border-color: rgba(255,204,0,0.2); margin: 15px 0;">
-                <p>En cumplimiento con la Ley Federal de Protección de Datos Personales en Posesión de los Particulares (LFPDPPP) y su Reglamento, el Colectivo Voz de los Usuarios (CVDLU) pone a su disposición el presente Aviso de Privacidad Integral para regular el tratamiento de los datos personales proporcionados en las solicitudes de ingreso a nuestro equipo de voluntarios.</p>
-                
-                <h4>1. Datos Personales que se Recaban</h4>
-                <p><strong>Identificación y Contacto:</strong> Nombre completo, apodo/nombre de preferencia, edad, municipio de residencia y medios de contacto (correo electrónico, teléfono y/o redes sociales).<br>
-                <strong>Contexto Socio-laboral:</strong> Ocupación actual.<br>
-                <strong>Perfil Organizativo:</strong> Motivaciones personales, experiencia previa en movimientos comunitarios, habilidades a aportar, disponibilidad de tiempo y expectativas.<br>
-                <strong>Criterio y Alineación Social:</strong> Aceptación expresada de principios apartidistas, horizontales y perspectiva crítica sociopolítica local.</p>
-
-                <div class="privacidad-alerta-salud" style="margin: 15px 0;">
-                    <p><strong>Trato Especial de Datos Personales Sensibles (Salud):</strong> El formulario recopila información sobre estado de salud o tratamientos médicos vigentes. Este dato es clasificado formalmente como <strong>Dato Personal Sensible</strong> conforme a la LFPDPPP. Finalidad exclusiva de seguridad para proteger la salud e integridad física en brigadas y eventos públicos.</p>
+                <h3>Resumen de Protección de Datos</h3>
+                <p>El <strong>Colectivo Voz de los Usuarios (CVDLU)</strong> trata tus datos personales y de contacto de forma estrictamente confidencial únicamente para fines de organización ciudadana, logística de brigadas y seguridad en campo.</p>
+                <div class="privacidad-alerta-salud">
+                    <h4><i class="fas fa-notes-medical"></i> Datos Sensibles (Salud)</h4>
+                    <p>Los datos médicos eventualmente recopilados tienen como única finalidad contar con un protocolo de prevención y apoyo en emergencias físicas durante nuestras acciones públicas.</p>
                 </div>
-
-                <h4>2. Finalidades del Tratamiento de Datos</h4>
-                <p>Evaluación y filtro de perfil, estructura organizativa por niveles, seguridad e integridad física en campo y canales de comunicación.<br>
-                <em>Cláusula de no comercialización: El CVDLU no comercializa ni comparte sus datos con fines mercadotécnicos, comerciales ni de proselitismo político.</em></p>
-
-                <h4>3. Protección de Estrategia Organizativa y Reserva de Criterios Internos</h4>
-                <p>El llenado del formulario web constituye únicamente una solicitud de ingreso inicial. El colectivo se reserva la facultad discrecional de aplicar etapas posteriores de verificación antes de otorgar acceso a espacios de decisión o canales restringidos.</p>
-
-                <h4>4. Transferencia de Datos Personales</h4>
-                <p>El CVDLU se compromete a no transferir, vender ni compartir sus datos personales con terceros, partidos políticos, entes gubernamentales ni empresas privadas.</p>
-
-                <h4>5. Derechos ARCO (Acceso, Rectificación, Cancelación y Oposición)</h4>
-                <p>Dirigir solicitudes por escrito a <strong>cvdlu.buzon@gmail.com</strong> o al teléfono <strong>9987864260</strong> en Monterrey, N.L. Plazo de atención: máximo 15 días hábiles.</p>
-
-                <h4>6. Modificaciones y 7. Aceptación de Términos</h4>
-                <p>Las versiones vigentes se mantendrán disponibles en este sitio. Al enviar la solicitud, el titular manifiesta expresamente su conformidad.</p>
-                <p style="font-size: 0.85rem; color: #888; margin-top: 10px;"><em>Última actualización: Julio de 2026 | Colectivo Voz de los Usuarios</em></p>
+                <p style="margin-top: 15px; margin-bottom: 0;">
+                    <a href="javascript:void(0)" onclick="abrirModalPrivacidad()" class="btn-submit btn-outline-minimal" style="display: inline-block; padding: 8px 18px; font-size: 0.85rem; text-decoration: none; width: auto;">
+                        <i class="fas fa-file-contract" style="margin-right: 5px;"></i> Abrir Documento Integral Completo (Modal)
+                    </a>
+                </p>
             </div>
         </details>
 

@@ -576,14 +576,12 @@ function getDeviceName() {
     return os + " - " + browser;
 }
 
-// PROTECCIÓN BÁSICA DEL SITIO
-document.addEventListener('contextmenu', event => event.preventDefault());
-
-// Cierre del modal con Escape
+// Cierre global de modales activos con la tecla Escape
 document.addEventListener('keydown', e => {
     if (e.key === 'Escape') {
         cerrarEtapaBtn();
         cerrarNoticiaModalBtn();
+        cerrarNoticiaAnalisisModalBtn();
         cerrarPrivacidadModalBtn();
     }
 });
