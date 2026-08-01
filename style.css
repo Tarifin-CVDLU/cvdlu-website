@@ -109,6 +109,29 @@ nav ul li a:hover {
     justify-content: flex-start;
 }
 
+.btn-hero-secondary {
+    text-decoration: none;
+    display: inline-block;
+    width: auto;
+    padding: 15px 40px;
+    background-color: #1A1A1A;
+    border: 2px solid #1A1A1A;
+    color: var(--primary-color);
+    border-radius: 6px;
+    font-weight: 800;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.btn-hero-secondary:hover {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    color: #000;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(255, 204, 0, 0.3);
+}
+
 .hero-image img {
     max-width: 450px;
     filter: drop-shadow(0 10px 20px rgba(0,0,0,0.1));
@@ -346,10 +369,16 @@ section {
 }
 
 .card-date {
-    font-size: 0.85rem;
+    font-size: 0.8rem;
+    background: #111111;
     color: var(--primary-color);
-    font-weight: 700;
-    margin-bottom: 10px;
+    padding: 4px 12px;
+    border-radius: 6px;
+    font-weight: 800;
+    display: inline-block;
+    margin-bottom: 12px;
+    letter-spacing: 0.5px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
 }
 
 .card-content h3 {
@@ -549,9 +578,23 @@ input:focus, textarea:focus {
 /* Footer & Social */
 footer {
     padding: 60px 10%;
-    background: #F9F9F9;
-    border-top: 1px solid #EEE;
+    background: #0d0d0d;
+    border-top: 3px solid var(--primary-color);
     text-align: center;
+    color: #FFF;
+}
+
+footer h2 {
+    color: var(--primary-color);
+    margin-bottom: 20px;
+    font-size: 2.2rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+footer p {
+    color: #DDD;
 }
 
 .social-links {
@@ -573,25 +616,26 @@ footer {
     justify-content: center;
     border-radius: 50%;
     background: #FFF;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
 }
 
 .social-links a:hover {
-    color: var(--primary-color);
-    background: #000;
+    color: #000;
+    background: var(--primary-color);
     transform: scale(1.1);
+    box-shadow: 0 0 15px rgba(255, 204, 0, 0.4);
 }
 
 .creative-signature {
     margin-top: 40px;
     padding-top: 20px;
-    border-top: 1px dashed #DDD;
+    border-top: 1px dashed rgba(255, 255, 255, 0.2);
     display: inline-block;
 }
 
 .creative-signature p {
     font-size: 0.9rem;
-    color: #666;
+    color: #AAA;
     margin-bottom: 5px;
 }
 
@@ -926,8 +970,8 @@ footer {
 
 .progreso-step.pendiente .step-circulo {
     background: rgba(255,255,255,0.08);
-    color: #666;
-    border: 2px dashed #444;
+    color: #999;
+    border: 2px dashed #666;
 }
 
 .pulso-ring {
@@ -967,7 +1011,7 @@ footer {
     line-height: 1.3;
 }
 
-.progreso-step.pendiente .step-nombre { color: #555; }
+.progreso-step.pendiente .step-nombre { color: #AAA; }
 .progreso-step.activo    .step-nombre { color: #FFF; font-weight: 700; }
 
 .progreso-nota {
@@ -2309,6 +2353,31 @@ footer {
     font-size: 0.95rem;
     margin-top: 15px;
     margin-bottom: 5px;
+}
+
+.privacy-accordion-content .privacidad-alerta-salud {
+    background: #fff5f5;
+    border: 1px solid #f5c6cb;
+    border-left: 4px solid #dc3545;
+    padding: 15px 18px;
+    border-radius: 8px;
+    margin-top: 15px;
+}
+
+.privacy-accordion-content .privacidad-alerta-salud h4 {
+    color: #b02a37;
+    margin-bottom: 8px;
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.privacy-accordion-content .privacidad-alerta-salud p {
+    color: #842029;
+    font-size: 0.88rem;
+    margin-bottom: 6px;
+    line-height: 1.5;
 }
 
 @media (max-width: 768px) {
