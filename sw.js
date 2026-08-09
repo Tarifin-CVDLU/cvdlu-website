@@ -1,4 +1,4 @@
-const CACHE_NAME = 'cvdlu-cache-v13';
+const CACHE_NAME = 'cvdlu-cache-v15';
 const urlsToCache = [
   '/',
   '/index.html',

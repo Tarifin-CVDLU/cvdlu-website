@@ -126,53 +126,154 @@ const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycby3EjWgoeTJ00
 // Configuración de límites y bloqueos de reportes por dirección IP
 // Asigna 0 para bloqueo total del formulario de reportes o un número N para límite de envíos por semana.
 const RESTRICTED_IPS_CONFIG = {
-    "187.190.173.169": 0 // Bloqueo total de envío de reportes ciudadanos para esta IP
+    "187.190.173.169": 0 // Redirigido a Shadow Ban silencioso
 };
 
-function obtenerMaxSemanalIP(userIP) {
-    if (typeof RESTRICTED_IPS_CONFIG[userIP] === 'number') {
-        return RESTRICTED_IPS_CONFIG[userIP];
+// Generar o recuperar UUID de Dispositivo persistente (LocalStorage)
+function obtenerIDDispositivo() {
+    let devId = "";
+    try {
+        devId = localStorage.getItem("cvdlu_device_id");
+        if (!devId) {
+            devId = 'dev_' + Date.now().toString(36) + '_' + Math.random().toString(36).substring(2, 9);
+            localStorage.setItem("cvdlu_device_id", devId);
+        }
+    } catch(e) {
+        devId = 'dev_temp_' + Math.random().toString(36).substring(2, 9);
     }
-    return null; // Sin restricciones para el resto de los usuarios
+    return devId;
 }
 
-function validarLimiteEnviosIP(userIP, isReporte) {
-    if (!isReporte || !userIP) return;
-
-    const maxSemanal = obtenerMaxSemanalIP(userIP);
-    if (maxSemanal === null) return;
-
-    if (maxSemanal === 0) {
-        throw new Error("¡Gracias por sumar tu voz! Para mantener la comunidad ordenada y evitar reportes duplicados, esta opción está pausada para ti. Si necesitas ayuda o reactivarla, contacta a un administrador.");
-    }
-
-    const key = `cvdlu_historial_ip_${userIP.replace(/[^a-zA-Z0-9]/g, '_')}`;
-    const historial = JSON.parse(localStorage.getItem(key) || '[]');
-    const sieteDiasMs = 7 * 24 * 60 * 60 * 1000;
-    const ahora = Date.now();
-
-    // Filtrar envíos realizados en los últimos 7 días
-    const enviosRecientes = historial.filter(timestamp => (ahora - timestamp) < sieteDiasMs);
-
-    if (enviosRecientes.length >= maxSemanal) {
-        throw new Error(`¡Gracias por participar! Has alcanzado el límite de ${maxSemanal} reportes por semana para evitar duplicados. Si necesitas ayuda, contacta a un administrador.`);
+// Generar Huella Digital del Navegador (Device Fingerprint) basada en características de pantalla/sistema
+function obtenerHuellaNavegador() {
+    try {
+        const screenRes = `${window.screen.width}x${window.screen.height}x${window.screen.colorDepth}`;
+        const tz = Intl.DateTimeFormat().resolvedOptions().timeZone || '';
+        const navLang = navigator.language || '';
+        const cores = navigator.hardwareConcurrency || 1;
+        const ua = navigator.userAgent || '';
+        const raw = `${ua}|${screenRes}|${navLang}|${tz}|${cores}`;
+        
+        let hash = 0;
+        for (let i = 0; i < raw.length; i++) {
+            hash = ((hash << 5) - hash) + raw.charCodeAt(i);
+            hash |= 0;
+        }
+        return 'fp_' + Math.abs(hash).toString(36);
+    } catch(e) {
+        return 'fp_generic';
     }
 }
 
-function registrarEnvioExitosoIP(userIP, isReporte) {
-    if (!isReporte || !userIP) return;
+// Comprobar si el envío debe ser desviado a Shadow Ban (Respuesta Fantasma)
+function comprobarShadowBanORateLimit(formData, userIP, isReporte) {
+    if (!isReporte) return false;
 
-    const maxSemanal = obtenerMaxSemanalIP(userIP);
-    if (maxSemanal === null) return;
+    const devId = obtenerIDDispositivo();
+    const huella = obtenerHuellaNavegador();
+    const textoReporte = (formData.get("reporte") || "").toLowerCase();
+    const categoria = (formData.get("categoria") || "").toLowerCase();
 
-    const key = `cvdlu_historial_ip_${userIP.replace(/[^a-zA-Z0-9]/g, '_')}`;
-    const historial = JSON.parse(localStorage.getItem(key) || '[]');
-    const sieteDiasMs = 7 * 24 * 60 * 60 * 1000;
+    // 1. Bloqueo explícito por IP configurada en RESTRICTED_IPS_CONFIG
+    if (userIP && RESTRICTED_IPS_CONFIG[userIP] === 0) {
+        console.log("Shadow Ban activado por IP en lista de restricción.");
+        return true;
+    }
+
+    // 2. Detección de coincidencia con la Ruta 201 o variantes repetitivas
+    const esRuta201 = /\b(201|ruta\s*201|r-?201)\b/i.test(textoReporte) || /\b(201|ruta\s*201|r-?201)\b/i.test(categoria);
+
+    const historialKey = "cvdlu_historial_reportes_v2";
+    let historial = [];
+    try {
+        historial = JSON.parse(localStorage.getItem(historialKey) || "[]");
+    } catch(e) {
+        historial = [];
+    }
+
     const ahora = Date.now();
+    const doceHorasMs = 12 * 60 * 60 * 1000;
+    const veinticuatroHorasMs = 24 * 60 * 60 * 1000;
 
-    const enviosRecientes = historial.filter(timestamp => (ahora - timestamp) < sieteDiasMs);
-    enviosRecientes.push(ahora);
-    localStorage.setItem(key, JSON.stringify(enviosRecientes));
+    // Filtrar historial antiguo (más de 24 horas)
+    historial = historial.filter(item => (ahora - item.timestamp) < veinticuatroHorasMs);
+
+    // Buscar envíos anteriores desde el mismo dispositivo, huella o IP
+    const enviosPreviosDispositivo = historial.filter(item => 
+        item.devId === devId || 
+        item.huella === huella || 
+        (userIP !== "Desconocida" && item.userIP === userIP)
+    );
+
+    // A) Si es sobre la Ruta 201 y el mismo dispositivo ya envió un reporte en las últimas 24 horas -> Shadow Ban
+    if (esRuta201 && enviosPreviosDispositivo.length >= 1) {
+        console.log("Shadow Ban activado: Reporte repetitivo de Ruta 201 en las últimas 24h.");
+        return true;
+    }
+
+    // B) Límite de Frecuencia General por Dispositivo (Máximo 2 reportes en 12 horas) -> Shadow Ban en el 3er intento
+    const enviosUltimas12h = enviosPreviosDispositivo.filter(item => (ahora - item.timestamp) < doceHorasMs);
+    if (enviosUltimas12h.length >= 2) {
+        console.log("Shadow Ban activado: Exceso de límite de frecuencia (máx. 2 reportes por dispositivo en 12h).");
+        return true;
+    }
+
+    // Registrar este envío en el historial local antes de procesarlo
+    historial.push({
+        timestamp: ahora,
+        devId: devId,
+        huella: huella,
+        userIP: userIP,
+        esRuta201: esRuta201
+    });
+
+    try {
+        localStorage.setItem(historialKey, JSON.stringify(historial));
+    } catch(e) {}
+
+    return false; // Envío legítimo
+}
+
+// Ejecutar respuesta fantasma (Shadow Ban) sin enviar nada al servidor de Google
+async function ejecutarEnvioFantasma(form, statusDiv, btn, originalBtnText, tieneArchivo) {
+    const progressContainer = document.getElementById("progress-container");
+    const bus = document.getElementById("progress-bus");
+    const percentText = document.getElementById("progress-percent");
+
+    if (tieneArchivo && progressContainer) {
+        progressContainer.style.display = "block";
+    }
+
+    // Animación fluida simulada del autobús de carga
+    let p = 0;
+    await new Promise(resolve => {
+        const timer = setInterval(() => {
+            p += 20;
+            if (bus) bus.style.left = Math.min(p, 100) + "%";
+            if (percentText) percentText.innerText = Math.min(p, 100) + "%";
+            
+            if (p >= 100) {
+                clearInterval(timer);
+                setTimeout(resolve, 250);
+            }
+        }, 120);
+    });
+
+    if (statusDiv) statusDiv.style.display = "none";
+    mostrarToast("¡Enviado con éxito! Gracias por tu lucha.", "success");
+
+    form.reset();
+
+    if (progressContainer) {
+        setTimeout(() => {
+            progressContainer.style.display = "none";
+            if (bus) bus.style.left = "0%";
+            if (percentText) percentText.innerText = "0%";
+        }, 1000);
+    }
+
+    btn.disabled = false;
+    btn.innerText = originalBtnText;
 }
 
 function setupForm(formId, statusId, btnId, isReporte) {
@@ -197,16 +298,18 @@ function setupForm(formId, statusId, btnId, isReporte) {
 
         let progressInterval = null; // Referencia al interval para poder limpiarlo
         try {
-            // Obtener IP por seguridad
+            // Obtener IP por seguridad con timeout de 3 segundos
             let userIP = "Desconocida";
             try {
-                const ipRes = await fetch("https://api.ipify.org?format=json");
-                const ipData = await ipRes.json();
-                userIP = ipData.ip;
-            } catch(e) { console.log("No se pudo obtener la IP"); }
-
-            // Validar límite de envíos por IP para reportes
-            validarLimiteEnviosIP(userIP, isReporte);
+                const controller = new AbortController();
+                const timeoutId = setTimeout(() => controller.abort(), 3000);
+                const ipRes = await fetch("https://api.ipify.org?format=json", { signal: controller.signal });
+                clearTimeout(timeoutId);
+                if (ipRes.ok) {
+                    const ipData = await ipRes.json();
+                    userIP = ipData.ip;
+                }
+            } catch(e) { console.log("No se pudo obtener la IP (timeout o bloqueo)"); }
 
             const formData = new FormData(form);
             
@@ -214,6 +317,17 @@ function setupForm(formId, statusId, btnId, isReporte) {
             if (formData.get("telefono_falso")) {
                 console.warn("Spam detectado");
                 throw new Error("Petición inválida.");
+            }
+
+            // --- SHADOW BAN & RATE LIMIT POR DISPOSITIVO/RUTA ---
+            const archivoAdjunto = formData.get("archivo");
+            const tieneArchivo = archivoAdjunto && archivoAdjunto.size > 0;
+            const esShadowBanned = comprobarShadowBanORateLimit(formData, userIP, isReporte);
+
+            if (esShadowBanned) {
+                // Simular éxito visualmente pero SIN enviar datos al backend
+                await ejecutarEnvioFantasma(form, statusDiv, btn, originalBtnText, tieneArchivo);
+                return;
             }
 
             // Generar fecha y hora actual
@@ -234,7 +348,7 @@ function setupForm(formId, statusId, btnId, isReporte) {
             if (isReporte) {
                 payload.categoria = formData.get("categoria");
                 
-                // Recopilar municipio (ahora obligatorio, pero por si acaso)
+                // Recopilar municipio
                 const ubicacion = formData.get("ubicacion") || "No especificado";
                 
                 // Anexamos la fecha y municipio al texto del reporte
@@ -242,45 +356,54 @@ function setupForm(formId, statusId, btnId, isReporte) {
                 
                 const file = formData.get("archivo");
                 if (file && file.size > 0) {
-                    if (file.size > 40 * 1024 * 1024) throw new Error("Archivo muy grande (máx 40MB)");
+                    if (file.size > 40 * 1024 * 1024) throw new Error("El archivo supera el límite de 40MB.");
                     
                     const progressContainer = document.getElementById("progress-container");
                     const bus = document.getElementById("progress-bus");
                     const percentText = document.getElementById("progress-percent");
                     if (progressContainer) progressContainer.style.display = "block";
 
-                    const base64 = await toBase64(file);
-                    payload.fileData = base64.split(",")[1];
-                    payload.fileName = file.name;
-                    payload.mimeType = file.type;
-                    
                     let p = 0;
                     progressInterval = setInterval(() => {
                         p += 5;
-                        if (p > 95) clearInterval(progressInterval);
+                        if (p > 90) clearInterval(progressInterval);
                         if (bus) bus.style.left = p + "%";
                         if (percentText) percentText.innerText = p + "%";
-                    }, 200);
+                    }, 150);
+
+                    const base64 = await toBase64(file);
+                    payload.fileData = base64.includes(",") ? base64.split(",")[1] : base64;
+                    payload.fileName = file.name || "evidencia_adjunta";
+                    payload.mimeType = file.type || "image/jpeg";
                 }
             } else {
                 payload.email = formData.get("email");
                 payload.mensaje = formData.get("mensaje");
             }
 
-            const response = await fetch(GOOGLE_SCRIPT_URL, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "text/plain;charset=utf-8"
-                },
-                body: JSON.stringify(payload)
-            });
+            let response;
+            try {
+                response = await fetch(GOOGLE_SCRIPT_URL, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "text/plain;charset=utf-8"
+                    },
+                    body: JSON.stringify(payload)
+                });
+            } catch (netErr) {
+                console.error("Error de conexión al enviar:", netErr);
+                throw new Error("No se pudo conectar con el servidor. Revisa tu conexión a internet o intenta más tarde.");
+            }
             
             if (!response.ok) {
                 throw new Error(`Error en el servidor (${response.status})`);
             }
 
-            // Registrar el envío en el historial local tras éxito
-            registrarEnvioExitosoIP(userIP, isReporte);
+            // Completar la barra de progreso
+            const bus = document.getElementById("progress-bus");
+            const percentText = document.getElementById("progress-percent");
+            if (bus) bus.style.left = "100%";
+            if (percentText) percentText.innerText = "100%";
 
             if (statusDiv) statusDiv.style.display = "none"; // Ocultamos texto plano y usamos Toast
             
@@ -292,14 +415,24 @@ function setupForm(formId, statusId, btnId, isReporte) {
             
             form.reset();
             const progressContainer = document.getElementById("progress-container");
-            if (progressContainer) progressContainer.style.display = "none";
+            if (progressContainer) {
+                setTimeout(() => {
+                    progressContainer.style.display = "none";
+                    if (bus) bus.style.left = "0%";
+                    if (percentText) percentText.innerText = "0%";
+                }, 1200);
+            }
 
         } catch (error) {
+            const errorMsg = (error && error.message) 
+                ? error.message 
+                : (typeof error === 'string' ? error : "Ocurrió un problema inesperado al enviar la información.");
+
             if (statusDiv) {
                 statusDiv.className = "form-status error";
-                statusDiv.innerText = "Error: " + error.message;
+                statusDiv.innerText = "Error: " + errorMsg;
             }
-            mostrarToast("Fallo al enviar: " + error.message, "error");
+            mostrarToast("Fallo al enviar: " + errorMsg, "error");
         } finally {
             btn.disabled = false;
             btn.innerText = originalBtnText;
@@ -504,50 +637,79 @@ async function cargarEstadisticas() {
 
 function toBase64(file) {
     return new Promise((resolve, reject) => {
-        // Si no es imagen (ej. video), lo convierte normal
-        if (!file.type.startsWith('image/')) {
-            const reader = new FileReader();
-            reader.readAsDataURL(file);
-            reader.onload = () => resolve(reader.result);
-            reader.onerror = error => reject(error);
+        if (!file) {
+            reject(new Error("No se seleccionó ningún archivo."));
             return;
         }
-        
-        // Si es imagen, la comprime usando Canvas
+
+        // Detectar si es imagen por tipo MIME O por extensión del archivo
+        const fileName = file.name || "";
+        const isImage = (file.type && file.type.startsWith('image/')) || 
+                        /\.(jpg|jpeg|png|webp|heic|heif|gif|bmp)$/i.test(fileName);
+
         const reader = new FileReader();
+
+        if (!isImage) {
+            // Archivos que no son imagen (ej. video, audio, etc.)
+            reader.readAsDataURL(file);
+            reader.onload = () => resolve(reader.result);
+            reader.onerror = () => reject(new Error("No se pudo leer el archivo adjunto."));
+            return;
+        }
+
+        // Si es imagen, intentamos comprimirla usando Canvas
         reader.readAsDataURL(file);
         reader.onload = (e) => {
-            const img = new Image();
-            img.src = e.target.result;
-            img.onload = () => {
-                const canvas = document.createElement('canvas');
-                const MAX_WIDTH = 1200;
-                const MAX_HEIGHT = 1200;
-                let width = img.width;
-                let height = img.height;
+            const dataUrl = e.target.result;
+            if (!dataUrl) {
+                reject(new Error("Error al leer el archivo de imagen."));
+                return;
+            }
 
-                if (width > height) {
-                    if (width > MAX_WIDTH) {
-                        height *= MAX_WIDTH / width;
-                        width = MAX_WIDTH;
+            const img = new Image();
+            img.onload = () => {
+                try {
+                    const canvas = document.createElement('canvas');
+                    const MAX_WIDTH = 1200;
+                    const MAX_HEIGHT = 1200;
+                    let width = img.width;
+                    let height = img.height;
+
+                    if (width > height) {
+                        if (width > MAX_WIDTH) {
+                            height *= MAX_WIDTH / width;
+                            width = MAX_WIDTH;
+                        }
+                    } else {
+                        if (height > MAX_HEIGHT) {
+                            width *= MAX_HEIGHT / height;
+                            height = MAX_HEIGHT;
+                        }
                     }
-                } else {
-                    if (height > MAX_HEIGHT) {
-                        width *= MAX_HEIGHT / height;
-                        height = MAX_HEIGHT;
-                    }
+
+                    canvas.width = width;
+                    canvas.height = height;
+                    const ctx = canvas.getContext('2d');
+                    ctx.drawImage(img, 0, 0, width, height);
+
+                    // Comprime como JPEG al 70% de calidad
+                    const compressedDataUrl = canvas.toDataURL('image/jpeg', 0.7);
+                    resolve(compressedDataUrl);
+                } catch (err) {
+                    console.warn("Fallo al comprimir la imagen en canvas, usando la imagen original:", err);
+                    resolve(dataUrl); // Fallback a DataURL sin compresión en caso de error de canvas
                 }
-                
-                canvas.width = width;
-                canvas.height = height;
-                const ctx = canvas.getContext('2d');
-                ctx.drawImage(img, 0, 0, width, height);
-                // Comprime como JPEG al 70% de calidad
-                resolve(canvas.toDataURL('image/jpeg', 0.7));
             };
-            img.onerror = error => reject(error);
+
+            img.onerror = () => {
+                console.warn("No se pudo cargar la imagen en la etiqueta Image (posiblemente formato HEIC/HEIF o no soportado por Canvas). Usando lectura directa.");
+                resolve(dataUrl); // Fallback si img.onerror se dispara (evita rechazar la promesa)
+            };
+
+            img.src = dataUrl;
         };
-        reader.onerror = error => reject(error);
+
+        reader.onerror = () => reject(new Error("Error al leer la imagen de tu dispositivo."));
     });
 }
 
