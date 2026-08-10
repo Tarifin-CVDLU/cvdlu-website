@@ -21,18 +21,20 @@ function mostrarToast(mensaje, tipo = 'success') {
     setTimeout(() => {
         toast.classList.remove('show');
         setTimeout(() => toast.remove(), 300);
+    }, 4000);
+}
+
 // Función global para desinfectar entradas de usuario y prevenir XSS
 function escapeHTML(str) {
     if (typeof str !== 'string') return '';
-    return str.replace(/[&<>'"]/g, 
-        tag => ({
-            '&': '&amp;',
-            '<': '&lt;',
-            '>': '&gt;',
-            "'": '&#39;',
-            '"': '&quot;'
-        }[tag] || tag)
-    );
+    const map = {
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        "'": '&#39;',
+        '"': '&quot;'
+    };
+    return str.replace(/[&<>'"]/g, tag => map[tag] || tag);
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -460,20 +462,6 @@ async function cargarEstadisticas() {
     try {
         if (typeof Chart === 'undefined') {
             throw new Error("Chart.js no está cargado");
-        }
-
-        const escapeHTML = (str) => {
-            return str.replace(/[&<>'"]/g, 
-                tag => ({
-                    '&': '&amp;',
-                    '<': '&lt;',
-                    '>': '&gt;',
-                    "'": '&#39;',
-                    '"': '&quot;'
-                }[tag] || tag)
-            );
-        };
-
         const response = await fetch(GOOGLE_SCRIPT_URL + "?action=stats");
         const data = await response.json();
         totalSpan.innerText = data.total;
