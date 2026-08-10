@@ -21,7 +21,18 @@ function mostrarToast(mensaje, tipo = 'success') {
     setTimeout(() => {
         toast.classList.remove('show');
         setTimeout(() => toast.remove(), 300);
-    }, 4000);
+// Función global para desinfectar entradas de usuario y prevenir XSS
+function escapeHTML(str) {
+    if (typeof str !== 'string') return '';
+    return str.replace(/[&<>'"]/g, 
+        tag => ({
+            '&': '&amp;',
+            '<': '&lt;',
+            '>': '&gt;',
+            "'": '&#39;',
+            '"': '&quot;'
+        }[tag] || tag)
+    );
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -753,15 +764,15 @@ document.addEventListener('keydown', e => {
 // =============================================
 const ETAPAS_INFO = {
     1: {
-        img: 'iniciativa_etapa2_entrega.jpg',
+        img: 'iniciativa_etapa2_entrega.webp',
         caption: 'Etapa 1 · 5 Feb 2026 — Entrega de la iniciativa con 1,000 firmas ciudadanas al Congreso de Nuevo León'
     },
     2: {
-        img: 'iniciativa_etapa4_reunion.jpg',
+        img: 'iniciativa_etapa4_reunion.webp',
         caption: 'Etapa 2 · 9 Feb 2026 — Reunión con la Diputada Aile Tamez, Presidenta de la Comisión de Movilidad'
     },
     3: {
-        img: 'iniciativa_etapa3_estatus.jpg',
+        img: 'iniciativa_etapa3_estatus.webp',
         caption: 'Etapa 3 · ACTUAL — Iniciativa turnada a la Comisión de Movilidad. En espera de la Junta de Gobierno'
     },
     4: {

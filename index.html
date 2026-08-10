@@ -9,8 +9,8 @@
     <meta name="author" content="Voz de los Usuarios">
     <meta name="robots" content="index, follow">
     <!-- PWA y Favicon -->
-    <link rel="icon" href="logo.png" type="image/png">
-    <link rel="apple-touch-icon" href="logo.png">
+    <link rel="icon" href="logo.webp" type="image/png">
+    <link rel="apple-touch-icon" href="logo.webp">
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#FFCC00">
 
@@ -19,19 +19,45 @@
     <meta property="og:url" content="https://vozdelosusuarios.org/">
     <meta property="og:title" content="Voz de los Usuarios - Activismo y Participación Ciudadana">
     <meta property="og:description" content="Únete al colectivo ciudadano por un transporte digno en Nuevo León. Tu voz cuenta en nuestra lucha por la movilidad y los derechos ciudadanos.">
-    <meta property="og:image" content="https://vozdelosusuarios.org/logo.png">
+    <meta property="og:image" content="https://vozdelosusuarios.org/logo.webp">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://vozdelosusuarios.org/">
     <meta property="twitter:title" content="Voz de los Usuarios - Activismo y Participación Ciudadana">
     <meta property="twitter:description" content="Únete al colectivo ciudadano por un transporte digno en Nuevo León. Tu voz cuenta en nuestra lucha por la movilidad y los derechos ciudadanos.">
-    <meta property="twitter:image" content="https://vozdelosusuarios.org/logo.png">
-    <link rel="stylesheet" href="style.css?v=10">
+    <meta property="twitter:image" content="https://vozdelosusuarios.org/logo.webp">
+    <link rel="stylesheet" href="style.css?v=11">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Pre-conexión y Pre-carga de Recursos Críticos -->
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link rel="preload" href="abeja_lucha.webp" as="image">
+    
+    <!-- Datos Estructurados (Schema.org / JSON-LD) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "NGO",
+      "name": "Voz de los Usuarios",
+      "alternateName": "CVDLU",
+      "url": "https://vozdelosusuarios.org/",
+      "logo": "https://vozdelosusuarios.org/logo.webp",
+      "description": "Colectivo ciudadano apartidista en Nuevo León por una movilidad y transporte público digno, seguro y accesible.",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Monterrey",
+        "addressRegion": "Nuevo León",
+        "addressCountry": "MX"
+      },
+      "sameAs": [
+        "https://www.facebook.com/vozdelosusuarios",
+        "https://instagram.com/cvdlu.nl"
+      ]
+    }
+    </script>
 </head>
 <body>
     <!-- Facebook SDK -->
@@ -40,7 +66,7 @@
 
     <header>
         <div class="logo-container">
-            <img src="logo.png" alt="Logo CVDLU">
+            <img src="logo.webp" alt="Logo CVDLU">
             <div class="logo-text">Voz de los Usuarios</div>
         </div>
         <div class="menu-toggle" id="mobile-menu">
@@ -71,7 +97,7 @@
             </div>
         </div>
         <div class="hero-image">
-            <img src="abeja_lucha.png" alt="Mascota CVDLU - La lucha no termina">
+            <img src="abeja_lucha.webp" alt="Mascota CVDLU - La lucha no termina">
         </div>
     </section>
 
@@ -339,7 +365,7 @@
             <!-- Nueva noticia: Análisis colectivo - Mesas de diálogo (Publicación Propia Modal) -->
             <div class="card" onclick="abrirNoticiaAnalisisModal()" style="cursor: pointer;">
                 <div class="card-img">
-                    <img src="noticia_analisis_dialogo.jpg" alt="Análisis colectivo: Por qué el diálogo sin resultados no es la vía" loading="lazy">
+                    <img src="noticia_analisis_dialogo.webp" alt="Análisis colectivo: Por qué el diálogo sin resultados no es la vía" loading="lazy">
                 </div>
                 <div class="card-content">
                     <div class="card-date"><i class="fas fa-bullhorn" style="color: var(--primary-color);"></i> Posición Colectiva</div>
@@ -350,7 +376,7 @@
             <!-- Nueva noticia: Solicitud de Transparencia (Publicación Propia Modal) -->
             <div class="card" onclick="abrirNoticiaModal()" style="cursor: pointer;">
                 <div class="card-img">
-                    <img src="transparencia_seguro_1.jpg" alt="Solicitud de Transparencia Seguro de Viajero" loading="lazy">
+                    <img src="transparencia_seguro_1.webp" alt="Solicitud de Transparencia Seguro de Viajero" loading="lazy">
                 </div>
                 <div class="card-content">
                     <div class="card-date"><i class="fas fa-file-contract" style="color: var(--primary-color);"></i> Acción de Transparencia</div>
@@ -376,7 +402,7 @@
             <div class="card">
                 <a href="https://www.facebook.com/LaBocaNostra106.7FM/posts/pfbid024W8jd63XUjJYqX1umQKRNfkyUd6jfmHvkJA8gnQmVUgqWWaMoiVeoBVbSExP5jHHl" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: inherit;">
                     <div class="card-img">
-                        <img src="noticia_juez_encerrar.jpg" alt="¿Te imaginas que un juez te mande a encerrar por querer llegar a tiempo a tu trabajo?" loading="lazy">
+                        <img src="noticia_juez_encerrar.webp" alt="¿Te imaginas que un juez te mande a encerrar por querer llegar a tiempo a tu trabajo?" loading="lazy">
                     </div>
                     <div class="card-content">
                         <div class="card-date"><i class="fab fa-facebook" style="color: #1877F2;"></i> La Boca Nostra 106.7 FM</div>
@@ -389,7 +415,7 @@
             <div class="card">
                 <a href="https://www.facebook.com/share/p/1DkLjHjdkA/" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: inherit;">
                     <div class="card-img">
-                        <img src="noticia_1000_firmas.jpg" alt="1000 firmas entregadas al Congreso" loading="lazy">
+                        <img src="noticia_1000_firmas.webp" alt="1000 firmas entregadas al Congreso" loading="lazy">
                     </div>
                     <div class="card-content">
                         <div class="card-date"><i class="fab fa-facebook" style="color: #1877F2;"></i> Publicación en Facebook</div>
@@ -430,7 +456,7 @@
             <div class="card">
                 <a href="https://www.facebook.com/share/v/18LcQTrg4Y/" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: inherit;">
                     <div class="card-img">
-                        <img src="noticia_congreso.png" alt="Iniciativa Congreso" loading="lazy">
+                        <img src="noticia_congreso.webp" alt="Iniciativa Congreso" loading="lazy">
                         <i class="fas fa-play play-icon"></i>
                     </div>
                     <div class="card-content">
@@ -825,7 +851,7 @@
     <!-- Banner Flotante para Instalar PWA -->
     <div id="pwa-install-banner" style="display: none; position: fixed; bottom: 80px; left: 50%; transform: translateX(-50%); background: #111; color: #FFF; padding: 12px 20px; border-radius: 12px; border: 1px solid var(--primary-color); z-index: 9999; align-items: center; gap: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.5); width: 90%; max-width: 400px; justify-content: space-between;">
         <div style="display: flex; align-items: center; gap: 10px;">
-            <img src="logo.png" alt="Logo" style="width: 30px; height: 30px; border-radius: 5px; object-fit: contain;">
+            <img src="logo.webp" alt="Logo" style="width: 30px; height: 30px; border-radius: 5px; object-fit: contain;">
             <span style="font-size: 0.9rem; line-height: 1.2;">Instala nuestra App para un acceso más rápido.</span>
         </div>
         <div style="display: flex; gap: 10px; align-items: center;">
@@ -861,14 +887,14 @@
             <h2 class="noticia-modal-title">¿Dónde está tu Seguro de Viajero? Ingresamos solicitud en el Portal de Transparencia</h2>
             <div class="noticia-modal-date"><i class="fas fa-clock" style="margin-right: 6px;"></i> Estatus: En espera de respuesta oficial de las autoridades</div>
             
-            <img id="noticia-principal-img" src="transparencia_seguro_1.jpg" alt="Solicitud de Transparencia Seguro de Viajero" class="noticia-modal-img">
+            <img id="noticia-principal-img" src="transparencia_seguro_1.webp" alt="Solicitud de Transparencia Seguro de Viajero" class="noticia-modal-img">
             
             <p style="font-size: 0.85rem; color: var(--primary-color); font-weight: 700; text-transform: uppercase; margin-bottom: 8px;">📷 Documentación Oficial (Haz clic en una imagen para ampliarla):</p>
             <div class="noticia-modal-gallery" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 10px; margin-bottom: 25px;">
-                <img src="transparencia_seguro_1.jpg" alt="Exposición del Seguro de Viajero" style="width:100%; height: 100px; object-fit: cover; border-radius: 8px; border: 2px solid var(--primary-color); cursor: pointer;" onclick="cambiarImagenPrincipal(this.src)">
-                <img src="transparencia_seguro_2.jpg" alt="Folio en Portal de Transparencia" style="width:100%; height: 100px; object-fit: cover; border-radius: 8px; border: 1px solid #444; cursor: pointer;" onclick="cambiarImagenPrincipal(this.src)">
-                <img src="transparencia_seguro_3.jpg" alt="Desglose de Puntos Exigidos" style="width:100%; height: 100px; object-fit: cover; border-radius: 8px; border: 1px solid #444; cursor: pointer;" onclick="cambiarImagenPrincipal(this.src)">
-                <img src="transparencia_seguro_4.jpg" alt="Estatus En Espera de Respuesta" style="width:100%; height: 100px; object-fit: cover; border-radius: 8px; border: 1px solid #444; cursor: pointer;" onclick="cambiarImagenPrincipal(this.src)">
+                <img src="transparencia_seguro_1.webp" alt="Exposición del Seguro de Viajero" style="width:100%; height: 100px; object-fit: cover; border-radius: 8px; border: 2px solid var(--primary-color); cursor: pointer;" onclick="cambiarImagenPrincipal(this.src)">
+                <img src="transparencia_seguro_2.webp" alt="Folio en Portal de Transparencia" style="width:100%; height: 100px; object-fit: cover; border-radius: 8px; border: 1px solid #444; cursor: pointer;" onclick="cambiarImagenPrincipal(this.src)">
+                <img src="transparencia_seguro_3.webp" alt="Desglose de Puntos Exigidos" style="width:100%; height: 100px; object-fit: cover; border-radius: 8px; border: 1px solid #444; cursor: pointer;" onclick="cambiarImagenPrincipal(this.src)">
+                <img src="transparencia_seguro_4.webp" alt="Estatus En Espera de Respuesta" style="width:100%; height: 100px; object-fit: cover; border-radius: 8px; border: 1px solid #444; cursor: pointer;" onclick="cambiarImagenPrincipal(this.src)">
             </div>
 
             <div class="noticia-modal-body">
@@ -908,7 +934,7 @@
             <h2 class="noticia-modal-title">Análisis colectivo: Por qué el diálogo sin resultados y sin apertura no es la vía</h2>
             <div class="noticia-modal-date"><i class="fas fa-clock" style="margin-right: 6px;"></i> Publicado: 28 de Julio, 2026 | Movilidad y Dignidad Ciudadana</div>
             
-            <img src="noticia_analisis_dialogo.jpg" alt="Análisis colectivo: Por qué el diálogo sin resultados y sin apertura no es la vía" class="noticia-modal-img">
+            <img src="noticia_analisis_dialogo.webp" alt="Análisis colectivo: Por qué el diálogo sin resultados y sin apertura no es la vía" class="noticia-modal-img">
 
             <div class="noticia-modal-body">
                 <p>A raíz de las inquietudes de nuestros seguidores y de la comunidad movilizada, reflexionamos abiertamente sobre el panorama del transporte público en Nuevo León y la postura de nuestro colectivo frente a los procesos convocados por la autoridad.</p>
@@ -1080,6 +1106,6 @@
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js" integrity="sha512-CQBWl4fJHWbryGE+Pc7UAxWMUMNMWzWxF4SQo9CgkJIN1kx6djDQZjh3Y8SZ1d+6I+1zze6Z7kHXO7q3UyZAWw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="script.js?v=10"></script>
+    <script src="script.js?v=11"></script>
 </body>
 </html>
