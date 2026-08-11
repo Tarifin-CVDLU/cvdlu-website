@@ -1,9 +1,9 @@
-const CACHE_NAME = 'cvdlu-cache-v17';
+const CACHE_NAME = 'cvdlu-cache-v18';
 const urlsToCache = [
   '/',
   '/index.html',
-  '/style.css?v=12',
-  '/script.js?v=12',
+  '/style.css?v=13',
+  '/script.js?v=13',
   '/logo.webp',
   '/abeja_lucha.webp',
   '/manifest.json'
