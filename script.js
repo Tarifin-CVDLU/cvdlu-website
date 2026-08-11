@@ -462,6 +462,7 @@ async function cargarEstadisticas() {
     try {
         if (typeof Chart === 'undefined') {
             throw new Error("Chart.js no está cargado");
+        }
         const response = await fetch(GOOGLE_SCRIPT_URL + "?action=stats");
         const data = await response.json();
         totalSpan.innerText = data.total;
